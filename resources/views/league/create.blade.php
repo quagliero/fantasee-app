@@ -7,8 +7,9 @@
 <div class="form-group">
   {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Your league name']) !!}
 </div>
-<div class="form-group">
+<div class="form-group {{ $errors->has('league_id') ? 'has-error' : '' }}">
   {!! Form::text('league_id', null, ['class' => 'form-control', 'placeholder' => 'Your league id']) !!}
+  {!! $errors->first('league_id', '<span class="help-block">:message</span>') !!}
 </div>
 <div class="form-group">
   {!! Form::submit('Add league', ['class' => 'btn btn-primary'])!!}

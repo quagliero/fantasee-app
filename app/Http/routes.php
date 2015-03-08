@@ -33,5 +33,6 @@ Route::resource('leagues', 'LeaguesController', [
 		'store' => 'league_store',
 		'edit' => 'league_edit',
 		'update' => 'league_update',
+		'destroy' => 'league_destroy',
 	]
 ]);

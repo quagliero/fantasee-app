@@ -1,6 +1,7 @@
 <?php namespace Fantasee\Http\Controllers;
 
 use Fantasee\Http\Requests;
+use Fantasee\Http\Requests\CreateLeagueRequest;
 use Fantasee\Http\Controllers\Controller;
 use Fantasee\League;
 use Illuminate\Http\Request;
@@ -38,7 +39,6 @@ class LeaguesController extends Controller {
 	 */
 	public function create()
 	{
-		//
 		return view('league.create');
 	}
 
@@ -47,10 +47,9 @@ class LeaguesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(CreateLeagueRequest $request, League $league)
 	{
-		//
-		$this->leagues->create($request->all());
+		$league->create($request->all());
 
 		return redirect()->route('leagues_path');
 	}
@@ -63,7 +62,6 @@ class LeaguesController extends Controller {
 	 */
 	public function show(League $league)
 	{
-
 		return view('league.show', compact('league'));
 	}
 
@@ -101,7 +99,8 @@ class LeaguesController extends Controller {
 	 */
 	public function destroy(League $league)
 	{
-		//
+		$league->delete();
+		return redirect()->route('leagues_path');
 	}
 
 }
