@@ -47,10 +47,10 @@ class LeaguesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request, League $league)
+	public function store(Request $request)
 	{
 		//
-		$league->create($request->all());
+		$this->leagues->create($request->all());
 
 		return redirect()->route('leagues_path');
 	}
@@ -58,36 +58,39 @@ class LeaguesController extends Controller {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param	int	$id
+	 * @param	League $league
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(League $league)
 	{
-		//
-		$league = $this->leagues->find($id);
+
 		return view('league.show', compact('league'));
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param	int	$id
+	 * @param	League $league
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(League $league)
 	{
-		//
+
+		return view('league.edit', compact('league'));
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param	int	$id
+	 * @param	League $leagued
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(League $league, Request $request)
 	{
 		//
+		$league->fill($request->all())->save();
+
+		return redirect()->route('league_path', [$league->league_id]);
 	}
 
 	/**
@@ -96,7 +99,7 @@ class LeaguesController extends Controller {
 	 * @param	int	$id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy(League $league)
 	{
 		//
 	}

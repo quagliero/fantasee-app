@@ -20,6 +20,10 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+Route::bind('leagues', function($slug)
+{
+	return Fantasee\League::where('league_id', $slug)->first();
+});
 
 Route::resource('leagues', 'LeaguesController', [
 	'names' => [
@@ -27,6 +31,7 @@ Route::resource('leagues', 'LeaguesController', [
 		'show' => 'league_path',
 		'create' => 'league_create',
 		'store' => 'league_store',
-		'edit' => 'league_update'
+		'edit' => 'league_edit',
+		'update' => 'league_update',
 	]
 ]);
