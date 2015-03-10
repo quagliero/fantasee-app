@@ -16,7 +16,8 @@ class CreateLeaguesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('league_id')->unique();
-			$table->integer('user_id')->unsigned()->references('id')->on('users');
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users');
 			$table->string('name');
 			$table->string('slug')->unique();
 			$table->timestamps();
@@ -30,7 +31,10 @@ class CreateLeaguesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('leagues');
+		Schema::table('leagues', function (Blueprint $table) {
+			$table->dropForeign('leagues_user_id_foreign');
+			$table->drop();
+		});
 	}
 
 }

@@ -14,19 +14,19 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		$this->call('UsersTableSeeder');
+		$this->call('UserTableSeeder');
 		$this->command->info('Users table seeded!');
 
-		$this->call('SeasonsTableSeeder');
+		$this->call('SeasonTableSeeder');
 		$this->command->info('Seasons table seeded!');
 
-		$this->call('LeaguesTableSeeder');
+		$this->call('LeagueTableSeeder');
 		$this->command->info('Leagues table seeded!');
 
-		$this->call('ManagersTableSeeder');
+		$this->call('ManagerTableSeeder');
 		$this->command->info('Managers table seeded!');
 
-		$this->call('TeamsTableSeeder');
+		$this->call('TeamTableSeeder');
 		$this->command->info('Teams table seeded!');
 	}
 
