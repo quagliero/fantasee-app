@@ -8,8 +8,11 @@ class UserTableSeeder extends Seeder {
     {
         $users = [
           ['name' => 'Tobias',
-          'email' => 'tobiaswhd@mgail.com',
-          'password' => 'fantasee']
+          'email' => 'tobiaswhd@gmail.com',
+          'password' => bcrypt('fantasee')],
+          ['name' => 'Other',
+          'email' => 'other@gmail.com',
+          'password' => bcrypt('fantasee')]
         ];
 
         DB::table('users')->insert($users);

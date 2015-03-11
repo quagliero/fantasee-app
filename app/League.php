@@ -16,7 +16,7 @@ class League extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['league_id', 'name'];
+	protected $fillable = ['league_id', 'name', 'slug'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -25,4 +25,9 @@ class League extends Model {
 	 */
 	protected $hidden = [];
 
+	public function teams()
+	{
+		return $this->hasMany('Fantasee\Team');
+	}
+	
 }

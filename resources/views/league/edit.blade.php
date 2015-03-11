@@ -19,6 +19,5 @@
 {!! delete_form(['league_destroy', $league->league_id]) !!}
 </div>
 
-{!! Form::close() !!}
 <p>{!! link_to_route('league_path', 'Back to league', [$league->league_id]) !!}</p>
 @endsection

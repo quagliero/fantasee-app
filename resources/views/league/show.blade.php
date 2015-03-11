@@ -1,9 +1,31 @@
 @extends('app')
 
 @section('content')
-<h1>{{ $league->name }}</h1>
-<p>League id: {{ $league->league_id }}</p>
-<p>{!! link_to_route('league_edit', 'Edit', [$league->league_id], ['class' => 'btn btn-info']) !!}
+<h1>{{ $league->name }} {!! link_to_route('league_edit', 'Edit', [$league->league_id], ['class' => 'btn btn-info']) !!}</h1>
+<table class="table table-striped">
+  <thead>
+    <th>Team</th>
+    <th>Manager</th>
+    <th>Wins</th>
+    <th>Losses</th>
+    <th>Ties</th>
+    <th>Playoffs</th>
+    <th>Championships</th>
+  </thead>
+  <tbody>
+@foreach ($league->teams as $team)
+    <tr>
+      <td>{{ $team->name }}</td>
+      <td>{{ $team->manager->name }}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+@endforeach
+  </tbody>
+</table>
 <p>{!! link_to_route('leagues_path', 'Back to leagues') !!}</p>
 
 @endsection

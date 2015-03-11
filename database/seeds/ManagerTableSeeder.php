@@ -11,6 +11,10 @@ class ManagerTableSeeder extends DatabaseSeeder {
           ['name' => 'Andrew'],
           ['name' => 'Dave'],
           ['name' => 'Hine'],
+          ['name' => 'Foo'],
+          ['name' => 'Bar'],
+          ['name' => 'Baz'],
+          ['name' => 'Qux'],
         ];
 
         DB::table('managers')->insert($managers);

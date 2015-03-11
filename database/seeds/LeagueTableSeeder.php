@@ -11,7 +11,11 @@ class LeagueTableSeeder extends Seeder {
           ['user_id' => 1,
           'league_id' => 874089,
           'name' => 'The Chumbolone',
-          'slug' => 'the-chumbo']
+          'slug' => 'the-chumbo'],
+          ['user_id' => 2,
+          'league_id' => 12345,
+          'name' => 'The Others',
+          'slug' => 'the-others']
         ];
 
         DB::table('leagues')->insert($leagues);
