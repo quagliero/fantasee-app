@@ -31,7 +31,8 @@ class CreateTeamsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('teams', function (Blueprint $table) {
+		Schema::table('teams', function (Blueprint $table)
+		{
 			$table->dropForeign('teams_league_id_foreign');
 			$table->dropForeign('teams_manager_id_foreign');
 			$table->drop();
