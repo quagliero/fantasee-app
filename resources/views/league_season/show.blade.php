@@ -1,12 +1,12 @@
 @extends('app')
 
 @section('content')
-<h1>{{ $league->name }} {!! link_to_route('league_edit', 'Edit', [$league->league_id], ['class' => 'btn btn-info']) !!}</h1>
 
+<h1>{{ $league->name }} &mdash; {{ $season->year }}  {!! link_to_route('league_edit', 'Edit', [$league->league_id], ['class' => 'btn btn-info']) !!}</h1>
 <ul class="nav nav-tabs">
-<li class="active">{!! link_to_route('league_path', 'Overall', [$league->league_id]) !!}</li>
-@foreach ($league->seasons as $season)
-  <li>{!! link_to_route('league_season_path', $season->year, [$league->league_id, $season->year]) !!}</li>
+<li>{!! link_to_route('league_path', 'Overall', [$league->league_id]) !!}</li>
+@foreach ($league->seasons as $s)
+  <li class="{{ $s->year == $season->year ? 'active' : '' }}">{!! link_to_route('league_season_path', $s->year, [$league->league_id, $s->year]) !!}</li>
 @endforeach
 </ul>
 <table class="table table-striped">
@@ -33,6 +33,6 @@
   @endforeach
   </tbody>
 </table>
-<p>{!! link_to_route('leagues_path', 'Back to leagues') !!}</p>
 
+<p>{!! link_to_route('leagues_path', 'Back to leagues') !!}</p>
 @endsection

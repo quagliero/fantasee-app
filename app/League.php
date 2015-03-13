@@ -25,9 +25,24 @@ class League extends Model {
 	 */
 	protected $hidden = [];
 
+	/**
+	 * The teams attached to this league.
+	 *
+	 * @return array
+	 */
 	public function teams()
 	{
 		return $this->hasMany('Fantasee\Team');
 	}
-	
+
+	/**
+	 * The seasons attached to this league.
+	 *
+	 * @return array
+	 */
+	public function seasons()
+	{
+		return $this->belongsToMany('Fantasee\Season');
+	}
+
 }

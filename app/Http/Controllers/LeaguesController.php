@@ -26,7 +26,6 @@ class LeaguesController extends Controller {
 	 */
 	public function index()
 	{
-		//
 		$leagues = $this->leagues->get();
 
 		return view('league.index', compact('leagues'));
@@ -85,7 +84,6 @@ class LeaguesController extends Controller {
 	 */
 	public function update(League $league, Request $request)
 	{
-		//
 		$league->fill($request->all())->save();
 
 		return redirect()->route('league_path', [$league->league_id]);
