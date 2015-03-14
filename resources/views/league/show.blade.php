@@ -4,9 +4,9 @@
 <h1>{{ $league->name }} {!! link_to_route('league_edit', 'Edit', [$league->league_id], ['class' => 'btn btn-info']) !!}</h1>
 
 <ul class="nav nav-tabs">
-<li class="active">{!! link_to_route('league_path', 'Overall', [$league->league_id]) !!}</li>
+<li class="active">{!! link_to_route('league_path', 'Overall', [$league->slug]) !!}</li>
 @foreach ($league->seasons as $season)
-  <li>{!! link_to_route('league_season_path', $season->year, [$league->league_id, $season->year]) !!}</li>
+  <li>{!! link_to_route('league_season_path', $season->year, [$league->slug, $season->year]) !!}</li>
 @endforeach
 </ul>
 <table class="table table-striped">

@@ -23,7 +23,7 @@ Route::controllers([
 
 Route::bind('leagues', function($slug)
 {
-	return Fantasee\League::where('league_id', $slug)->first();
+	return Fantasee\League::where('slug', $slug)->first();
 });
 
 Route::bind('seasons', function($season)

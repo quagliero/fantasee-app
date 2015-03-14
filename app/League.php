@@ -26,7 +26,7 @@ class League extends Model {
 	protected $hidden = [];
 
 	/**
-	 * The teams attached to this league.
+	 * All teams attached to this league.
 	 *
 	 * @return array
 	 */
@@ -36,13 +36,23 @@ class League extends Model {
 	}
 
 	/**
-	 * The seasons attached to this league.
+	 * All seasons attached to this league.
 	 *
 	 * @return array
 	 */
 	public function seasons()
 	{
 		return $this->belongsToMany('Fantasee\Season');
+	}
+
+	/**
+	 * The teams attached to a specific season of this league.
+	 *
+	 * @return array
+	 */
+	public function seasonTeams($season_id)
+	{
+		return $this->belongsToMany('Fantasee\Team', 'league_season_team')->wherePivot('season_id', $season_id)->get();
 	}
 
 }
