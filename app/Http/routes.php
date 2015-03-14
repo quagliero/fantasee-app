@@ -31,6 +31,11 @@ Route::bind('seasons', function($season)
 	return Fantasee\Season::where('year', $season)->first();
 });
 
+Route::bind('managers', function($manager)
+{
+	return Fantasee\Manager::where('id', $manager)->first();
+});
+
 Route::resource('leagues', 'LeaguesController', [
 	'names' => [
 		'index' => 'leagues_path',
@@ -52,5 +57,25 @@ Route::resource('leagues.seasons', 'LeagueSeasonController', [
 		'edit' => 'league_season_edit',
 		'update' => 'league_season_update',
 		'destroy' => 'league_season_destroy',
+	]
+]);
+
+Route::resource('leagues.managers', 'LeagueManagerController', [
+	'names' => [
+		'index' => 'league_managers_path',
+		'show' => 'league_manager_path',
+		'create' => 'league_manager_create',
+		'store' => 'league_manager_store',
+		'edit' => 'league_manager_edit',
+		'update' => 'league_manager_update',
+		'destroy' => 'league_manager_destroy',
+	]
+]);
+
+Route::resource('leagues.managers.seasons', 'LeagueManagerSeasonController', [
+	'only' => ['index', 'show'],
+	'names' => [
+		'index' => 'league_manager_seasons_path',
+		'show' => 'league_manager_season_path',
 	]
 ]);

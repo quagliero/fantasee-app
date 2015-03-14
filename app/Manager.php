@@ -16,7 +16,7 @@ class Manager extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name'];
+	protected $fillable = ['name', 'league_id'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -25,4 +25,13 @@ class Manager extends Model {
 	 */
 	protected $hidden = [];
 
+	/**
+	 * The teams attached to a specific manager of a league.
+	 *
+	 * @return array
+	 */
+	public function teams()
+	{
+		return $this->hasMany('Fantasee\Team');
+	}
 }

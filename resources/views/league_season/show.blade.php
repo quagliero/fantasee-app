@@ -22,7 +22,7 @@
   @foreach ($league->seasonTeams($season->id) as $team)
     <tr>
       <td>{{ $team->name }}</td>
-      <td>{{ $team->manager->name }}</td>
+      <td>{!! link_to_route('league_manager_path', $team->manager->name, [$league->slug, $team->manager->id]) !!}</td>
       <td></td>
       <td></td>
       <td></td>

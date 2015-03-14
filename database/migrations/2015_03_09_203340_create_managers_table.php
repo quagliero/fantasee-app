@@ -16,6 +16,8 @@ class CreateManagersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
+			$table->integer('league_id')->unsigned();
+			$table->foreign('league_id')->references('id')->on('leagues');
 			$table->timestamps();
 		});
 	}
@@ -27,7 +29,11 @@ class CreateManagersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('managers');
+		Schema::table('managers', function(Blueprint $table)
+		{
+			$table->dropForeign('managers_league_id_foreign');
+			$table->drop();
+		});
 	}
 
 }

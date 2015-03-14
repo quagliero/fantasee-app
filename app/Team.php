@@ -25,8 +25,14 @@ class Team extends Model {
 	 */
 	protected $hidden = [];
 
+	/**
+	 * The manager of this team
+	 *
+	 * @var array
+	 */
 	public function manager()
 	{
 		return $this->belongsTo('Fantasee\Manager');
 	}
+
 }
