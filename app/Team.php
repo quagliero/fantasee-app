@@ -35,4 +35,13 @@ class Team extends Model {
 		return $this->belongsTo('Fantasee\Manager');
 	}
 
+	/**
+	 * The season of this team
+	 *
+	 * @var array
+	 */
+	public function season()
+	{
+		return $this->belongsTo('Fantasee\Season');
+	}
 }

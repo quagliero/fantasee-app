@@ -36,6 +36,16 @@ class League extends Model {
 	}
 
 	/**
+	* All teams attached to this league.
+	*
+	* @return array
+	*/
+	public function managers()
+	{
+		return $this->hasMany('Fantasee\Manager');
+	}
+
+	/**
 	 * All seasons attached to this league.
 	 *
 	 * @return array

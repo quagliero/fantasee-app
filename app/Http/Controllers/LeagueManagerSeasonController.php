@@ -29,7 +29,8 @@ class LeagueManagerSeasonController extends Controller {
 	 */
 	public function show(League $league, Manager $manager, Season $season)
 	{
-
+		$team = $manager->team($season->id);
+		return view('league_manager_season.show', ['league' => $league, 'manager' => $manager, 'season' => $season, 'team' => $team]);
 	}
 
 }

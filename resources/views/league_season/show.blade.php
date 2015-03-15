@@ -21,7 +21,7 @@
   <tbody>
   @foreach ($league->seasonTeams($season->id) as $team)
     <tr>
-      <td>{{ $team->name }}</td>
+      <td>{!! link_to_route('league_manager_season_path', $team->name, [$league->slug, $team->manager->id, $team->season->year]) !!}</td>
       <td>{!! link_to_route('league_manager_path', $team->manager->name, [$league->slug, $team->manager->id]) !!}</td>
       <td></td>
       <td></td>

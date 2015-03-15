@@ -19,6 +19,8 @@ class CreateTeamsTable extends Migration {
 			$table->foreign('league_id')->references('id')->on('leagues');
 			$table->integer('manager_id')->unsigned();
 			$table->foreign('manager_id')->references('id')->on('managers');
+			$table->integer('season_id')->unsigned();
+			$table->foreign('season_id')->references('id')->on('seasons');
 			$table->string('name');
 			$table->timestamps();
 		});
@@ -34,6 +36,7 @@ class CreateTeamsTable extends Migration {
 		Schema::table('teams', function (Blueprint $table)
 		{
 			$table->dropForeign('teams_league_id_foreign');
+			$table->dropForeign('teams_season_id_foreign');
 			$table->dropForeign('teams_manager_id_foreign');
 			$table->drop();
 		});

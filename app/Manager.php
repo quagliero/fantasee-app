@@ -26,12 +26,23 @@ class Manager extends Model {
 	protected $hidden = [];
 
 	/**
-	 * The teams attached to a specific manager of a league.
+	 * The teams attached to a manager of a league.
 	 *
 	 * @return array
 	 */
 	public function teams()
 	{
 		return $this->hasMany('Fantasee\Team');
+	}
+
+
+	/**
+	 * The team attached to a specific season of a manager in a league.
+	 *
+	 * @return array
+	 */
+	public function team($season_id)
+	{
+		return $this->hasMany('Fantasee\Team')->where('season_id', $season_id)->first();
 	}
 }

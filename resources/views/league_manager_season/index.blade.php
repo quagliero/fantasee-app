@@ -6,7 +6,7 @@
 
 <ul class="nav">
 @foreach ($manager->teams as $team)
-  {{ $team->name }}
+  <li>{{ $team->name }}</li>
 @endforeach
 </ul>
 

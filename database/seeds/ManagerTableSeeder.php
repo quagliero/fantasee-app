@@ -8,11 +8,23 @@ class ManagerTableSeeder extends DatabaseSeeder {
     {
         $managers = [
           [
+            'name' => 'Jimmie',
+            'league_id' => 1
+          ],
+          [
+            'name' => 'Dan',
+            'league_id' => 1
+          ],
+          [
+            'name' => 'Karsten',
+            'league_id' => 1
+          ],
+          [
             'name' => 'Tobias',
             'league_id' => 1
           ],
           [
-            'name' => 'Andrew',
+            'name' => 'Jason',
             'league_id' => 1
           ],
           [
@@ -20,24 +32,36 @@ class ManagerTableSeeder extends DatabaseSeeder {
             'league_id' => 1
           ],
           [
-            'name' => 'Hine',
+            'name' => 'Fintan',
             'league_id' => 1
           ],
           [
-            'name' => 'Foo',
-            'league_id' => 2
+            'name' => 'Andrew',
+            'league_id' => 1
           ],
           [
-            'name' => 'Bar',
-            'league_id' => 2
+            'name' => 'Anthony',
+            'league_id' => 1
           ],
           [
-            'name' => 'Baz',
-            'league_id' => 2
+            'name' => 'Rich',
+            'league_id' => 1
           ],
           [
-            'name' => 'Qux',
-            'league_id' => 2
+            'name' => 'Dave',
+            'league_id' => 1
+          ],
+          [
+            'name' => 'Euan',
+            'league_id' => 1
+          ],
+          [
+            'name' => 'Chris',
+            'league_id' => 1
+          ],
+          [
+            'name' => 'Sol',
+            'league_id' => 1
           ],
         ];
 
