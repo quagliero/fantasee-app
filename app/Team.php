@@ -26,6 +26,16 @@ class Team extends Model {
 	protected $hidden = [];
 
 	/**
+	 * The league of this team
+	 *
+	 * @var array
+	 */
+	public function league()
+	{
+		return $this->belongsTo('Fantasee\League');
+	}
+
+	/**
 	 * The manager of this team
 	 *
 	 * @var array
@@ -46,7 +56,27 @@ class Team extends Model {
 	}
 
 	/**
-	 * Get a team by its season
+	 * Get teams by their leagues
+	 *
+	 * @var array
+	 */
+	public function scopeByLeague($query, $league_id)
+	{
+		return $query->where('league_id', $league_id);
+	}
+
+	/**
+	 * Get teams by their manager
+	 *
+	 * @var array
+	 */
+	public function scopeByManager($query, $manager_id)
+	{
+		return $query->where('manager_id', $manager_id);
+	}
+
+	/**
+	 * Get teams by their season
 	 *
 	 * @var array
 	 */
@@ -54,4 +84,5 @@ class Team extends Model {
 	{
 		return $query->where('season_id', $season_id);
 	}
+
 }

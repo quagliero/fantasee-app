@@ -30,7 +30,7 @@ class LeagueManagerSeasonController extends Controller {
 	 */
 	public function show(League $league, Manager $manager, Season $season)
 	{
-		$team = Team::bySeason($season->id)->first();
+		$team = Team::byLeague($league->id)->bySeason($season->id)->byManager($manager->id)->first();
 		return view('league_manager_season.show', compact('league', 'manager', 'season', 'team'));
 	}
 

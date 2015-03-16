@@ -19,7 +19,7 @@
     <th>Ties</th>
   </thead>
   <tbody>
-  @foreach ($league->seasonTeams($season->id) as $team)
+  @foreach ($teams as $team)
     <tr>
       <td>{!! link_to_route('league_manager_season_path', $team->name, [$league->slug, $team->manager->id, $team->season->year]) !!}</td>
       <td>{!! link_to_route('league_manager_path', $team->manager->name, [$league->slug, $team->manager->id]) !!}</td>

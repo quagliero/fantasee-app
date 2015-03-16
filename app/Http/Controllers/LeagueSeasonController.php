@@ -4,6 +4,7 @@ use Fantasee\Http\Requests;
 use Fantasee\Http\Controllers\Controller;
 use Fantasee\League;
 use Fantasee\Season;
+use Fantasee\Team;
 use Illuminate\Http\Request;
 
 class LeagueSeasonController extends Controller {
@@ -46,7 +47,9 @@ class LeagueSeasonController extends Controller {
 	 */
 	public function show(League $league, Season $season)
 	{
-		return view('league_season.show', compact('league', 'season'));
+		$teams = Team::byLeague($league->id)->bySeason($season->id)->get();
+		
+		return view('league_season.show', compact('league', 'season', 'teams'));
 	}
 
 	/**

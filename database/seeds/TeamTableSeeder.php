@@ -28,7 +28,7 @@ class TeamTableSeeder extends DatabaseSeeder {
             'The Disciples of Juan Carlos',
             'Can\'t Stand the Heat',
             '21st and Hine',
-            'LWSS',
+            'The Ghost of Team Ez',
             'Kansas City Chumps',
             'Bush Johnson',
             'Team SMH Dollar Sign',
