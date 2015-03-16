@@ -44,4 +44,14 @@ class Team extends Model {
 	{
 		return $this->belongsTo('Fantasee\Season');
 	}
+
+	/**
+	 * Get a team by its season
+	 *
+	 * @var array
+	 */
+	public function scopeBySeason($query, $season_id)
+	{
+		return $query->where('season_id', $season_id);
+	}
 }

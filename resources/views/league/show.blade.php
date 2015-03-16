@@ -56,7 +56,7 @@
     <tr>
       <td>{!! link_to_route('league_manager_season_path', $team->name, [$league->slug, $team->manager->id, $team->season->year]) !!}</td>
       <td>{!! link_to_route('league_manager_path', $team->manager->name, [$league->slug, $team->manager->id]) !!}</td>
-      <td>{{ $team->season->year }}</td>
+      <td>{!! link_to_route('league_season_path', $team->season->year, [$league->slug, $team->season->year]) !!}</td>
       <td></td>
       <td></td>
       <td></td>

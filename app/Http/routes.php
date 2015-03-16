@@ -20,22 +20,6 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-
-Route::bind('leagues', function($slug)
-{
-	return Fantasee\League::where('slug', $slug)->first();
-});
-
-Route::bind('seasons', function($season)
-{
-	return Fantasee\Season::where('year', $season)->first();
-});
-
-Route::bind('managers', function($manager)
-{
-	return Fantasee\Manager::where('id', $manager)->first();
-});
-
 Route::resource('leagues', 'LeaguesController', [
 	'names' => [
 		'index' => 'leagues_path',

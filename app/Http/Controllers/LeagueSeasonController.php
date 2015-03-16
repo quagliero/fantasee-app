@@ -46,7 +46,7 @@ class LeagueSeasonController extends Controller {
 	 */
 	public function show(League $league, Season $season)
 	{
-		return view('league_season.show', ['league' => $league, 'season' => $season]);
+		return view('league_season.show', compact('league', 'season'));
 	}
 
 	/**

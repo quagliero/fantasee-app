@@ -5,6 +5,7 @@ use Fantasee\Http\Controllers\Controller;
 use Fantasee\Manager;
 use Fantasee\League;
 use Fantasee\Season;
+use Fantasee\Team;
 use Illuminate\Http\Request;
 
 class LeagueManagerSeasonController extends Controller {
@@ -16,7 +17,7 @@ class LeagueManagerSeasonController extends Controller {
 	 */
 	public function index(League $league, Manager $manager, Season $season)
 	{
-		return view('league_manager_season.index', ['league' => $league, 'manager' => $manager, 'season' => $season]);
+		return view('league_manager_season.index', compact('league', 'manager', 'season'));
 	}
 
 	/**
@@ -29,8 +30,8 @@ class LeagueManagerSeasonController extends Controller {
 	 */
 	public function show(League $league, Manager $manager, Season $season)
 	{
-		$team = $manager->team($season->id);
-		return view('league_manager_season.show', ['league' => $league, 'manager' => $manager, 'season' => $season, 'team' => $team]);
+		$team = Team::bySeason($season->id)->first();
+		return view('league_manager_season.show', compact('league', 'manager', 'season', 'team'));
 	}
 
 }

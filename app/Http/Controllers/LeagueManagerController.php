@@ -30,7 +30,7 @@ class LeagueManagerController extends Controller {
 	{
 		$managers = $this->managers->get();
 
-		return view('league_manager.index', ['league' => $league, 'managers' => $managers]);
+		return view('league_manager.index', compact('league', 'managers'));
 	}
 
 	/**
@@ -63,7 +63,7 @@ class LeagueManagerController extends Controller {
 	 */
 	public function show(League $league, Manager $manager)
 	{
-		return view('league_manager.show', ['league' => $league, 'manager' => $manager]);
+		return view('league_manager.show', compact('league', 'manager'));
 	}
 
 	/**

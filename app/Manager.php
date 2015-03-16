@@ -35,14 +35,4 @@ class Manager extends Model {
 		return $this->hasMany('Fantasee\Team');
 	}
 
-
-	/**
-	 * The team attached to a specific season of a manager in a league.
-	 *
-	 * @return array
-	 */
-	public function team($season_id)
-	{
-		return $this->hasMany('Fantasee\Team')->where('season_id', $season_id)->first();
-	}
 }

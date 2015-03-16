@@ -2,6 +2,9 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Fantasee\League;
+use Fantasee\Season;
+use Fantasee\Manager;
 
 class RouteServiceProvider extends ServiceProvider {
 
@@ -24,7 +27,20 @@ class RouteServiceProvider extends ServiceProvider {
 	{
 		parent::boot($router);
 
-		//
+		$router->bind('leagues', function($slug)
+		{
+			return League::where('slug', $slug)->first();
+		});
+
+		$router->bind('seasons', function($season)
+		{
+			return Season::where('year', $season)->first();
+		});
+
+		$router->bind('managers', function($manager)
+		{
+			return Manager::where('id', $manager)->first();
+		});
 	}
 
 	/**
