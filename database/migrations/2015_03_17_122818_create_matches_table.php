@@ -39,7 +39,7 @@ class CreateMatchesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('teams', function (Blueprint $table)
+		Schema::table('matches', function (Blueprint $table)
 		{
 			$table->dropForeign('matches_league_id_foreign');
 			$table->dropForeign('matches_season_id_foreign');
