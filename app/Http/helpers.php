@@ -1,4 +1,6 @@
 <?php
+use Fantasee\Team;
+use Fantasee\Match;
 
 function delete_form($routeParams, $label = 'Delete')
 {
@@ -7,4 +9,22 @@ function delete_form($routeParams, $label = 'Delete')
   $form .= Form::close();
 
   return $form;
+}
+
+function get_team_name_from_id($team_id)
+{
+  $team = Team::where('id', $team_id)->first();
+  return $team->name;
+}
+
+function get_match_winner($match_id)
+{
+  $match = Match::where('id', $match_id)->first();
+  if ($match->team1_score == $match->team2_score) {
+    return Team;
+  } elseif ($match->team1_score > $match->team2_score) {
+    return Team::where('id', $match->team1_id)->first();
+  } else {
+    return Team::where('id', $match->team2_id)->first();
+  }
 }

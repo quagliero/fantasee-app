@@ -5,6 +5,7 @@ use Fantasee\Http\Controllers\Controller;
 use Fantasee\League;
 use Fantasee\Season;
 use Fantasee\Team;
+use Fantasee\Match;
 use Illuminate\Http\Request;
 
 class LeagueSeasonController extends Controller {
@@ -48,8 +49,8 @@ class LeagueSeasonController extends Controller {
 	public function show(League $league, Season $season)
 	{
 		$teams = Team::byLeague($league->id)->bySeason($season->id)->get();
-		
-		return view('league_season.show', compact('league', 'season', 'teams'));
+		$matches = Match::byLeague($league->id)->bySeason($season->id)->get();
+		return view('league_season.show', compact('league', 'season', 'teams', 'matches'));
 	}
 
 	/**

@@ -55,14 +55,4 @@ class League extends Model {
 		return $this->belongsToMany('Fantasee\Season');
 	}
 
-	/**
-	 * The teams attached to a specific season of this league.
-	 *
-	 * @return array
-	 */
-	public function seasonTeams($season_id)
-	{
-		return $this->belongsToMany('Fantasee\Team', 'league_season_team')->wherePivot('season_id', $season_id)->get();
-	}
-
 }
