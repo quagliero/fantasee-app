@@ -77,6 +77,16 @@ class Match extends Model {
 	}
 
 	/**
+	 * All matches in a specific week
+	 *
+	 * @return array
+	 */
+	public function scopeByWeek($query, $week_id)
+	{
+		return $query->where('week_id', $week_id);
+	}
+
+	/**
 	 * All matches involving a specific team
 	 *
 	 * @return array

@@ -4,6 +4,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Fantasee\League;
 use Fantasee\Season;
+use Fantasee\Week;
 use Fantasee\Manager;
 
 class RouteServiceProvider extends ServiceProvider {
@@ -29,17 +30,23 @@ class RouteServiceProvider extends ServiceProvider {
 
 		$router->bind('leagues', function($slug)
 		{
-			return League::where('slug', $slug)->first();
+			return League::where('slug', $slug)->firstOrFail();
 		});
 
 		$router->bind('seasons', function($season)
 		{
-			return Season::where('year', $season)->first();
+			return Season::where('year', $season)->firstOrFail();
 		});
 
-		$router->bind('managers', function($manager)
+
+		$router->model('weeks', 'Fantasee\Week', function()
 		{
-			return Manager::where('id', $manager)->first();
+    	throw new NotFoundHttpException;
+		});
+
+		$router->model('managers', 'Fantasee\Manager', function()
+		{
+			throw new NotFoundHttpException;
 		});
 	}
 

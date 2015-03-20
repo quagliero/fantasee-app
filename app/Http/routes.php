@@ -44,6 +44,14 @@ Route::resource('leagues.seasons', 'LeagueSeasonController', [
 	]
 ]);
 
+Route::resource('leagues.seasons.weeks', 'LeagueSeasonWeekController', [
+	'only' => ['index', 'show'],
+	'names' => [
+		'index' => 'league_season_weeks_path',
+		'show' => 'league_season_week_path',
+	]
+]);
+
 Route::resource('leagues.managers', 'LeagueManagerController', [
 	'names' => [
 		'index' => 'league_managers_path',

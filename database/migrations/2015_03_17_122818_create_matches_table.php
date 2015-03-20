@@ -28,7 +28,6 @@ class CreateMatchesTable extends Migration {
 			$table->decimal('team1_score', 5, 2);
 			$table->decimal('team2_score', 5, 2);
 			$table->timestamps();
-			['league_id', 'season_id', 'week_id', 'team1_id', 'team2_id', 'team1_score', 'team2_score'];
 		});
 	}
 
