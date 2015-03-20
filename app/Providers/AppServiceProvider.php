@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider {
 			'Fantasee\Services\Registrar'
 		);
 
-		if ($this->app->environment() == 'local') {
+		if ($this->app->environment() == 'local' || $this->app->environment() == 'dev') {
 				$this->app->register('Laracasts\Generators\GeneratorsServiceProvider');
 		}
 	}

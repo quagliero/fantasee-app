@@ -22,12 +22,15 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('LeagueTableSeeder');
 		$this->command->info('Leagues table seeded!');
-		
+
 		$this->call('WeekTableSeeder');
 		$this->command->info('Weeks table seeded!');
 
 		$this->call('LeagueSeasonTableSeeder');
 		$this->command->info('League Season table seeded!');
+
+		$this->call('LeagueSeasonWeekTableSeeder');
+		$this->command->info('League Season Week table seeded!');
 
 		$this->call('ManagerTableSeeder');
 		$this->command->info('Managers table seeded!');

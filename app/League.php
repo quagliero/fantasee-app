@@ -55,4 +55,24 @@ class League extends Model {
 		return $this->belongsToMany('Fantasee\Season');
 	}
 
+	/**
+	 * All matches attached to this league.
+	 *
+	 * @return array
+	 */
+	public function matches()
+	{
+		return $this->hasMany('Fantasee\Match');
+	}
+
+	/**
+	* Get the weeks attached to a specific season of this league.
+	*
+	* @return array
+	*/
+	public function getSeasonWeeks($season_id)
+	{
+		return $this->belongsToMany('Fantasee\Week', 'league_season_week')->wherePivot('season_id', $season_id)->get();
+	}
+
 }

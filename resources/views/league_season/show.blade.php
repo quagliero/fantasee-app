@@ -11,6 +11,7 @@
 </ul>
 
 <table class="table table-striped">
+  <caption>Standings</caption>
   <thead>
     <th>Team</th>
     <th>Manager</th>
@@ -30,6 +31,12 @@
   @endforeach
   </tbody>
 </table>
+
+<ul class="nav navbar-left nav-pills nav-stacked">
+@foreach ($weeks as $key => $w)
+<li class="{{ $key == 0 ? 'active' : '' }}">{!! link_to_route('league_season_week_path', $w->name, [$league->slug, $season->year, $w->id]) !!}</li>
+@endforeach
+</ul>
 
 @foreach ($matches as $match)
 <div>
