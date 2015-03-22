@@ -70,9 +70,9 @@ class League extends Model {
 	*
 	* @return array
 	*/
-	public function getSeasonWeeks($season_id)
+	public function seasonWeeks($season_id)
 	{
-		return $this->belongsToMany('Fantasee\Week', 'league_season_week')->wherePivot('season_id', $season_id)->get();
+		return $this->belongsToMany('Fantasee\Week', 'league_season_week')->wherePivot('season_id', $season_id);
 	}
 
 }

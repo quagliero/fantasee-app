@@ -9,17 +9,18 @@ use Fantasee\Match;
 use Illuminate\Http\Request;
 
 class LeagueSeasonWeekController extends Controller {
-
+	
 	/**
 	 * Display a listing of the resource.
 	 * @param  League  $league
 	 * @param  Season  $season
-	 * @param  Week  	 $week
 	 * @return Response
 	 */
-	public function index(League $league, Season $season, Week $week)
+	public function index(League $league, Season $season)
 	{
-		return view('league_season_week.index', compact('league, season, weeks'));
+		$weeks = $league->seasonWeeks($season->id)->get();
+		$matches = Match::byLeague($league->id)->bySeason($season->id)->byWeek(1)->get();
+		return view('league_season_week.index', compact('league', 'season', 'weeks', 'matches'));
 	}
 
 	/**
@@ -32,8 +33,9 @@ class LeagueSeasonWeekController extends Controller {
 	 */
 	public function show(League $league, Season $season, Week $week)
 	{
+		$weeks = $league->seasonWeeks($season->id)->get();
 		$matches = Match::byLeague($league->id)->bySeason($season->id)->byWeek($week->id)->get();
-		return view('league_season_week.show', compact('league', 'season', 'week', 'matches'));
+		return view('league_season_week.show', compact('league', 'season', 'weeks', 'week', 'matches'));
 	}
 
 }

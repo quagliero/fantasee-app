@@ -9,9 +9,13 @@
   <li class="{{ $s->year == $season->year ? 'active' : '' }}">{!! link_to_route('league_season_path', $s->year, [$league->slug, $s->year]) !!}</li>
 @endforeach
 </ul>
-
+<br>
+<ul class="nav nav-pills">
+  <li class="active">{!! link_to_route('league_season_path', 'Standings', [$league->slug, $season->year]) !!}</li>
+  <li>{!! link_to_route('league_season_weeks_path', 'Schedule', [$league->slug, $season->year]) !!}</li>
+</ul>
+<br>
 <table class="table table-striped">
-  <caption>Standings</caption>
   <thead>
     <th>Team</th>
     <th>Manager</th>
@@ -31,19 +35,6 @@
   @endforeach
   </tbody>
 </table>
-
-<ul class="nav navbar-left nav-pills nav-stacked">
-@foreach ($weeks as $key => $w)
-<li class="{{ $key == 0 ? 'active' : '' }}">{!! link_to_route('league_season_week_path', $w->name, [$league->slug, $season->year, $w->id]) !!}</li>
-@endforeach
-</ul>
-
-@foreach ($matches as $match)
-<div>
-  {!! get_team_name_from_id($match->team1_id) !!} {{ $match->team1_score }} - {{ $match->team2_score }} {!! get_team_name_from_id($match->team2_id) !!}
-  <br>Winner: {{ get_match_winner($match->id)->name }}
-</div>
-@endforeach
 
 <p>{!! link_to_route('leagues_path', 'Back to leagues') !!}</p>
 @stop

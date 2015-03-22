@@ -21,7 +21,9 @@ function get_match_winner($match_id)
 {
   $match = Match::where('id', $match_id)->first();
   if ($match->team1_score == $match->team2_score) {
-    return Team;
+    $draw = new Team;
+    $draw->name = 'Draw';
+    return $draw;
   } elseif ($match->team1_score > $match->team2_score) {
     return Team::where('id', $match->team1_id)->first();
   } else {

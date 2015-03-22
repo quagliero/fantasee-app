@@ -38,6 +38,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('TeamTableSeeder');
 		$this->command->info('Teams table seeded!');
 
+		$this->call('MatchTableSeeder');
+		$this->command->info('Matches table seeded!');
 	}
 
 }
