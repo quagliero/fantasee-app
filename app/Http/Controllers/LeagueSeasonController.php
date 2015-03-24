@@ -48,7 +48,10 @@ class LeagueSeasonController extends Controller {
 	 */
 	public function show(League $league, Season $season)
 	{
-		$teams = Team::byLeague($league->id)->bySeason($season->id)->get();
+		$teams = Team::byLeague($league->id)->bySeason($season->id)->get()->sort(function ($team1, $team2) {
+			return $team1->getWins() < $team2->getWins();
+		});
+
 		$weeks = $league->seasonWeeks($season->id)->get();
 		$matches = Match::byLeague($league->id)->bySeason($season->id)->byWeek(1)->get();
 		return view('league_season.show', compact('league', 'season', 'teams', 'weeks', 'matches'));

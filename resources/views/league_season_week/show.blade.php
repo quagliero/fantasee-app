@@ -17,7 +17,7 @@
 </ul>
 <br>
 <div class="nav-left">
-  <ul class="nav nav-pills nav-stacked">
+  <ul class="well nav nav-pills nav-stacked">
   @foreach ($weeks as $w)
   <li class="{{ $w->id == $week->id ? 'active' : '' }}">{!! link_to_route('league_season_week_path', $w->name, [$league->slug, $season->year, $w->id]) !!}</li>
   @endforeach
@@ -30,7 +30,11 @@
     {!! get_team_name_from_id($match->team1_id) !!}
     </span>
     <span class="match__score">
-      {{ $match->team1_score }} - {{ $match->team2_score }}
+      <span class="score-box">
+        <span class="score-box__left">{{ $match->team1_score }}</span>
+        <span class="score-box__sep">-</span>
+        <span class="score-box__right">{{ $match->team2_score }}</span>
+      </span>
     </span>
     <span class="match__team">
       {!! get_team_name_from_id($match->team2_id) !!}

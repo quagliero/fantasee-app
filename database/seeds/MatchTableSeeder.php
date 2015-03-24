@@ -33,7 +33,6 @@ class MatchTableSeeder extends Seeder {
               $team1 = $team_id[$j][$l];
 
               if (in_array($team1, $played)) {
-
                 continue;
               }
 

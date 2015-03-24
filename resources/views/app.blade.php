@@ -60,5 +60,16 @@
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+	<script>
+	$('.nav-pills a').on('click', function (e) {
+		e.preventDefault();
+		console.log('in');
+	  var url = $(this).attr('href');
+	  $.get(url, function(data) {
+	    $('#dynamic').html(data);
+	  });
+	});
+	</script>
 </body>
 </html>

@@ -56,6 +56,36 @@ class Team extends Model {
 	}
 
 	/**
+	 * The 'home' matches of this team
+	 *
+	 * @var array
+	 */
+	public function homeMatches()
+	{
+		return $this->hasMany('Fantasee\Match', 'team1_id');
+	}
+
+	/**
+	 * The 'away' matches of this team
+	 *
+	 * @var array
+	 */
+	public function awayMatches()
+	{
+		return $this->hasMany('Fantasee\Match', 'team2_id');
+	}
+
+	/**
+	 * The matches of this team
+	 *
+	 * @var array
+	 */
+	public function allMatches()
+	{
+		return $this->homeMatches->merge($this->awayMatches);
+	}
+
+	/**
 	 * Get teams by their leagues
 	 *
 	 * @var array
@@ -85,4 +115,62 @@ class Team extends Model {
 		return $query->where('season_id', $season_id);
 	}
 
+	/**
+	 * Get team wins by their season
+	 *
+	 * @var array
+	 */
+	public function getWins()
+	{
+		$wins = $this->allMatches()->filter(function ($match)
+		{
+		  $home = $this->id == $match->team1_id;
+		  if ($home && $match->team1_score > $match->team2_score) {
+		    return $match;
+		  }
+		  if (!$home && $match->team2_score > $match->team1_score) {
+		    return $match;
+		  }
+		})->count();
+
+		return $wins;
+	}
+
+	/**
+	 * Get team losses by their season
+	 *
+	 * @var array
+	 */
+	public function getLosses()
+	{
+		$wins = $this->allMatches()->filter(function ($match)
+		{
+		  $home = $this->id == $match->team1_id;
+		  if ($home && $match->team1_score < $match->team2_score) {
+		    return $match;
+		  }
+		  if (!$home && $match->team2_score < $match->team1_score) {
+		    return $match;
+		  }
+		})->count();
+
+		return $wins;
+	}
+
+	/**
+	 * Get team ties by their season
+	 *
+	 * @var array
+	 */
+	public function getTies()
+	{
+		$wins = $this->allMatches()->filter(function ($match)
+		{
+		  if ($match->team1_score == $match->team2_score) {
+		    return $match;
+		  }
+		})->count();
+
+		return $wins;
+	}
 }

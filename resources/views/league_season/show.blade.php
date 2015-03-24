@@ -1,4 +1,6 @@
+@if(!Request::ajax())
 @extends('app')
+@endif
 
 @section('content')
 
@@ -12,9 +14,10 @@
 <br>
 <ul class="nav nav-pills">
   <li class="active">{!! link_to_route('league_season_path', 'Standings', [$league->slug, $season->year]) !!}</li>
-  <li>{!! link_to_route('league_season_weeks_path', 'Schedule', [$league->slug, $season->year]) !!}</li>
+  <li>{!! link_to_route('league_season_week_path', 'Schedule', [$league->slug, $season->year, 1]) !!}</li>
 </ul>
 <br>
+<div id="dynamic">
 <table class="table table-striped">
   <thead>
     <th>Team</th>
@@ -28,13 +31,15 @@
     <tr>
       <td>{!! link_to_route('league_manager_season_path', $team->name, [$league->slug, $team->manager->id, $team->season->year]) !!}</td>
       <td>{!! link_to_route('league_manager_path', $team->manager->name, [$league->slug, $team->manager->id]) !!}</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{!! $team->getWins() !!}</td>
+      <td>{!! $team->getLosses() !!}</td>
+      <td>{!! $team->getTies() !!}</td>
     </tr>
   @endforeach
   </tbody>
 </table>
-
+</div>
 <p>{!! link_to_route('leagues_path', 'Back to leagues') !!}</p>
+
+
 @stop
