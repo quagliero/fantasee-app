@@ -25,6 +25,8 @@
     <th>Wins</th>
     <th>Losses</th>
     <th>Ties</th>
+    <th>For</th>
+    <th>Against</th>
   </thead>
   <tbody>
   @foreach ($teams as $team)
@@ -34,6 +36,8 @@
       <td>{!! $team->getWins() !!}</td>
       <td>{!! $team->getLosses() !!}</td>
       <td>{!! $team->getTies() !!}</td>
+      <td>{!! $team->getPointsFor() !!}</td>
+      <td>{!! $team->getPointsAgainst() !!}</td>
     </tr>
   @endforeach
   </tbody>

@@ -173,4 +173,38 @@ class Team extends Model {
 
 		return $wins;
 	}
+
+	/**
+	 * Get team points by their season
+	 *
+	 * @var array
+	 */
+	public function getPointsFor()
+	{
+		$pointsFor = $this->allMatches()->reduce(function ($score, $match)
+		{
+			$weekScore = ($this->id == $match->team1_id) ? $match->team1_score : $match->team2_score;
+
+			return $score += $weekScore;
+		});
+
+		return $pointsFor;
+	}
+
+	/**
+	 * Get team points against by their season
+	 *
+	 * @var array
+	 */
+	public function getPointsAgainst()
+	{
+		$pointsFor = $this->allMatches()->reduce(function ($score, $match)
+		{
+			$weekScore = ($this->id == $match->team1_id) ? $match->team2_score : $match->team1_score;
+
+			return $score += $weekScore;
+		});
+
+		return $pointsFor;
+	}
 }
