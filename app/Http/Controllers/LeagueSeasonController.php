@@ -52,9 +52,7 @@ class LeagueSeasonController extends Controller {
 			return $team1->getWins() < $team2->getWins();
 		});
 
-		$weeks = $league->seasonWeeks($season->id)->get();
-		$matches = Match::byLeague($league->id)->bySeason($season->id)->byWeek(1)->get();
-		return view('league_season.show', compact('league', 'season', 'teams', 'weeks', 'matches'));
+		return view('league_season.show', compact('league', 'season', 'teams'));
 	}
 
 	/**

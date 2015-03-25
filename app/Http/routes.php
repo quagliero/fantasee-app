@@ -20,6 +20,12 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+/* Non-resource /leagues/{$league} routes */
+Route::get('leagues/{leagues}/teams', [
+	'uses' => 'LeaguesController@teams',
+	'as' => 'league_teams_path'
+]);
+
 Route::resource('leagues', 'LeaguesController', [
 	'names' => [
 		'index' => 'leagues_path',

@@ -136,6 +136,7 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
+		'Clockwork\Support\Laravel\ClockworkServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -194,6 +195,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form'      => 'Illuminate\Html\FormFacade',
+		'Clockwork' => 'Clockwork\Support\Laravel\Facade',
 
 	],
 

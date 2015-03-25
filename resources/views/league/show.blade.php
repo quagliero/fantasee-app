@@ -9,63 +9,35 @@
   <li>{!! link_to_route('league_season_path', $season->year, [$league->slug, $season->year]) !!}</li>
 @endforeach
 </ul>
+<br>
+<ul class="nav nav-pills">
+  <li class="active">{!! link_to_route('league_path', 'Managers', [$league->slug]) !!}</li>
+  <li>{!! link_to_route('league_teams_path', 'Teams', [$league->slug]) !!}</li>
+</ul>
 
 <table class="table table-striped">
-  <caption>
-    <h4>Managers</h4>
-  </caption>
   <thead>
     <th>Name</th>
     <th>Wins</th>
     <th>Losses</th>
     <th>Ties</th>
-    <th>Playoffs</th>
-    <th>Championships</th>
-  </thead>
-  <tbody>
-  @foreach ($league->managers as $manager)
-    <tr>
-      <td>{!! link_to_route('league_manager_path', $manager->name, [$league->slug, $manager->id]) !!}</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  @endforeach
-  </tbody>
-</table>
-
-
-<table class="table table-striped">
-  <caption>
-    <h4>Teams</h4>
-  </caption>
-  <thead>
-    <th>Team</th>
-    <th>Manager</th>
-    <th>Season</th>
-    <th>Wins</th>
-    <th>Losses</th>
-    <th>Ties</th>
-    <th>Points Scored</th>
+    <th>Points For</th>
     <th>Points Against</th>
   </thead>
   <tbody>
-  @foreach ($league->teams as $team)
+  @foreach ($managers as $manager)
     <tr>
-      <td>{!! link_to_route('league_manager_season_path', $team->name, [$league->slug, $team->manager->id, $team->season->year]) !!}</td>
-      <td>{!! link_to_route('league_manager_path', $team->manager->name, [$league->slug, $team->manager->id]) !!}</td>
-      <td>{!! link_to_route('league_season_path', $team->season->year, [$league->slug, $team->season->year]) !!}</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{!! link_to_route('league_manager_path', $manager->name, [$league->slug, $manager->id]) !!}</td>
+      <td>{!! $manager->getWins() !!}</td>
+      <td>{!! $manager->getLosses() !!}</td>
+      <td>{!! $manager->getTies() !!}</td>
+      <td>{!! $manager->getPointsFor() !!}</td>
+      <td>{!! $manager->getPointsAgainst() !!}</td>
     </tr>
   @endforeach
   </tbody>
 </table>
+
 <p>{!! link_to_route('leagues_path', 'Back to leagues') !!}</p>
 
 @endsection
