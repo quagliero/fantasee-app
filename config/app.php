@@ -195,8 +195,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form'      => 'Illuminate\Html\FormFacade',
-		'Clockwork' => 'Clockwork\Support\Laravel\Facade',
-
+		'Clockwork' => 'Clockwork\Support\Laravel\Facade'
 	],
 
 ];
