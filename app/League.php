@@ -16,7 +16,7 @@ class League extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['league_id', 'name', 'slug'];
+	protected $fillable = ['league_id', 'user_id', 'name', 'slug'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.

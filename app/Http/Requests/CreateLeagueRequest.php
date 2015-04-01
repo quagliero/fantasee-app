@@ -22,7 +22,8 @@ class CreateLeagueRequest extends Request {
 	public function rules()
 	{
 		return [
-			'league_id' => ['required', 'unique:leagues,league_id']
+			'league_id' => ['required', 'unique:leagues,league_id'],
+			'user_id' => ['required']
 		];
 	}
 

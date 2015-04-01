@@ -16,7 +16,7 @@ class Manager extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'league_id'];
+	protected $fillable = ['name', 'league_id', 'site_id'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
