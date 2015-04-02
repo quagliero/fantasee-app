@@ -1,7 +1,6 @@
 <?php namespace Fantasee\Http\Controllers;
 
 use Fantasee\Http\Requests;
-use Fantasee\Http\Requests\CreateLeagueSeasonRequest;
 use Fantasee\Http\Controllers\Controller;
 use Fantasee\League;
 use Fantasee\Season;
@@ -21,7 +20,8 @@ class ScrapeController extends Controller {
 		$this->seasons = $this->scrapeSeasons();
 	}
 
-	private function scrapeSeasons() {
+	private function scrapeSeasons()
+	{
 		$client = new Client();
 		$crawler = $client->request('GET', $this->baseUrl);
 		$seasons = $crawler->filter('#historySeasonNav .st-menu a[href]')->each(function ($node) {
@@ -31,7 +31,8 @@ class ScrapeController extends Controller {
 		return $seasons;
 	}
 
-	private function createLeagueSeasons() {
+	private function createLeagueSeasons()
+	{
 		$seasonIds = array_map(function ($s) {
 			return $s->id;
 		}, $this->seasons);
@@ -39,10 +40,10 @@ class ScrapeController extends Controller {
 		$this->league->seasons()->sync($seasonIds);
 	}
 
-	private function createLeagueManagers() {
-
+	private function createLeagueManagers()
+	{
 		foreach ($this->seasons as $season) {
-			$crawler = $this->client->request('GET', 'http://fantasy.nfl.com/league/' . $this->leagueId . '/history/' . $season->year . '/owners');
+			$crawler = $this->client->request('GET', $this->baseUrl . '/' . $season->year . '/owners');
 
 			$manager = $crawler->filter('#leagueOwners .tableWrap tbody tr')->each(function ($node) {
 				$owner = $node->filter('.teamOwnerName')->text();
@@ -58,22 +59,48 @@ class ScrapeController extends Controller {
 		}
 	}
 
-	private function scrapeChampions() {
-		$client = new Client();
-		$crawler = $client->request('GET', $this->baseUrl);
+	/*
+	 * ScraperController@createLeagueSchedule
+	 * $seasons Array - array of Season models
+	 * $pagination String - the additional URL params to navigate individual weeks
+	 */
+	private function createLeagueSchedule($seasons, $pagination = '')
+	{
+		$urlParams = $pagination ?: 'schedule?leagueId=' . $this->league->league_id . '&scheduleDetail=1&scheduleType=week&standingsTab=schedule';
 
-		$crawler->filter('#leagueHistoryAlmanac [class*="history-champ"]')->each(function ($node) {
-			$year = $node->filter('.historySeason')->text();
-			$team = $node->filter('.historyTeam .teamName')->text();
+		foreach ($seasons as $season) {
+			$crawler = $this->client->request('GET', $this->baseUrl . '/' . $season->year . '/' . $urlParams);
 
-			print $year . ' Champion: ' . $team . '<br>';
-		});
+			$week = intval($crawler->filter('#scheduleSchedule .content ul.scheduleWeekNav .selected .title span')->text());
+			$matchups = $crawler->filter('#scheduleSchedule .content .scheduleContent .matchups .matchup');
+			$matchups->each(function ($node) use ($season, $week) {
+				$team1 = $this->buildTeam($node, 1);
+				$team2 = $this->buildTeam($node, 2);
+			});
+
+			// we have a next week, recursion!
+			if ($crawler->filter('#scheduleSchedule .weekNav .ww-next a')->count()) {
+				$next = $crawler->filter('#scheduleSchedule .weekNav .ww-next a')->attr('href');
+				$this->createLeagueSchedule(array($season), $next);
+			}
+		}
+	}
+
+	private function buildTeam($matchup, $team) {
+	  $team = $matchup->filter('.teamWrap-' . $team);
+	  return (object) array(
+			'manager_id' => preg_replace('/(\D)*/', '', $team->filter('[class*="userId-"]')->attr('class'))
+	    'name' => $team->filter('.teamName')->text(),
+	    'score' => $team->filter('.teamTotal')->text()
+	  );
 	}
 
 	public function index(Request $request) {
 
 		$this->createLeagueSeasons();
 		$this->createLeagueManagers();
+		$this->createLeagueSchedule($this->seasons);
+
 		//
 		// // display season champs
 		// $seasons = [2012, 2013, 2014];
