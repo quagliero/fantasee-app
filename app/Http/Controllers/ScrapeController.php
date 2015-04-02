@@ -54,7 +54,28 @@ class ScrapeController extends Controller {
 					'site_id' => $ownerId,
 				]);
 
-				$this->league->managers()->save($manager);
+				$manager->save();
+			});
+		}
+	}
+
+	private function createLeagueTeams()
+	{
+		foreach ($this->seasons as $season) {
+			$crawler = $this->client->request('GET', $this->baseUrl . '/' . $season->year . '/owners');
+
+			$manager = $crawler->filter('#leagueOwners .tableWrap tbody tr')->each(function ($node) use ($season) {
+				$managerId = preg_replace('/(\D)*/', '', $node->filter('[class*="userId-"]')->attr('class'));
+				$name = $node->filter('.teamName')->text();
+				$manager = Manager::where('site_id', $managerId)->first();
+				$team = Team::updateOrCreate([
+					'name' => $name,
+					'league_id' => $this->league->id,
+					'manager_id' => $manager->id,
+					'season_id' => $season->id,
+				]);
+
+				$team->save();
 			});
 		}
 	}
@@ -89,7 +110,7 @@ class ScrapeController extends Controller {
 	private function buildTeam($matchup, $team) {
 	  $team = $matchup->filter('.teamWrap-' . $team);
 	  return (object) array(
-			'manager_id' => preg_replace('/(\D)*/', '', $team->filter('[class*="userId-"]')->attr('class'))
+			'manager_id' => preg_replace('/(\D)*/', '', $team->filter('[class*="userId-"]')->attr('class')),
 	    'name' => $team->filter('.teamName')->text(),
 	    'score' => $team->filter('.teamTotal')->text()
 	  );
@@ -99,7 +120,8 @@ class ScrapeController extends Controller {
 
 		$this->createLeagueSeasons();
 		$this->createLeagueManagers();
-		$this->createLeagueSchedule($this->seasons);
+		$this->createLeagueTeams();
+		// $this->createLeagueSchedule($this->seasons);
 
 		//
 		// // display season champs

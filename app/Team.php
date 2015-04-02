@@ -16,7 +16,7 @@ class Team extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['league_id', 'name', 'manager_id'];
+	protected $fillable = ['league_id', 'name', 'manager_id', 'season_id'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
