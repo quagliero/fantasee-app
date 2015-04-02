@@ -23,7 +23,7 @@
   @endforeach
   </ul>
   <div class="media-body">
-    <h3 class="media-heading">{{ $weeks[0]->name }}</h3>
+    <h3 class="media-heading">{{ $weeks->name }}</h3>
   @foreach ($matches as $match)
   <div>
     {!! get_team_name_from_id($match->team1_id) !!} {{ $match->team1_score }} - {{ $match->team2_score }} {!! get_team_name_from_id($match->team2_id) !!}

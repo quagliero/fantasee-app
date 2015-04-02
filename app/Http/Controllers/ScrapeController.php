@@ -4,8 +4,11 @@ use Fantasee\Http\Requests;
 use Fantasee\Http\Controllers\Controller;
 use Fantasee\League;
 use Fantasee\Season;
+use Fantasee\Week;
+use Fantasee\LeagueSeasonWeek;
 use Fantasee\Manager;
 use Fantasee\Team;
+use Fantasee\Match;
 use Illuminate\Http\Request;
 use Goutte\Client;
 
@@ -40,6 +43,7 @@ class ScrapeController extends Controller {
 		$this->league->seasons()->sync($seasonIds);
 	}
 
+
 	private function createLeagueManagers()
 	{
 		foreach ($this->seasons as $season) {
@@ -54,7 +58,6 @@ class ScrapeController extends Controller {
 					'site_id' => $ownerId,
 				]);
 
-				$manager->save();
 			});
 		}
 	}
@@ -74,8 +77,6 @@ class ScrapeController extends Controller {
 					'manager_id' => $manager->id,
 					'season_id' => $season->id,
 				]);
-
-				$team->save();
 			});
 		}
 	}
@@ -92,12 +93,35 @@ class ScrapeController extends Controller {
 		foreach ($seasons as $season) {
 			$crawler = $this->client->request('GET', $this->baseUrl . '/' . $season->year . '/' . $urlParams);
 
-			$week = intval($crawler->filter('#scheduleSchedule .content ul.scheduleWeekNav .selected .title span')->text());
+			$week = Week::where('id', intval($crawler->filter('#scheduleSchedule .content ul.scheduleWeekNav .selected .title span')->text()))->first();
+
 			$matchups = $crawler->filter('#scheduleSchedule .content .scheduleContent .matchups .matchup');
 			$matchups->each(function ($node) use ($season, $week) {
 				$team1 = $this->buildTeam($node, 1);
 				$team2 = $this->buildTeam($node, 2);
+				$manager1 = Manager::where('site_id', $team1->manager_id)->first();
+				$manager2 = Manager::where('site_id', $team2->manager_id)->first();
+				$team1Model = Team::byLeague($this->league->id)->bySeason($season->id)->byManager($manager1->id)->first();
+				$team2Model = Team::byLeague($this->league->id)->bySeason($season->id)->byManager($manager2->id)->first();
+
+				$match = Match::updateOrCreate([
+					'league_id' => $this->league->id,
+					'season_id' => $season->id,
+					'week_id' => $week->id,
+					'team1_id' => $team1Model->id,
+					'team1_score' => $team1->score,
+					'team2_id' => $team2Model->id,
+					'team2_score' => $team2->score,
+				]);
+
 			});
+
+			// Create League Season Week pivot
+			$leagueSeasonWeek = LeagueSeasonWeek::firstOrCreate([
+				'league_id' => $this->league->id,
+				'season_id' => $season->id,
+				'week_id' => $week->id
+			]);
 
 			// we have a next week, recursion!
 			if ($crawler->filter('#scheduleSchedule .weekNav .ww-next a')->count()) {
@@ -121,7 +145,7 @@ class ScrapeController extends Controller {
 		$this->createLeagueSeasons();
 		$this->createLeagueManagers();
 		$this->createLeagueTeams();
-		// $this->createLeagueSchedule($this->seasons);
+		$this->createLeagueSchedule($this->seasons);
 
 		//
 		// // display season champs

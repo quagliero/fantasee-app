@@ -9,7 +9,7 @@ use Fantasee\Match;
 use Illuminate\Http\Request;
 
 class LeagueSeasonWeekController extends Controller {
-	
+
 	/**
 	 * Display a listing of the resource.
 	 * @param  League  $league
@@ -34,6 +34,7 @@ class LeagueSeasonWeekController extends Controller {
 	public function show(League $league, Season $season, Week $week)
 	{
 		$weeks = $league->seasonWeeks($season->id)->get();
+
 		$matches = Match::byLeague($league->id)->bySeason($season->id)->byWeek($week->id)->get();
 		return view('league_season_week.show', compact('league', 'season', 'weeks', 'week', 'matches'));
 	}
