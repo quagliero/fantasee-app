@@ -70,6 +70,10 @@ class ScrapeController extends Controller {
 			$manager = $crawler->filter('#leagueOwners .tableWrap tbody tr')->each(function ($node) use ($season) {
 				$managerId = preg_replace('/(\D)*/', '', $node->filter('[class*="userId-"]')->attr('class'));
 				$name = $node->filter('.teamName')->text();
+				// The Dickens hack
+				if ($managerId == 2886224) {
+					$managerId = 6557238;
+				}
 				$manager = Manager::where('site_id', $managerId)->first();
 				$team = Team::updateOrCreate([
 					'name' => $name,
@@ -99,6 +103,14 @@ class ScrapeController extends Controller {
 			$matchups->each(function ($node) use ($season, $week) {
 				$team1 = $this->buildTeam($node, 1);
 				$team2 = $this->buildTeam($node, 2);
+				// The Dickens hack
+				if ($team1->manager_id == 2886224) {
+					$team1->manager_id = 6557238;
+				}
+				// The Dickens hack
+				if ($team2->manager_id == 2886224) {
+					$team2->manager_id = 6557238;
+				}
 				$manager1 = Manager::where('site_id', $team1->manager_id)->first();
 				$manager2 = Manager::where('site_id', $team2->manager_id)->first();
 				$team1Model = Team::byLeague($this->league->id)->bySeason($season->id)->byManager($manager1->id)->first();
