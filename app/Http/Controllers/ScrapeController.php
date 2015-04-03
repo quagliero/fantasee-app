@@ -17,7 +17,7 @@ class ScrapeController extends Controller {
 	public function __construct(Request $request)
 	{
 		$this->client = new Client();
-		$this->leagueId = $request->route('leagueId');
+		// $this->leagueId = $request->route('leagueId');
 		$this->league = League::where('league_id', $this->leagueId)->firstOrFail();
 		$this->baseUrl = 'http://fantasy.nfl.com/league/' . $this->league->league_id . '/history';
 		$this->seasons = $this->scrapeSeasons();

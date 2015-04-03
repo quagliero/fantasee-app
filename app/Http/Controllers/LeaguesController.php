@@ -2,6 +2,7 @@
 
 use Fantasee\Http\Requests;
 use Fantasee\Http\Requests\CreateLeagueRequest;
+use Fantasee\Http\Requests\UpdateLeagueRequest;
 use Fantasee\Http\Controllers\Controller;
 use Fantasee\League;
 use Illuminate\Http\Request;
@@ -17,6 +18,9 @@ class LeaguesController extends Controller {
 	public function __construct(League $leagues)
 	{
 		$this->leagues = $leagues;
+
+		$this->middleware('auth', ['only' => ['create', 'edit', 'update', 'destroy']]);
+		$this->middleware('admin', ['only' => ['edit', 'update', 'destroy']]);
 	}
 
 	/**
@@ -101,11 +105,11 @@ class LeaguesController extends Controller {
 	 * @param	League $leagued
 	 * @return Response
 	 */
-	public function update(League $league, Request $request)
+	public function update(League $league, UpdateLeagueRequest $request)
 	{
 		$league->fill($request->all())->save();
 
-		return redirect()->route('league_path', [$league->league_id]);
+		return redirect()->route('league_path', [$league->slug]);
 	}
 
 	/**

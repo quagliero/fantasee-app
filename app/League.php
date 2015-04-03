@@ -26,6 +26,16 @@ class League extends Model {
 	protected $hidden = [];
 
 	/**
+	 * Slug should be formatted as URL friendly
+	 *
+	 * @var array
+	 */
+	public function setSlugAttribute($slug)
+	{
+		$this->attributes['slug'] = str_slug($slug);
+	}
+
+	/**
 	 * All teams attached to this league.
 	 *
 	 * @return array

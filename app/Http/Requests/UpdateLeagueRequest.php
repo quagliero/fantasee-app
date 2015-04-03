@@ -2,7 +2,7 @@
 
 use Fantasee\Http\Requests\Request;
 
-class CreateLeagueRequest extends Request {
+class UpdateLeagueRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class CreateLeagueRequest extends Request {
 		return [
 			'name' => ['required'],
 			'league_id' => ['required'],
-			'user_id' => ['required'],
-			'slug' => ['required', 'unique:leagues,slug'],
+			'slug' => ['required', 'unique:leagues,slug,' . $this->id],
 		];
 	}
 

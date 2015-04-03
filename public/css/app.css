@@ -6226,9 +6226,7 @@ button.close {
     display: none !important;
   }
 }
-body,
-label,
-.checkbox label {
+body {
   font-weight: 300;
 }
 h1 {

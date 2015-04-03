@@ -1,8 +1,17 @@
 @extends('app')
 
 @section('content')
-<h1>{{ $league->name }} {!! link_to_route('league_edit', 'Edit', [$league->league_id], ['class' => 'btn btn-info']) !!}</h1>
-
+<div class="row">
+  <div class="col-sm-6">
+    <h1>{{ $league->name }}</h1>
+  </div>
+  <div class="col-sm-6 text-right">
+    <br>
+    @if (Auth::check() && Auth::user()->id == $league->user_id)
+  {!! link_to_route('league_edit', 'Edit', [$league->slug], ['class' => 'btn btn-info']) !!}
+    @endif
+  </div>
+</div>
 <ul class="nav nav-tabs">
 <li class="active">{!! link_to_route('league_path', 'Overall', [$league->slug]) !!}</li>
 @foreach ($league->seasons as $season)
