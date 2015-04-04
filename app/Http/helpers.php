@@ -30,3 +30,13 @@ function get_match_winner($match_id)
     return Team::where('id', $match->team2_id)->first();
   }
 }
+
+function is_league_admin($league_id)
+{
+  $league = League::find($league_id);
+  if (Auth::check() && $league->user_id == Auth::user()->id) {
+    return true;
+  } else {
+    return false;
+  }
+}

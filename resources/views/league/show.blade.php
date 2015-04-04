@@ -7,7 +7,7 @@
   </div>
   <div class="col-sm-6 text-right">
     <br>
-    @if (Auth::check() && Auth::user()->id == $league->user_id)
+    @if (is_league_admin($league->id))
   {!! link_to_route('league_edit', 'Edit', [$league->slug], ['class' => 'btn btn-info']) !!}
     @endif
   </div>
