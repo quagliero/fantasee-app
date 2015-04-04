@@ -15,8 +15,6 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
 
-Route::get('scrape/{leagueId}', 'ScrapeController@index');
-
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
@@ -26,6 +24,12 @@ Route::controllers([
 Route::get('leagues/{leagues}/teams', [
 	'uses' => 'LeaguesController@teams',
 	'as' => 'league_teams_path'
+]);
+
+/* League scraper */
+Route::get('leagues/{leagues}/scrape/{methods?}', [
+	'uses' => 'ScrapeController@index',
+	'as' => 'league_scrape',
 ]);
 
 Route::resource('leagues', 'LeaguesController', [

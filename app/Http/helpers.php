@@ -1,6 +1,7 @@
 <?php
 use Fantasee\Team;
 use Fantasee\Match;
+use Fantasee\League;
 
 function delete_form($routeParams, $label = 'Delete')
 {

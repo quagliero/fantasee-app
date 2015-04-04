@@ -39,8 +39,44 @@
     </div>
   </div>
   <div class="col-sm-6">
+    <section class="well">
     <h2>Data Scraper</h2>
-
+    {!! Form::open(['url' => route('league_scrape', [$league->slug]), 'method' => 'GET']) !!}
+    <span class="help-block">All of your league information was scraped on creation. Use these options to get any new or changed data.</span>
+    {!! Form::hidden('createLeagueSeasons', 'true') !!}
+    <div class="checkbox">
+      <label>
+      {!! Form::checkbox('createLeagueManagers', 'true') !!}
+      Managers
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+      {!! Form::checkbox('createLeagueTeams', 'true') !!}
+      Teams
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+      {!! Form::checkbox('createLeagueSchedule', 'true') !!}
+      Schedule
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+      {!! Form::checkbox('createLeagueDrafts', 'true') !!}
+      Drafts
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+      {!! Form::checkbox('createLeagueTrades', 'true') !!}
+      Trades
+      </label>
+    </div>
+      {!! Form::submit('Scrape it', ['class' => 'btn btn-primary']) !!}
+    {!! Form::close() !!}
+    </section>
   </div>
 </div>
 
