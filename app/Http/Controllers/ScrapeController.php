@@ -21,6 +21,7 @@ class ScrapeController extends Controller {
 		$this->baseUrl = 'http://fantasy.nfl.com/league/' . $this->league->league_id . '/history';
 		$this->methods = array_keys($request->all());
 		$this->seasons = $this->scrapeSeasons();
+		dd($this->league);
 		$this->middleware('auth');
 		$this->middleware('admin');
 	}

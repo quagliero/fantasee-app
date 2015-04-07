@@ -38,15 +38,14 @@ class RouteServiceProvider extends ServiceProvider {
 			return Season::where('year', $season)->firstOrFail();
 		});
 
-
-		$router->model('weeks', 'Fantasee\Week', function()
+		$router->bind('weeks', function($week)
 		{
-    	throw new NotFoundHttpException;
+			return Week::findOrFail($week);
 		});
 
-		$router->model('managers', 'Fantasee\Manager', function()
+		$router->bind('managers', function($manager)
 		{
-			throw new NotFoundHttpException;
+			return Manager::findOrFail($manager);
 		});
 	}
 
