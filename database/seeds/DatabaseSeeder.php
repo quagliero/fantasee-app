@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder {
 		$this->call('WeekTableSeeder');
 		$this->command->info('Weeks table seeded!');
 
+		$this->call('RoundTableSeeder');
+		$this->command->info('Rounds table seeded!');
+
 		$this->call('LeagueSeasonTableSeeder');
 		$this->command->info('League Season table seeded!');
 
@@ -40,6 +43,9 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('MatchTableSeeder');
 		$this->command->info('Matches table seeded!');
+
+		$this->call('DraftTableSeeder');
+		$this->command->info('Drafts table seeded!');
 	}
 
 }

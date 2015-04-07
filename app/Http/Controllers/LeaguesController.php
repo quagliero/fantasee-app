@@ -88,6 +88,22 @@ class LeaguesController extends Controller {
 	}
 
 	/**
+	 * Display all the drafts of the league
+	 *
+	 * @param	League $league
+	 * @return Response
+	 */
+	public function drafts(League $league)
+	{
+		// $teams = $league->teams()->get()->sort(function ($team1, $team2) {
+		// 	return $team1->getWins() < $team2->getWins();
+		// });
+		$drafts = $league->drafts()->groupBy('season_id')->get();
+
+		return view('league.drafts', compact('league', 'drafts'));
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param	League $league

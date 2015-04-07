@@ -26,6 +26,11 @@ Route::get('leagues/{leagues}/teams', [
 	'as' => 'league_teams_path'
 ]);
 
+Route::get('leagues/{leagues}/drafts', [
+	'uses' => 'LeaguesController@drafts',
+	'as' => 'league_drafts_path'
+]);
+
 /* League scraper */
 Route::get('leagues/{leagues}/scrape/{methods?}', [
 	'uses' => 'ScrapeController@index',
@@ -53,6 +58,13 @@ Route::resource('leagues.seasons', 'LeagueSeasonController', [
 		'edit' => 'league_season_edit',
 		'update' => 'league_season_update',
 		'destroy' => 'league_season_destroy',
+	]
+]);
+
+Route::resource('leagues.seasons.draft', 'LeagueSeasonDraftController', [
+	'only' => ['show'],
+	'names' => [
+		'show' => 'league_season_draft_path',
 	]
 ]);
 

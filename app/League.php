@@ -76,6 +76,16 @@ class League extends Model {
 	}
 
 	/**
+	 * All drafts attached to this league.
+	 *
+	 * @return array
+	 */
+	public function drafts()
+	{
+		return $this->hasMany('Fantasee\Draft');
+	}
+
+	/**
 	* Get the weeks attached to a specific season of this league.
 	*
 	* @return array
