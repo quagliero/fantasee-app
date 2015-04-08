@@ -14,14 +14,9 @@ use Goutte\Client;
 
 class ScrapeController extends Controller {
 
-	public function __construct(Request $request, League $league)
+	public function __construct()
 	{
 		$this->client = new Client();
-		$this->league = $league->first();
-		$this->baseUrl = 'http://fantasy.nfl.com/league/' . $this->league->league_id . '/history';
-		$this->methods = array_keys($request->all());
-		$this->seasons = $this->scrapeSeasons();
-		dd($this->league);
 		$this->middleware('auth');
 		$this->middleware('admin');
 	}
@@ -179,7 +174,14 @@ class ScrapeController extends Controller {
 
 
 
-	public function index() {
+	public function index(Request $request, League $league) {
+		// Have to define these here because it doesn't have the
+		// League model instance in the __constructor
+		// I thought it would, but hey.
+		$this->league = $league;
+		$this->baseUrl = 'http://fantasy.nfl.com/league/' . $this->league->league_id . '/history';
+		$this->methods = array_keys($request->all());
+		$this->seasons = $this->scrapeSeasons();
 
 		foreach ($this->methods as $method)
 		{

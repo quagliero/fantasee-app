@@ -18,7 +18,7 @@ class LeaguesController extends Controller {
 	public function __construct(League $leagues)
 	{
 		$this->leagues = $leagues;
-
+		
 		$this->middleware('auth', ['only' => ['create', 'edit', 'update', 'destroy']]);
 		$this->middleware('admin', ['only' => ['edit', 'update', 'destroy']]);
 	}
@@ -111,7 +111,6 @@ class LeaguesController extends Controller {
 	 */
 	public function edit(League $league)
 	{
-
 		return view('league.edit', compact('league'));
 	}
 
