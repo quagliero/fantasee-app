@@ -6,12 +6,12 @@
   <p>{!! link_to_route('league_create', 'Add new league', null, ['class="btn btn-primary"'])!!}</p>
 @else
   <p class="alert alert-info"><i class="glyphicon glyphicon-info-sign"></i>
-    <a href="{{ url('/auth/login') }}">Login</a> or <a href="{{ url('/auth/register') }}">Register</a> to add your league.</p>
+    <strong><a href="{{ url('/auth/login') }}">Login</a></strong> or <strong><a href="{{ url('/auth/register') }}">Register</a></strong> to add your nfl.com fantasy league.</p>
 @endif
 
 <div class="row">
   @foreach ($leagues as $league)
-  <div class="col-sm-4 col-xs-6">
+  <div class="col-md-3 col-sm-4 col-xs-6">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">{{ $league->name }}</h3>
