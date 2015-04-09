@@ -22,6 +22,7 @@ class CreateTeamsTable extends Migration {
 			$table->integer('season_id')->unsigned();
 			$table->foreign('season_id')->references('id')->on('seasons');
 			$table->string('name');
+			$table->integer('position');
 			$table->timestamps();
 		});
 	}
