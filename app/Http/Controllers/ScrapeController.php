@@ -84,6 +84,25 @@ class ScrapeController extends Controller {
 				]);
 			});
 		}
+
+		// After we have the teams, go and grab their standings
+		$this->createLeagueStandings();
+	}
+
+	private function createLeagueStandings()
+	{
+		foreach ($this->seasons as $season) {
+			$crawler = $this->client->request('GET', $this->baseUrl . '/' . $season->year . '/standings');
+
+			$manager = $crawler->filter('#primaryContent #finalStandings #championResults .results ul > li')->each(function ($node, $i) use ($season) {
+				$name = $node->filter('.teamName')->text();
+				$pos = $i + 1;
+
+				$team = Team::byLeague($this->league->id)->bySeason($season->id)->where('name', $name)->first();
+				$team->position = $pos;
+				$team->save();
+			});
+		}
 	}
 
 	/*
