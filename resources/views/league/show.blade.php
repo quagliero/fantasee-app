@@ -32,6 +32,7 @@
     <th>Ties</th>
     <th>Points For</th>
     <th>Points Against</th>
+    <th><i class="glyphicon glyphicon-tower"></i></th>
   </thead>
   <tbody>
   @foreach ($managers as $manager)
@@ -42,6 +43,7 @@
       <td>{!! $manager->getTies() !!}</td>
       <td>{!! $manager->getPointsFor() !!}</td>
       <td>{!! $manager->getPointsAgainst() !!}</td>
+      <td>{!! $manager->getChampionshipSeasons() !!}</td>
     </tr>
   @endforeach
   </tbody>
