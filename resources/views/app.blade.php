@@ -18,7 +18,7 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
-<body>
+<body @if(Route::current()->getName() == 'leagues_path')class="splash-bg"@endif>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
