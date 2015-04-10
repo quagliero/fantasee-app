@@ -104,4 +104,18 @@ class Manager extends Model {
 
 		return $totalPointsAgainst;
 	}
+
+	/**
+	* Get manager championship seasons
+	*
+	* @var number
+	*/
+	public function getChampionshipSeasons()
+	{
+		$championships = $this->teams->map(function ($team) {
+			return ($team->position == 1) ? $team->season->year : null;
+		})->toArray();
+
+		return implode(array_filter($championships), ', ');
+	}
 }
