@@ -27,7 +27,7 @@
           </li>
           <li class="list-group-item">
             <i class="fa fa-trophy"></i> <strong>Champions</strong>
-            <span class="badge">3</span>
+            <span class="badge">{{ $league->getChampions() }}</span>
           </li>
           <li class="list-group-item">
             {!! link_to_route('league_path', 'Explore league', [$league->slug], ['class' => 'btn btn-primary btn-block']) !!}

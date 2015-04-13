@@ -35,10 +35,17 @@ function get_match_winner($match_id)
 function is_league_admin($league_id)
 {
   $league = League::find($league_id);
-  
+
   if (Auth::check() && $league->user_id == Auth::user()->id) {
     return true;
   } else {
     return false;
+  }
+}
+
+function show_trophy($team)
+{
+  if ($team->position == 1) {
+    return '<i class="fa fa-trophy" title="' . $team->season->year . ' Champion" style="color: gold;"></i>';
   }
 }

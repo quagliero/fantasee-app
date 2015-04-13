@@ -95,4 +95,17 @@ class League extends Model {
 		return $this->belongsToMany('Fantasee\Week', 'league_season_week')->wherePivot('season_id', $season_id);
 	}
 
+	/**
+	 * The champions of this league
+	 *
+	 * @return array
+	 */
+	public function getChampions()
+	{
+		$champions = $this->managers->reduce(function ($count, $manager) {
+			return $count += $manager->getChampionshipSeasons() ? 1: 0;
+		});
+
+		return $champions;
+	}
 }
