@@ -30,7 +30,7 @@
             <span class="badge">{{ $league->getChampions() }}</span>
           </li>
           <li class="list-group-item">
-            {!! link_to_route('league_path', 'Explore league', [$league->slug], ['class' => 'btn btn-primary btn-block']) !!}
+            {!! link_to_route('league_path', 'Explore league', [$league->slug], ['class' => 'btn btn-success btn-block']) !!}
           </li>
         </ul>
       </div>

@@ -15,7 +15,7 @@
   <tr>
     <td>{!! link_to_route('league_season_path', $team->season->year, [$league->slug, $team->season->year]) !!}</td>
     <td>{!! link_to_route('league_manager_season_path', $team->name, [$league->slug, $manager->id, $team->season->year]) !!}</td>
-    <td></td>
+    <td>{{ ordinal($team->position) }}</td>
   </tr>
 @endforeach
 </tbody>

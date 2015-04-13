@@ -49,3 +49,13 @@ function show_trophy($team)
     return '<i class="fa fa-trophy" title="' . $team->season->year . ' Champion" style="color: gold;"></i>';
   }
 }
+
+function ordinal($number) {
+  $ends = array('th','st','nd','rd','th','th','th','th','th','th');
+  if ((($number % 100) >= 11) && (($number%100) <= 13)) {
+      return $number. 'th';
+    }
+  else {
+    return $number. $ends[$number % 10];
+  }
+}

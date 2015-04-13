@@ -7,6 +7,8 @@ class SeasonTableSeeder extends Seeder {
     public function run()
     {
         $seasons = [
+          ['year' => 2008],
+          ['year' => 2009],
           ['year' => 2010],
           ['year' => 2011],
           ['year' => 2012],

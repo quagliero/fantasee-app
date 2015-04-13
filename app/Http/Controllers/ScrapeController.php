@@ -95,10 +95,16 @@ class ScrapeController extends Controller {
 			$crawler = $this->client->request('GET', $this->baseUrl . '/' . $season->year . '/standings');
 
 			$manager = $crawler->filter('#primaryContent #finalStandings #championResults .results ul > li')->each(function ($node, $i) use ($season) {
-				$name = $node->filter('.teamName')->text();
+				// is it a customised standing?
+				if ($node->filter('.customFinalTeam')->count()) {
+					$name = $node->filter('.customFinalTeam')->text();
+				} else {
+					$name = $node->filter('.teamName')->text();
+				}
 				$pos = $i + 1;
 
 				$team = Team::byLeague($this->league->id)->bySeason($season->id)->where('name', $name)->first();
+
 				$team->position = $pos;
 				$team->save();
 			});
