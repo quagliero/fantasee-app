@@ -2,3 +2,4 @@
 /node_modules
 .env
 *.map
+bower_components

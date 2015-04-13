@@ -32,7 +32,7 @@
     <th>Ties</th>
     <th>Points For</th>
     <th>Points Against</th>
-    <th><i class="glyphicon glyphicon-tower"></i></th>
+    <th><i class="fa fa-trophy"></i></th>
   </thead>
   <tbody>
   @foreach ($managers as $manager)

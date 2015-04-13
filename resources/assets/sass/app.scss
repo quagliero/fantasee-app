@@ -1,7 +1,17 @@
-@import "bootstrap/bootstrap";
+/*
+ * Vars
+ */
 
-@btn-font-weight: 300;
-@font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+$fa-font-path: '../bower_components/font-awesome-sass/assets/fonts/font-awesome/';
+
+/*
+ * Vendor
+ */
+@import "bootstrap";
+@import "font-awesome";
+
+$btn-font-weight: 300;
+$font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
 
 html {
 	height: 100%;

@@ -1,0 +1,23 @@
+{
+  "name": "fantasee",
+  "version": "0.0.0",
+  "homepage": "https://github.com/quagliero/fantasee-app",
+  "authors": [
+    "Tobias <tobiaswhd@gmail.com>"
+  ],
+  "description": "See more of your fantasy league",
+  "main": "public/index.php",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome-sass": "~4.3.1",
+    "bootstrap-sass-official": "~3.3.4"
+  }
+}
