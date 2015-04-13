@@ -29,6 +29,7 @@
     <th>Ties</th>
     <th>For</th>
     <th>Against</th>
+    <th></th>
   </thead>
   <tbody>
   @foreach ($teams as $index => $team)
@@ -41,6 +42,7 @@
       <td>{!! $team->getTies() !!}</td>
       <td>{!! $team->getPointsFor() !!}</td>
       <td>{!! $team->getPointsAgainst() !!}</td>
+      <td>{!! show_trophy($team) !!}</td>
     </tr>
   @endforeach
   </tbody>
