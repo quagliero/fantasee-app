@@ -11,9 +11,15 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', [
+	'uses' => 'WelcomeController@index',
+	'as' => 'root_path'
+	]);
 
-Route::get('home', 'HomeController@index');
+Route::get('home', [
+	'uses' => 'HomeController@index',
+	'as' => 'home_path'
+	]);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

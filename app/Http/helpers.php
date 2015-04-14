@@ -3,6 +3,16 @@ use Fantasee\Team;
 use Fantasee\Match;
 use Fantasee\League;
 
+function splash_bg()
+{
+  $showSplash = ['leagues_path'];
+  $route = Route::current()->getName();
+  if (in_array($route, $showSplash))
+  {
+    return 'splash-bg';
+  }
+}
+
 function delete_form($routeParams, $label = 'Delete')
 {
   $form = Form::open(['method' => 'DELETE', 'route' => $routeParams]);

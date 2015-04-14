@@ -1,48 +1,44 @@
-<html>
-	<head>
-		<title>Laravel</title>
-		
-		<link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+@extends('app')
 
-		<style>
-			body {
-				margin: 0;
-				padding: 0;
-				width: 100%;
-				height: 100%;
-				color: #B0BEC5;
-				display: table;
-				font-weight: 100;
-				font-family: 'Lato';
-			}
-
-			.container {
-				text-align: center;
-				display: table-cell;
-				vertical-align: middle;
-			}
-
-			.content {
-				text-align: center;
-				display: inline-block;
-			}
-
-			.title {
-				font-size: 96px;
-				margin-bottom: 40px;
-			}
-
-			.quote {
-				font-size: 24px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<div class="content">
-				<div class="title">Laravel 5</div>
-				<div class="quote">{{ Inspiring::quote() }}</div>
-			</div>
-		</div>
-	</body>
-</html>
+@section('content')
+  <div class="splash-green">
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Fantasee</h1>
+        <p>See more of your fantasy league</p>
+        <p><a class="btn btn-default btn-lg" href="{{ route('leagues_path') }}" role="button">Take a look</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <br><br>
+    <div class="row">
+      @foreach ($leagues as $league)
+      <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ $league->name }}</h3>
+          </div>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <i class="fa fa-calendar"></i> <strong>Seasons</strong>
+                <span class="badge">{{ $league->seasons->count() }}</span>
+              </li>
+              <li class="list-group-item">
+                <i class="fa fa-user"></i> <strong>Managers</strong>
+                <span class="badge">{{ $league->managers->count() }}</span>
+              </li>
+              <li class="list-group-item">
+                <i class="fa fa-trophy"></i> <strong>Champions</strong>
+                <span class="badge">{{ $league->getChampions() }}</span>
+              </li>
+              <li class="list-group-item">
+                {!! link_to_route('league_path', 'Explore league', [$league->slug], ['class' => 'btn btn-success btn-block']) !!}
+              </li>
+            </ul>
+          </div>
+      </div>
+      @endforeach
+    </div>
+  </div>
+@stop

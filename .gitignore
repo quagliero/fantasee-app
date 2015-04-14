@@ -3,3 +3,4 @@
 .env
 *.map
 bower_components
+.DS_Store
