@@ -18,52 +18,23 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="{!! splash_bg() !!}">
-  <nav class="navbar navbar-static-top navbar-default site-nav">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle Navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <span class="navbar-brand">Fantasee</span>
-      </div>
-
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="{{ url('/') }}">Home</a></li>
-          <li>{!! link_to_route('leagues_path', 'Leagues') !!}</li>
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-          @if (Auth::guest())
-            <li><a href="{{ url('/auth/login') }}">Login</a></li>
-            <li><a href="{{ url('/auth/register') }}">Register</a></li>
-          @else
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
-              </ul>
-            </li>
-          @endif
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <main class="container">
-  @yield('content')
+<body>
+  @if (Route::current()->getName() != 'root_path')
+  @include('common.header')
+  @endif
+  <main>
+    @yield('content')
 	</main>
-	<footer>
-		<div class="container">
-			<p>Designed, built and maintained by <a href="https://twitter.com/quagliero">@quagliero</a></p>
-		</div>
-	</footer>
-  <!-- Scripts -->
+	@include('common.footer')
+
+  @section('scripts')
+  @if (App::environment('local'))
+  {!! HTML::script('bower_components/jquery/dist/jquery.min.js') !!}
+  {!! HTML::script('bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.min.js') !!}
+  @else
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
+  @endif
+  @show
 </body>
 </html>

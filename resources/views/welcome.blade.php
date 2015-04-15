@@ -1,7 +1,8 @@
 @extends('app')
 
 @section('content')
-  <div class="splash-green">
+  <section class="splash-mast">
+    @include('common.header')
     <div class="container">
       <div class="jumbotron">
         <h1>Fantasee</h1>
@@ -9,12 +10,33 @@
         <p><a class="btn btn-default btn-lg" href="{{ route('leagues_path') }}" role="button">Take a look</a></p>
       </div>
     </div>
-  </div>
-  <div class="container">
-    <br><br>
+    <section class="splash-stats">
+      <h4 class="lead-in">So far there&rsquo;s</h4>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <h3><span class="big" data-counter="{!! league_count() !!}">0</span><br>Leagues</h3>
+          </div>
+          <div class="col-sm-4">
+            <h3><span class="big" data-counter="{!! manager_count() !!}">0</span><br>Managers</h3>
+          </div>
+          <div class="col-sm-4">
+            <h3><span class="big" data-counter="{!! match_count() !!}" data-counter-start="{!! match_count() - 200 !!}">0</span><br>Games</h3>
+          </div>
+        </div>
+      </div>
+      <h4 class="lead-out">and counting...</h4>
+    </section>
+  </section>
+  <section class="splash-leagues">
+    <div class="container">
+      <h2>Built for fantasy football lovers, everywhere.</h2>
+      <p class="lead">Fantasee looks at your existing nfl.com fantasy league, and shows you all the things you wish you could see.</p>
+      <p>Total records, overall head-to-heads, trade history, and lots more to come.</p>
+      <br> 
     <div class="row">
       @foreach ($leagues as $league)
-      <div class="col-md-3 col-sm-4 col-xs-6">
+      <div class="col-sm-4 col-xs-6">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">{{ $league->name }}</h3>
@@ -41,4 +63,11 @@
       @endforeach
     </div>
   </div>
+  </section>
+@stop
+
+
+@section('scripts')
+  @parent
+  {!! HTML::script('js/counter.js', ['async' => 'async']) !!}
 @stop

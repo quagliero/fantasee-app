@@ -2,15 +2,29 @@
 use Fantasee\Team;
 use Fantasee\Match;
 use Fantasee\League;
+use Fantasee\Manager;
+use Fantasee\Season;
 
-function splash_bg()
+/* Totals */
+
+function league_count()
 {
-  $showSplash = ['leagues_path'];
-  $route = Route::current()->getName();
-  if (in_array($route, $showSplash))
-  {
-    return 'splash-bg';
-  }
+  return League::get()->count();
+}
+
+function manager_count()
+{
+  return Manager::get()->count();
+}
+
+function team_count()
+{
+  return Team::get()->count();
+}
+
+function match_count()
+{
+  return Match::get()->count();
 }
 
 function delete_form($routeParams, $label = 'Delete')

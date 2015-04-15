@@ -27,12 +27,48 @@ h1 {
 
 }
 
-.splash-green {
-	padding-top: 81px;
-	padding-bottom: 30px;
-	margin-top: -51px;
+.splash-mast {
 	background-image: linear-gradient(45deg, rgba(#4E9862,.95) 10%, rgba(#BEFFB0, .95) 90%), url('/img/bg.jpg');
 	border-bottom: 1px solid #d8d8d8;
+}
+
+.splash-stats {
+	background: rgba(#4a4a4a, .5);
+	text-align: center;
+	color: #fff;
+	padding: 40px 0;
+	position: relative;
+	font-family: 'Roboto';
+
+	h3 {
+		font-weight: 300;
+		text-shadow: 0px 1px 0 #333;
+	}
+
+	h4 {
+		font-weight: 300;
+	}
+
+	.lead-in {
+		position: absolute;
+		left: 20px;
+		top: 0;
+	}
+
+	.lead-out {
+		position: absolute;
+		right: 20px;
+		bottom: 0;
+	}
+
+	.big {
+		font-weight: 600;
+		font-size: 1.8em;
+	}
+}
+
+.splash-leagues {
+	padding: 40px 0 20px;
 }
 
 .site-nav {
@@ -54,11 +90,11 @@ h1 {
 	}
 }
 
-.splash-bg {
-	background-image: linear-gradient(rgba(255,255,255, .95) 33%, rgba(255,255,255, .3)), url('/img/bg.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
+.site-footer {
+	padding: 40px 0;
+	border-top: 1px solid #d8d8d8;
 }
+
 .nav-left {
 
 	.nav {
