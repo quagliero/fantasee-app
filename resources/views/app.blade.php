@@ -19,9 +19,7 @@
   <![endif]-->
 </head>
 <body>
-  @if (Route::current()->getName() != 'root_path')
   @include('common.header')
-  @endif
   <main>
     @yield('content')
 	</main>

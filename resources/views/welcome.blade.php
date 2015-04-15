@@ -2,7 +2,6 @@
 
 @section('content')
   <section class="splash-mast">
-    @include('common.header')
     <div class="container">
       <div class="jumbotron">
         <h1>Fantasee</h1>
@@ -33,7 +32,7 @@
       <h2>Built for fantasy football lovers, everywhere.</h2>
       <p class="lead">Fantasee looks at your existing nfl.com fantasy league, and shows you all the things you wish you could see.</p>
       <p>Total records, overall head-to-heads, trade history, and lots more to come.</p>
-      <br> 
+      <br>
     <div class="row">
       @foreach ($leagues as $league)
       <div class="col-sm-4 col-xs-6">
