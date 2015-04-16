@@ -23,7 +23,6 @@ class WelcomeController extends Controller {
 	public function __construct(League $leagues)
 	{
 		$this->leagues = $leagues;
-		$this->middleware('guest');
 	}
 
 	/**
