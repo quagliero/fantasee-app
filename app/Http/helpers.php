@@ -27,6 +27,16 @@ function match_count()
   return Match::get()->count();
 }
 
+/* homepage */
+
+function get_random_splash_word()
+{
+  $words = ['nerds', 'addicts', 'heroes', 'studs', 'data hoarders', 'junkies', 'stat lovers', 'lovers'];
+  $rand = round(mt_rand(0, count($words) - 1));
+
+  return $words[$rand];
+}
+
 function delete_form($routeParams, $label = 'Delete')
 {
   $form = Form::open(['method' => 'DELETE', 'route' => $routeParams]);

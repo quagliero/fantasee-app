@@ -30,7 +30,7 @@
   </section>
   <section class="splash-leagues">
     <div class="container">
-      <h2>Built for fantasy football nerds.</h2>
+      <h2>Built for fantasy football {!! get_random_splash_word() !!}.</h2>
       <p class="lead">Fantasee looks at your existing nfl.com fantasy league, and shows you all the things you wish you could see.</p>
       <p>Total records, overall head-to-head, trade history, and lots more to come.</p>
       <br>
