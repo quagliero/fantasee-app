@@ -8,9 +8,8 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="{{ url('/') }}" class="navbar-brand">Fantasee</a>
+        <a href="{{ url('/') }}" class="navbar-brand">Fantasee <i class="badge">pre-alpha</i></a>
       </div>
-
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li>{!! link_to_route('leagues_path', 'Leagues') !!}</li>

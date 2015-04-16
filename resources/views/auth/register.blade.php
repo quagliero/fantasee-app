@@ -8,6 +8,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading"><strong>Register</strong></div>
 					<div class="panel-body">
+						<p class="alert alert-info"><i class="fa fa-info"></i> This pre-alpha release of Fantasee only works with single division nfl.com leagues.</p>
 						@if (count($errors) > 0)
 							<div class="alert alert-danger">
 								<strong>Whoops!</strong> There were some problems with your input.<br><br>

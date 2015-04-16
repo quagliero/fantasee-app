@@ -5,9 +5,11 @@
     <div class="container">
       <div class="splash-mast__body">
         <h1>Fantasee</h1>
-        <p class="lead">See more of your fantasy league</p>
+        <p class="lead">See the history of your fantasy league</p>
         <p>
-          <a class="btn btn-default btn-lg" href="{{ route('league_create') }}" role="button"><i class="fa fa-plus-circle"></i> Add yours now</a></p>
+          <a class="btn btn-default btn-lg" href="{{ route('league_create') }}" role="button"><i class="fa fa-plus-circle"></i> Add yours now</a>
+        </p>
+        <p style="color: #fff;"><small>&mdash;currently nfl.com leagues only&mdash;</small></p>
       </div>
     </div>
     <section class="splash-stats">
@@ -69,5 +71,5 @@
 
 @section('scripts')
   @parent
-  {!! HTML::script('js/counter.js', ['async' => 'async']) !!}
+  {!! HTML::script('js/counter.js') !!}
 @stop
