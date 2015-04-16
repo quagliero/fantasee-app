@@ -8,12 +8,11 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <span class="navbar-brand">Fantasee</span>
+        <a href="{{ url('/') }}" class="navbar-brand">Fantasee</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="{{ url('/') }}">Home</a></li>
           <li>{!! link_to_route('leagues_path', 'Leagues') !!}</li>
         </ul>
 
@@ -25,6 +24,9 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
+              @if (Auth::check())
+              <li>{!! link_to_route('home_path', 'Account') !!}</li>
+              @endif
               <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
             </ul>
           </li>
