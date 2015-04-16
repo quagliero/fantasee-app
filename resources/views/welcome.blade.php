@@ -3,14 +3,15 @@
 @section('content')
   <section class="splash-mast">
     <div class="container">
-      <div class="jumbotron">
+      <div class="splash-mast__body">
         <h1>Fantasee</h1>
-        <p>See more of your fantasy league</p>
-        <p><a class="btn btn-default btn-lg" href="{{ route('leagues_path') }}" role="button">Take a look</a></p>
+        <p class="lead">See more of your fantasy league</p>
+        <p>
+          <a class="btn btn-default btn-lg" href="{{ route('league_create') }}" role="button"><i class="fa fa-plus-circle"></i> Add yours now</a></p>
       </div>
     </div>
     <section class="splash-stats">
-      <h4 class="lead-in">So far there&rsquo;s</h4>
+      <!-- <h4 class="lead-in">So far there&rsquo;s</h4> -->
       <div class="container">
         <div class="row">
           <div class="col-sm-4">
@@ -29,9 +30,9 @@
   </section>
   <section class="splash-leagues">
     <div class="container">
-      <h2>Built for fantasy football lovers, everywhere.</h2>
+      <h2>Built for fantasy football nerds.</h2>
       <p class="lead">Fantasee looks at your existing nfl.com fantasy league, and shows you all the things you wish you could see.</p>
-      <p>Total records, overall head-to-heads, trade history, and lots more to come.</p>
+      <p>Total records, overall head-to-head, trade history, and lots more to come.</p>
       <br>
     <div class="row">
       @foreach ($leagues as $league)
