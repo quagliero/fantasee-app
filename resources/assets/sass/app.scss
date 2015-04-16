@@ -28,6 +28,8 @@ h1 {
 }
 
 .splash-mast {
+	padding-top: 20px;
+	margin-top: -20px;
 	background-image: linear-gradient(45deg, rgba(#4E9862,.95) 10%, rgba(#BEFFB0, .95) 90%), url('/img/bg.jpg');
 	border-bottom: 1px solid #d8d8d8;
 }
@@ -97,12 +99,11 @@ h1 {
 }
 
 .splash-leagues {
-	padding: 40px 0 20px;
+	padding: 20px 0;
 }
 
 .site-nav {
 	background: rgba(255,255,255,.5);
-	margin-bottom: 0;
 
 	a {
 		color: #fff;

@@ -1,11 +1,12 @@
 @extends('app')
 
 @section('content')
-<div class="container-fluid">
+<section class="splash-mast">
+<div class="container">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-sm-6 col-xs-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Login</div>
+				<div class="panel-heading"><strong>Login</strong></div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
@@ -56,6 +57,17 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-sm-6 col-xs-12">
+			<div class="panel panel-default">
+			  <div class="panel-heading"><strong>Not registered?</strong></div>
+			    <div class="panel-body">
+						<p>Once you're logged in you can add your league to Fantasee and get things like total records, cumulative points scored, head-to-heads, and trade partners.</p>
+						<p><a href="{{ url('auth/register') }}" class="btn btn-default  btn-block">Join now</a></p>
+						<p><em>C'mon, Rich Eisen could run a 40 in the time it takes to create an account.</em></p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
+</section>
 @endsection
