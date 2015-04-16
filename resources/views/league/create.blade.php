@@ -1,8 +1,10 @@
 @extends('app')
 
 @section('content')
-
+<section class="splash-mast">
 <div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
   <h1>Add a league to Fantasee</h1>
 
   {!! Form::open(['route' => 'league_store']) !!}
@@ -31,6 +33,9 @@
   </div>
   {!! Form::close() !!}
 </div>
+</div>
+</div>
+</section>
 @stop
 
 @section('scripts')
