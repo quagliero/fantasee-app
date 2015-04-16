@@ -6574,6 +6574,8 @@ h1 {
   padding-top: 20px;
   margin-top: -20px;
   background-image: linear-gradient(45deg, rgba(78, 152, 98, 0.95) 10%, rgba(190, 255, 176, 0.95) 90%), url('/img/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   border-bottom: 1px solid #d8d8d8; }
 
 .splash-mast__body {

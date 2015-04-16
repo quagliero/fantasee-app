@@ -27,7 +27,7 @@ function match_count()
   return Match::get()->count();
 }
 
-/* homepage */
+/* random words and sentences */
 
 function get_random_splash_word()
 {
@@ -35,6 +35,14 @@ function get_random_splash_word()
   $rand = round(mt_rand(0, count($words) - 1));
 
   return $words[$rand];
+}
+
+function get_random_register_analogy()
+{
+  $analogies = ['in a 2-for-1', 'if Chip Kelly takes over', 'for LT in his prime', 'for a first round pick this year AND next'];
+  $rand = round(mt_rand(0, count($analogies) - 1));
+
+  return $analogies[$rand];
 }
 
 function delete_form($routeParams, $label = 'Delete')
