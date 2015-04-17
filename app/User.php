@@ -31,4 +31,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+	/**
+	* All leagues attached to this user.
+	*
+	* @return array
+	*/
+	public function leagues()
+	{
+		return $this->hasMany('Fantasee\League');
+	}
+
 }

@@ -28,6 +28,11 @@ class RouteServiceProvider extends ServiceProvider {
 	{
 		parent::boot($router);
 
+		$router->bind('users', function($user)
+		{
+			return League::findOrFail($user);
+		});
+
 		$router->bind('leagues', function($slug)
 		{
 			return League::where('slug', $slug)->firstOrFail();

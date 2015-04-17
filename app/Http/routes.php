@@ -16,7 +16,7 @@ Route::get('/', [
 	'as' => 'root_path'
 	]);
 
-Route::get('home', [
+Route::get('home', [ // currently not used
 	'uses' => 'HomeController@index',
 	'as' => 'home_path'
 	]);
@@ -41,6 +41,18 @@ Route::get('leagues/{leagues}/drafts', [
 Route::get('leagues/{leagues}/scrape/{methods?}', [
 	'uses' => 'ScrapeController@index',
 	'as' => 'league_scrape',
+]);
+
+Route::resource('users', 'UsersController', [
+	'names' => [
+		'index' => 'users_path',
+		'show' => 'user_path',
+		'create' => 'user_create',
+		'store' => 'user_store',
+		'edit' => 'user_edit',
+		'update' => 'user_update',
+		'destroy' => 'user_destroy',
+	]
 ]);
 
 Route::resource('leagues', 'LeaguesController', [
