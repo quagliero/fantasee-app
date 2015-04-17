@@ -22,7 +22,7 @@
         <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
           {!! Form::label('slug', 'Fantasee URL') !!}
           <div class="input-group">
-            <div class="input-group-addon">http://fantasee.app/</div>
+            <div class="input-group-addon">{{ url() }}/</div>
           {!! Form::text('slug', null, ['class' => 'form-control', 'placeholder' => '']) !!}
           </div>
           {!! $errors->first('slug', '<span class="help-block">:message</span>') !!}
