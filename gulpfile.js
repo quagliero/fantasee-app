@@ -1,4 +1,5 @@
 var elixir = require('laravel-elixir');
+var browserSync = require('laravel-elixir-browser-sync');
 
 /*
  |--------------------------------------------------------------------------
@@ -16,10 +17,19 @@ var paths = {
 };
 
 elixir(function(mix) {
-    mix.sass('app.scss', 'public/css', {
-      includePaths: [
-        paths.bootstrap + 'stylesheets/',
-        paths.fontAwesome + 'stylesheets/'
-      ]
-    });
+  mix.sass('app.scss', 'public/css', {
+    includePaths: [
+      paths.bootstrap + 'stylesheets/',
+      paths.fontAwesome + 'stylesheets/'
+    ]
+  });
+
+  mix.browserSync([
+    'app/**/*',
+    'public/**/*',
+    'resources/views/**/*'
+  ], {
+    proxy: 'fantasee.app',
+    reloadDelay: 500
+  });
 });
