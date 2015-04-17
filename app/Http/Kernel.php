@@ -29,6 +29,7 @@ class Kernel extends HttpKernel {
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
 		'guest' => 'Fantasee\Http\Middleware\RedirectIfAuthenticated',
 		'admin' => 'Fantasee\Http\Middleware\AdminMiddleware',
+		'superadmin' => 'Fantasee\Http\Middleware\SuperAdminMiddleware',
 	];
 
 }
