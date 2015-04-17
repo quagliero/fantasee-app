@@ -3,14 +3,16 @@
 @section('content')
 <section class="splash-mast">
   <div class="container">
-    <h1>Leagues using Fantasee</h1>
     @if (Auth::check())
-      <p>{!! link_to_route('league_create', 'Add new league', null, ['class="btn btn-primary"'])!!}</p>
+    <h1>Leagues using Fantasee
+      <a href="{{ route('league_create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus-circle"></i> Add your league</a>
+    </h1>
     @else
+      <h1>Leagues using Fantasee</h1>
       <p class="alert alert-info"><i class="fa fa-info"></i>
         <strong><a href="{{ url('/auth/login') }}">Login</a></strong> or <strong><a href="{{ url('/auth/register') }}">Register</a></strong> to add your nfl.com fantasy league.</p>
     @endif
-
+    <br>
     <div class="row">
       @foreach ($leagues as $league)
       <div class="col-md-3 col-sm-4 col-xs-6">
