@@ -1,6 +1,7 @@
 <?php namespace Fantasee\Http\Controllers;
 
 use Fantasee\Http\Requests;
+use Fantasee\Http\Requests\UpdateUserRequest;
 use Fantasee\Http\Controllers\Controller;
 use Fantasee\User;
 use Illuminate\Http\Request;
@@ -18,7 +19,6 @@ class UsersController extends Controller {
 		$this->users = $users;
 
 		$this->middleware('auth', ['only' => ['create', 'edit', 'update', 'destroy']]);
-		$this->middleware('admin', ['only' => ['edit', 'update', 'destroy']]);
 		$this->middleware('superadmin', ['only' => ['index', 'destroy']]);
 	}
 
@@ -60,9 +60,9 @@ class UsersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(User $user)
 	{
-		//
+		return view('user.show', compact('user'));
 	}
 
 	/**
@@ -82,9 +82,11 @@ class UsersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(User $user, UpdateUserRequest $request)
 	{
-		//
+		$user->fill($request->all())->save();
+
+		return redirect()->route('user_path', [$user->id]);
 	}
 
 	/**

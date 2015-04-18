@@ -21,10 +21,10 @@
           <li><a href="{{ url('/auth/register') }}">Register</a></li>
           @else
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name ?: Auth::user()->email }} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               @if (Auth::check())
-              <li>{!! link_to_route('home_path', 'Account') !!}</li>
+              <li>{!! link_to_route('user_path', 'Account', [Auth::user()->id]) !!}</li>
               @endif
               <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
             </ul>

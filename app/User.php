@@ -31,6 +31,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+
+	/**
+	* Password should be encrypted
+	*
+	* @var array
+	*/
+	public function setPasswordAttribute($input)
+	{
+		$this->attributes['password'] = \Hash::make($input);
+	}
+
 	/**
 	* All leagues attached to this user.
 	*

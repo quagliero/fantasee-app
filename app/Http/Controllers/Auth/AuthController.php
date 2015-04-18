@@ -20,6 +20,7 @@ class AuthController extends Controller {
 
 	use AuthenticatesAndRegistersUsers;
 
+
 	/**
 	 * Create a new authentication controller instance.
 	 *
@@ -33,6 +34,14 @@ class AuthController extends Controller {
 		$this->registrar = $registrar;
 
 		$this->middleware('guest', ['except' => 'getLogout']);
+	}
+
+	/**
+	 * Redirect after log in
+	 */
+	public function redirectPath()
+	{
+		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/leagues';
 	}
 
 }

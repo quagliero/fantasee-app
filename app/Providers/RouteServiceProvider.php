@@ -2,6 +2,7 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Fantasee\User;
 use Fantasee\League;
 use Fantasee\Season;
 use Fantasee\Week;
@@ -30,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider {
 
 		$router->bind('users', function($user)
 		{
-			return League::findOrFail($user);
+			return User::findOrFail($user);
 		});
 
 		$router->bind('leagues', function($slug)
