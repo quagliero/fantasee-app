@@ -35,7 +35,7 @@
     {!! Form::close() !!}
 
     <div class="form-group">
-    {!! delete_form(['league_destroy', $league->league_id]) !!}
+    {!! delete_form(['league_destroy', $league->slug]) !!}
     </div>
   </div>
   <div class="col-sm-6">

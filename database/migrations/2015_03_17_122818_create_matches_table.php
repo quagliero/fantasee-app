@@ -16,15 +16,15 @@ class CreateMatchesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('league_id')->unsigned();
-			$table->foreign('league_id')->references('id')->on('leagues');
+			$table->foreign('league_id')->references('id')->on('leagues')->onDelete('cascade');;
 			$table->integer('season_id')->unsigned();
 			$table->foreign('season_id')->references('id')->on('seasons');
 			$table->integer('week_id')->unsigned();
 			$table->foreign('week_id')->references('id')->on('weeks');
 			$table->integer('team1_id')->unsigned();
-			$table->foreign('team1_id')->references('id')->on('teams');
+			$table->foreign('team1_id')->references('id')->on('teams')->onDelete('cascade');;
 			$table->integer('team2_id')->unsigned();
-			$table->foreign('team2_id')->references('id')->on('teams');
+			$table->foreign('team2_id')->references('id')->on('teams')->onDelete('cascade');;
 			$table->decimal('team1_score', 5, 2);
 			$table->decimal('team2_score', 5, 2);
 			$table->timestamps();

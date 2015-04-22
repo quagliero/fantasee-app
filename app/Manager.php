@@ -36,6 +36,16 @@ class Manager extends Model {
 	}
 
 	/**
+	 * Get managers by their leagues
+	 *
+	 * @var array
+	 */
+	public function scopeByLeague($query, $league_id)
+	{
+		return $query->where('league_id', $league_id);
+	}
+
+	/**
 	 * Get manager wins
 	 *
 	 * @var number

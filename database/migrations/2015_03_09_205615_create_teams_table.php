@@ -16,9 +16,9 @@ class CreateTeamsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('league_id')->unsigned();
-			$table->foreign('league_id')->references('id')->on('leagues');
+			$table->foreign('league_id')->references('id')->on('leagues')->onDelete('cascade');
 			$table->integer('manager_id')->unsigned();
-			$table->foreign('manager_id')->references('id')->on('managers');
+			$table->foreign('manager_id')->references('id')->on('managers')->onDelete('cascade');;
 			$table->integer('season_id')->unsigned();
 			$table->foreign('season_id')->references('id')->on('seasons');
 			$table->string('name');

@@ -18,7 +18,7 @@ class CreateManagersTable extends Migration {
 			$table->string('name');
 			$table->string('site_id')->unique();
 			$table->integer('league_id')->unsigned();
-			$table->foreign('league_id')->references('id')->on('leagues');
+			$table->foreign('league_id')->references('id')->on('leagues')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

@@ -75,7 +75,7 @@ class ScrapeController extends Controller {
 				if ($managerId == 2886224) {
 					$managerId = 6557238;
 				}
-				$manager = Manager::where('site_id', $managerId)->first();
+				$manager = Manager::byLeague($this->league->id)->where('site_id', $managerId)->first();
 				$team = Team::updateOrCreate([
 					'name' => $name,
 					'league_id' => $this->league->id,
@@ -137,8 +137,8 @@ class ScrapeController extends Controller {
 				if ($team2->manager_id == 2886224) {
 					$team2->manager_id = 6557238;
 				}
-				$manager1 = Manager::where('site_id', $team1->manager_id)->first();
-				$manager2 = Manager::where('site_id', $team2->manager_id)->first();
+				$manager1 = Manager::byLeague($this->league->id)->where('site_id', $team1->manager_id)->first();
+				$manager2 = Manager::byLeague($this->league->id)->where('site_id', $team2->manager_id)->first();
 				$team1Model = Team::byLeague($this->league->id)->bySeason($season->id)->byManager($manager1->id)->first();
 				$team2Model = Team::byLeague($this->league->id)->bySeason($season->id)->byManager($manager2->id)->first();
 
