@@ -36,12 +36,13 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
+
 	/**
 	 * Redirect after log in
 	 */
 	public function redirectPath()
 	{
-		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/leagues';
+		return property_exists($this, 'redirectTo') ? $this->redirectTo : route('user_path', [$this->auth->user()->id]);
 	}
 
 }
