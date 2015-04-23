@@ -17,6 +17,9 @@
   <![endif]-->
 </head>
 <body>
+  @if (App::environment('production'))
+  @include('common.analytics')
+  @endif
   @include('common.header')
   <main>
     @yield('content')
