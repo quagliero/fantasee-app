@@ -6653,6 +6653,16 @@ h1 {
   text-align: center;
   margin-bottom: 1.4rem; }
 
+.schedule-nav {
+  margin-bottom: 20px; }
+  .schedule-nav .nav {
+    float: left; }
+    .schedule-nav .nav li {
+      float: none; }
+      @media (max-width: 767px) {
+        .schedule-nav .nav li {
+          float: left; } }
+
 .match {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -6660,9 +6670,9 @@ h1 {
   margin-bottom: 10px; }
 
 .match__team {
-  -webkit-flex: 3;
-      -ms-flex: 3;
-          flex: 3; }
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1; }
   .match__team:first-of-type {
     text-align: right; }
   .match__team:last-of-type {

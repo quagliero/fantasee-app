@@ -11,16 +11,6 @@ use Illuminate\Http\Request;
 class LeagueManagerSeasonController extends Controller {
 
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index(League $league, Manager $manager, Season $season)
-	{
-		return view('league_manager_season.index', compact('league', 'manager', 'season'));
-	}
-
-	/**
 	 * Display the specified resource.
 	 *
 	 * @param  League  $league

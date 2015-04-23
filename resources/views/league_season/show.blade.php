@@ -4,14 +4,7 @@
 
 @section('content')
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1>{{ $league->name }} &mdash; {{ $season->year }} </h1>
-      @if (is_league_admin($league->id))
-    {!! link_to_route('league_edit', 'Edit', [$league->slug], ['class' => 'btn btn-info pull-right']) !!}
-      @endif
-      </div>
-  </div>
+  <h1>{{ $league->name }} &mdash; {{ $season->year }}</h1>
   <ul class="nav nav-tabs">
     <li>{!! link_to_route('league_path', 'Overall', [$league->slug]) !!}</li>
     @foreach ($league->seasons as $s)

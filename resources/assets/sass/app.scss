@@ -145,13 +145,29 @@ h1 {
 	margin-bottom: 1.4rem;
 }
 
+.schedule-nav {
+	margin-bottom: 20px;
+	
+	.nav {
+		float: left;
+
+		li {
+			float: none;
+
+			@media (max-width: $screen-xs-max) {
+				float: left;
+			}
+		}
+	}
+}
+
 .match {
 	display: flex;
 	margin-bottom: 10px;
 }
 
 .match__team {
-	flex: 3;
+	flex: 1;
 
 	&:first-of-type {
 		text-align: right;

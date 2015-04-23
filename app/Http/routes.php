@@ -107,9 +107,8 @@ Route::resource('leagues.managers', 'LeagueManagerController', [
 ]);
 
 Route::resource('leagues.managers.seasons', 'LeagueManagerSeasonController', [
-	'only' => ['index', 'show'],
+	'only' => ['show'],
 	'names' => [
-		'index' => 'league_manager_seasons_path',
 		'show' => 'league_manager_season_path',
 	]
 ]);
