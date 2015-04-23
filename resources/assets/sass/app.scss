@@ -35,11 +35,16 @@ h1 {
 	background-size: cover;
 	border-bottom: 1px solid #d8d8d8;
 }
+
 .splash-mast__body {
 	padding: 40px 0 20px;
 	background: none;
 	text-align: center;
 	font-size: 2rem;
+
+	@media (max-width: $screen-xs-max) {
+		padding: 20px 0 0;
+	}
 
 	h1 {
 		color: #fff;
@@ -72,6 +77,10 @@ h1 {
 	padding: 40px 0;
 	position: relative;
 	font-family: 'Roboto';
+
+	@media (max-width: $screen-xs-max) {
+		padding-top: 0;
+	}
 
 	h3 {
 		font-weight: 300;

@@ -15,7 +15,7 @@
     <br>
     <div class="row">
       @foreach ($leagues as $league)
-      <div class="col-md-3 col-sm-4 col-xs-6">
+      <div class="col-md-3 col-sm-4 col-xs-12">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">{{ $league->name }}</h3>

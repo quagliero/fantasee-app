@@ -6583,6 +6583,9 @@ h1 {
   background: none;
   text-align: center;
   font-size: 2rem; }
+  @media (max-width: 767px) {
+    .splash-mast__body {
+      padding: 20px 0 0; } }
   .splash-mast__body h1 {
     color: #fff;
     font-size: 6rem;
@@ -6608,6 +6611,9 @@ h1 {
   padding: 40px 0;
   position: relative;
   font-family: 'Roboto'; }
+  @media (max-width: 767px) {
+    .splash-stats {
+      padding-top: 0; } }
   .splash-stats h3 {
     font-weight: 300;
     text-shadow: 0px 1px 0 #333; }

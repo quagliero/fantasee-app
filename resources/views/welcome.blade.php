@@ -13,7 +13,6 @@
       </div>
     </div>
     <section class="splash-stats">
-      <!-- <h4 class="lead-in">So far there&rsquo;s</h4> -->
       <div class="container">
         <div class="row">
           <div class="col-sm-4">
@@ -38,7 +37,7 @@
       <br>
     <div class="row">
       @foreach ($leagues as $league)
-      <div class="col-sm-4 col-xs-6">
+      <div class="col-md-3 col-sm-4 col-xs-12">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">{{ $league->name }}</h3>
