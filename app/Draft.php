@@ -16,7 +16,7 @@ class Draft extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['league_id', 'season_id', 'manager_id', 'round', 'pick', 'player_id'];
+	protected $fillable = ['league_id', 'season_id', 'manager_id', 'round_id', 'pick', 'team_id', 'player_id'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.

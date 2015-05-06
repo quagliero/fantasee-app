@@ -62,13 +62,13 @@
         Schedule
         </label>
       </div>
-      <!--
       <div class="checkbox">
         <label>
         {!! Form::checkbox('createLeagueDrafts', 'true') !!}
         Drafts
         </label>
       </div>
+      <!--
       <div class="checkbox">
         <label>
         {!! Form::checkbox('createLeagueTrades', 'true') !!}

@@ -9,6 +9,8 @@ use Fantasee\LeagueSeasonWeek;
 use Fantasee\Manager;
 use Fantasee\Team;
 use Fantasee\Match;
+use Fantasee\Draft;
+use Fantasee\Round;
 use Illuminate\Http\Request;
 use Goutte\Client;
 
@@ -191,21 +193,30 @@ class ScrapeController extends Controller {
 
 	private function createLeagueDrafts()
 	{
-		//
-		// // draft results
-		// foreach ($seasons as $season) {
-		// 	$crawler = $client->request('GET', 'http://fantasy.nfl.com/league/' . $leagueId . '/history/' . $season . '/draftresults?draftResultsDetail=0&draftResultsTab=round&draftResultsType=results');
-		// 	print '<h2>' . $season . ' Draft</h2>';
-		// 	$crawler->filter('#leagueDraftResults #leagueDraftResultsResults .results .wrap > ul')->each(function ($round, $i) {
-		// 		print '<h3>Round ' . ($i + 1) . '</h3>';
-		// 		$round->children('li')->each(function ($pick) {
-		//       $num = $pick->filter('.count')->text();
-		//       $player = $pick->filter('.playerName')->text();
-		//       $team = $pick->filter('.teamName')->text();
-		//       print 'Pick ' . $num . ': ' . $player . ' TO ' . $team . '<br>';
-		//     });
-		// 	});
-		// }
+		// draft results
+		foreach ($this->seasons as $season) {
+			$crawler = $this->client->request('GET', $this->baseUrl . '/' . $season->year . '/draftresults?draftResultsDetail=0&draftResultsTab=round&draftResultsType=results');
+
+			$rounds = $crawler->filter('#leagueDraftResults #leagueDraftResultsResults .results .wrap > ul');
+
+			$rounds->each(function ($round, $i) use ($season) {
+				$round->children('li')->each(function ($pick, $j) use ($season, $i) {
+					$roundNumber = $i + 1;
+		      $pickNumber = preg_replace('/(\D)*/', '', $pick->filter('.count')->text());
+		      $player = $pick->filter('.playerName')->text();
+		      $teamName = $pick->filter('.teamName')->text();
+					$team = Team::byLeague($this->league->id)->bySeason($season->id)->where('name', $teamName)->first();
+					$draftPick = Draft::updateOrCreate([
+						'league_id' => $this->league->id,
+						'season_id' => $season->id,
+						'round_id' => $roundNumber,
+						'pick' => $pickNumber,
+						'team_id' => $team->id,
+						// 'player_id' => $player,
+					]);
+		    });
+			});
+		}
 	}
 
 	private function buildTeam($matchup, $team) {
