@@ -41,7 +41,7 @@
     <div class="col-sm-6">
       <section class="well">
       <h2>Data Scraper</h2>
-      {!! Form::open(['url' => route('league_scrape', [$league->slug]), 'method' => 'GET']) !!}
+      {!! Form::open(['url' => route('league_scrape', [$league->slug]), 'method' => 'POST']) !!}
       <span class="help-block">All of your league information was scraped on creation. Use these options to get any new or changed data.</span>
       {!! Form::hidden('createLeagueSeasons', 'true') !!}
       <div class="checkbox">

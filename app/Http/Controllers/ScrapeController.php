@@ -21,6 +21,26 @@ class ScrapeController extends Controller {
 		$this->middleware('admin');
 	}
 
+	public function index(Request $request, League $league) {
+		// Have to define these here because it doesn't have the
+		// League model instance in the __constructor
+		// I thought it would, but hey.
+		$this->league = $league;
+		$this->baseUrl = 'http://fantasy.nfl.com/league/' . $this->league->league_id . '/history';
+		$this->methods = array_keys($request->all());
+		$this->seasons = $this->scrapeSeasons();
+
+		foreach ($this->methods as $method)
+		{
+			if (method_exists($this, $method) && is_callable([$this, $method]))
+			{
+				$this->$method($this->seasons);
+			}
+		}
+
+		return redirect()->route('league_path', [$this->league->slug]);
+	}
+
 	private function scrapeSeasons()
 	{
 		$crawler = $this->client->request('GET', $this->baseUrl);
@@ -196,24 +216,4 @@ class ScrapeController extends Controller {
 	    'score' => $team->filter('.teamTotal')->text()
 	  );
 	}
-
-
-
-	public function index(Request $request, League $league) {
-		// Have to define these here because it doesn't have the
-		// League model instance in the __constructor
-		// I thought it would, but hey.
-		$this->league = $league;
-		$this->baseUrl = 'http://fantasy.nfl.com/league/' . $this->league->league_id . '/history';
-		$this->methods = array_keys($request->all());
-		$this->seasons = $this->scrapeSeasons();
-
-		foreach ($this->methods as $method)
-		{
-			$this->$method($this->seasons);
-		}
-
-		return redirect()->route('league_path', [$this->league->slug]);
-	}
-
 }

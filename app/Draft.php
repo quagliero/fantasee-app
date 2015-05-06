@@ -45,24 +45,4 @@ class Draft extends Model {
 		return $this->belongsTo('Fantasee\Season');
 	}
 
-	/**
-	* The team attached to this draft pick
-	*
-	* @return array
-	*/
-	public function team()
-	{
-		return $this->belongsTo('Fantasee\Team');
-	}
-
-	/**
-	* The teams attached to this match
-	*
-	* @return array
-	*/
-	// public function rounds()
-	// {
-	// 	return $this->hasMany('Fantasee\Round');
-	// }
-
 }

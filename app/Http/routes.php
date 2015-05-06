@@ -38,7 +38,7 @@ Route::get('leagues/{leagues}/drafts', [
 ]);
 
 /* League scraper */
-Route::get('leagues/{leagues}/scrape/{methods?}', [
+Route::post('leagues/{leagues}/scrape', [
 	'uses' => 'ScrapeController@index',
 	'as' => 'league_scrape',
 ]);
