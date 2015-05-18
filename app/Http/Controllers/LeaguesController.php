@@ -18,7 +18,7 @@ class LeaguesController extends Controller {
 	public function __construct(League $leagues)
 	{
 		$this->leagues = $leagues;
-		
+
 		$this->middleware('auth', ['only' => ['create', 'edit', 'update', 'destroy']]);
 		$this->middleware('admin', ['only' => ['edit', 'update', 'destroy']]);
 	}
@@ -52,9 +52,10 @@ class LeaguesController extends Controller {
 	 */
 	public function store(CreateLeagueRequest $request, League $league)
 	{
-		$league->create($request->all());
-
-		return redirect()->route('leagues_path');
+		// Create the new league instance
+		$newLeague = $league->create($request->all());
+		//
+		return redirect()->route('league_edit', [$newLeague->slug]);
 	}
 
 	/**

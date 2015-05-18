@@ -8,6 +8,10 @@
         <h1>Add a league to Fantasee</h1>
         {!! Form::open(['route' => 'league_store']) !!}
         {!! Form::hidden('user_id', Auth::user()->id) !!}
+        {!! Form::hidden('createLeagueSeasons', 'true') !!}
+        {!! Form::hidden('createLeagueManagers', 'true') !!}
+        {!! Form::hidden('createLeagueTeams', 'true') !!}
+        {!! Form::hidden('createLeagueSchedule', 'true') !!}
         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
           {!! Form::label('name', 'League Name') !!}
           {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Your league name']) !!}

@@ -43,6 +43,7 @@ Route::post('leagues/{leagues}/scrape', [
 	'as' => 'league_scrape',
 ]);
 
+
 Route::resource('users', 'UsersController', [
 	'names' => [
 		'index' => 'users_path',
