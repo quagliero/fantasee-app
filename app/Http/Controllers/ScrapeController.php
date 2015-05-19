@@ -18,12 +18,15 @@ class ScrapeController extends Controller {
 
 	public function __construct()
 	{
-		$this->client = new Client();
 		$this->middleware('auth');
 		$this->middleware('admin');
 	}
 
-	public function index(Request $request, League $league) {
+	public function store(Request $request, League $league) {
+		$availableCommands = [
+			'seasons' => SeasonScraper::class
+		];
+
 		// Have to define these here because it doesn't have the
 		// League model instance in the __constructor
 		// I thought it would, but hey.

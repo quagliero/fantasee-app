@@ -39,7 +39,7 @@ Route::get('leagues/{leagues}/drafts', [
 
 /* League scraper */
 Route::post('leagues/{leagues}/scrape', [
-	'uses' => 'ScrapeController@index',
+	'uses' => 'ScrapeController@store',
 	'as' => 'league_scrape',
 ]);
 

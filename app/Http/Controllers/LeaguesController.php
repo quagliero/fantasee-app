@@ -54,7 +54,11 @@ class LeaguesController extends Controller {
 	{
 		// Create the new league instance
 		$newLeague = $league->create($request->all());
-		//
+		// Scrape initial data
+		$this->dispatch(
+        new ScrapeLeague($newLeague, $request->all());
+    );
+		
 		return redirect()->route('league_edit', [$newLeague->slug]);
 	}
 
