@@ -6,9 +6,9 @@ use Goutte\Client;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 
-abstract class ScrapeLeague extends Command implements SelfHandling, ShouldBeQueued {
+abstract class BaseScraper extends Command implements SelfHandling, ShouldBeQueued {
 
-	protected $league;
+	protected $league, $client, $baseUrl;
 
 	/**
 	 * Create a new command instance.
@@ -21,19 +21,5 @@ abstract class ScrapeLeague extends Command implements SelfHandling, ShouldBeQue
     $this->league = $league;
     $this->baseUrl = 'http://fantasy.nfl.com/league/' . $this->league->league_id . '/history';
 	}
-
-  /**
-	 * Get a league's seasons
-	 *
-	 * @return array
-	 */
-  public function getSeasons()
-  {
-    if (count($this->league->seasons()) == 0) {
-      $this->dispatch(new ScrapeSeasons, $this->league);
-    }
-
-    return $this->league->seasons();
-  }
 
 }

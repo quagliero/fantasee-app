@@ -1,6 +1,5 @@
 <?php namespace Fantasee\Commands;
 
-use Fantasee\Commands\BaseScraper;
 use Fantasee\Season;
 
 class ScrapeSeasons extends BaseScraper {
@@ -10,9 +9,9 @@ class ScrapeSeasons extends BaseScraper {
 	 *
 	 * @return void
 	 */
-	public function __construct(League $league)
+	public function __construct($league)
 	{
-		//
+		parent::__construct($league);
 	}
 
 	/**
@@ -22,16 +21,18 @@ class ScrapeSeasons extends BaseScraper {
 	 */
 	public function handle()
 	{
-		$crawler = $this->client->request('GET', $this->baseUrl);
-		$seasons = $crawler->filter('#historySeasonNav .st-menu a[href]')->each(function ($node) {
-			return Season::where('year', intval($node->text()))->first();
-		});
+		if (count($this->league->seasons()->get()) == 0) {
+			$crawler = $this->client->request('GET', $this->baseUrl);
+			$seasons = $crawler->filter('#historySeasonNav .st-menu a[href]')->each(function ($node) {
+				return Season::where('year', intval($node->text()))->first();
+			});
 
-		$seasonIds = array_map(function ($s) {
-			return $s->id;
-		}, $seasons);
+			$seasonIds = array_map(function ($s) {
+				return $s->id;
+			}, $seasons);
 
-		$this->league->seasons()->sync($seasonIds);
+			$this->league->seasons()->sync($seasonIds);
+		}
 	}
 
 }

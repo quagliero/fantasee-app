@@ -1,22 +1,21 @@
 <?php namespace Fantasee\Commands;
 
-use Fantasee\Commands\Command;
+use Fantasee\League;
 
-use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldBeQueued;
-
-class ScrapeLeague extends Command implements SelfHandling, ShouldBeQueued {
-
-	protected $league, $request;
+class ScrapeLeague extends BaseScraper {
+	use \Illuminate\Foundation\Bus\DispatchesCommands;
 
 	/**
 	 * Create a new command instance.
 	 *
 	 * @return void
 	 */
-	public function __construct(League $league, $data)
+	public function __construct($league)
 	{
-		$this->league = $league;
+		// init base scrape constructor
+		parent::__construct($league);
+		// get the seasons
+		$this->dispatch(new ScrapeSeasons($this->league));
 	}
 
 	/**
@@ -28,9 +27,8 @@ class ScrapeLeague extends Command implements SelfHandling, ShouldBeQueued {
 	{
 		// Handle the scrape
 		// dispatch Commands for a whole league scrape
-
-
-		event(new LeagueWasScraped($this->league));
+		$this->dispatch(new ScrapeManagers($this->league));
+		// event(new LeagueWasScraped($this->league));
 	}
 
 }

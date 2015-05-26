@@ -6,6 +6,7 @@ use Fantasee\Http\Requests\UpdateLeagueRequest;
 use Fantasee\Http\Controllers\Controller;
 use Fantasee\League;
 use Illuminate\Http\Request;
+use Fantasee\Commands\ScrapeLeague;
 
 class LeaguesController extends Controller {
 
@@ -55,10 +56,8 @@ class LeaguesController extends Controller {
 		// Create the new league instance
 		$newLeague = $league->create($request->all());
 		// Scrape initial data
-		$this->dispatch(
-        new ScrapeLeague($newLeague, $request->all());
-    );
-		
+		$this->dispatch(new ScrapeLeague($newLeague));
+
 		return redirect()->route('league_edit', [$newLeague->slug]);
 	}
 
