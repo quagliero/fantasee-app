@@ -52,26 +52,32 @@
       </div>
       <div class="checkbox">
         <label>
-        {!! Form::checkbox('createLeagueTeams', 'true') !!}
+        {!! Form::checkbox('teams', 'true') !!}
         Teams
         </label>
       </div>
       <div class="checkbox">
         <label>
-        {!! Form::checkbox('createLeagueSchedule', 'true') !!}
+        {!! Form::checkbox('standings', 'true') !!}
+        Standings
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+        {!! Form::checkbox('schedule', 'true') !!}
         Schedule
         </label>
       </div>
       <div class="checkbox">
         <label>
-        {!! Form::checkbox('createLeagueDrafts', 'true') !!}
+        {!! Form::checkbox('drafts', 'true') !!}
         Drafts
         </label>
       </div>
       <!--
       <div class="checkbox">
         <label>
-        {!! Form::checkbox('createLeagueTrades', 'true') !!}
+        {!! Form::checkbox('trades', 'true') !!}
         Trades
         </label>
       </div>
