@@ -207,4 +207,16 @@ class Team extends Model {
 
 		return $pointsFor;
 	}
+
+	/**
+	* Get team win percentage
+	*
+	* @var number
+	*/
+	public function getWinPercent()
+	{
+		$total = $this->getWins() + $this->getLosses() + $this->getTies();
+
+		return ($this->getWins() / $total) * 100;
+	}
 }

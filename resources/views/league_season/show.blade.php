@@ -26,6 +26,7 @@
         <th>Wins</th>
         <th>Losses</th>
         <th>Ties</th>
+        <th>%</th>
         <th>For</th>
         <th>Against</th>
         <th></th>
@@ -39,6 +40,7 @@
           <td>{!! $team->getWins() !!}</td>
           <td>{!! $team->getLosses() !!}</td>
           <td>{!! $team->getTies() !!}</td>
+          <td>{!! decimal_perc($team->getWinPercent()) !!}</td>
           <td>{!! $team->getPointsFor() !!}</td>
           <td>{!! $team->getPointsAgainst() !!}</td>
           <td>{!! show_trophy($team) !!}</td>

@@ -31,6 +31,7 @@
       <th>Wins</th>
       <th>Losses</th>
       <th>Ties</th>
+      <th>%</th>
       <th>Points For</th>
       <th>Points Against</th>
       <th><i class="fa fa-trophy"></i></th>
@@ -42,6 +43,7 @@
         <td>{!! $manager->getWins() !!}</td>
         <td>{!! $manager->getLosses() !!}</td>
         <td>{!! $manager->getTies() !!}</td>
+        <td>{!! decimal_perc($manager->getWinPercent()) !!}</td>
         <td>{!! $manager->getPointsFor() !!}</td>
         <td>{!! $manager->getPointsAgainst() !!}</td>
         <td>{!! $manager->getChampionshipSeasons() !!}</td>

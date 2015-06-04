@@ -34,6 +34,7 @@
       <th>Wins</th>
       <th>Losses</th>
       <th>Ties</th>
+      <th>%</th>
       <th>Points Scored</th>
       <th>Points Against</th>
     </thead>
@@ -46,6 +47,7 @@
         <td>{!! $team->getWins() !!}</td>
         <td>{!! $team->getLosses() !!}</td>
         <td>{!! $team->getTies() !!}</td>
+        <td>{!! decimal_perc($team->getWinPercent()) !!}</td>
         <td>{!! $team->getPointsFor() !!}</td>
         <td>{!! $team->getPointsAgainst() !!}</td>
       </tr>

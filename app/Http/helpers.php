@@ -27,6 +27,10 @@ function match_count()
   return Match::get()->count();
 }
 
+function decimal_perc($num) {
+  return ltrim(number_format($num / 100, 3), 0);
+}
+
 /* random words and sentences */
 
 function get_random_splash_word()

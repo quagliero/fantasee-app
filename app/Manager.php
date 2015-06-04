@@ -128,4 +128,16 @@ class Manager extends Model {
 
 		return implode(array_filter($championships), ', ');
 	}
+
+	/**
+	 * Get manager win percentage
+	 *
+	 * @var number
+	 */
+	public function getWinPercent()
+	{
+		$total = $this->getWins() + $this->getLosses() + $this->getTies();
+
+		return ($this->getWins() / $total) * 100;
+	}
 }
