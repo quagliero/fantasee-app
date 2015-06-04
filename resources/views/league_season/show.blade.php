@@ -18,7 +18,7 @@
   </ul>
   <br>
   <div id="dynamic">
-    <table class="table table-striped">
+    <table class="table table-striped" data-sortable="0,3,4,6,7,8">
       <thead>
         <th>#</th>
         <th>Team</th>
@@ -50,4 +50,9 @@
     </table>
   </div>
 </div>
+@stop
+
+@section('scripts')
+  @parent
+  {!! HTML::script('js/table-sortable.js') !!}
 @stop

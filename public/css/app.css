@@ -6573,7 +6573,7 @@ h1 {
 .splash-mast {
   padding-top: 20px;
   margin-top: -20px;
-  background-image: linear-gradient(45deg, rgba(78, 152, 98, 0.95) 10%, rgba(190, 255, 176, 0.95) 90%), url('/img/bg.jpg');
+  background-image: linear-gradient(45deg, rgba(78, 152, 98, 0.95) 10%, rgba(190, 255, 176, 0.95) 90%), url("/img/bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   border-bottom: 1px solid #d8d8d8; }
@@ -6589,7 +6589,7 @@ h1 {
   .splash-mast__body h1 {
     color: #fff;
     font-size: 6rem;
-    text-shadow: 0px 2px 1px #4E9862; }
+    text-shadow: 0 2px 1px #4e9862; }
   .splash-mast__body .btn {
     margin: 20px 0 0;
     font-size: 2.5rem;
@@ -6600,7 +6600,7 @@ h1 {
     box-shadow: 0 0 6px #47a349; }
     .splash-mast__body .btn:hover, .splash-mast__body .btn:focus {
       background: #fff;
-      color: #86CA87;
+      color: #86ca87;
       text-shadow: 0 1px 0 #47a349;
       box-shadow: 0 0 5px #47a349; }
 
@@ -6616,7 +6616,7 @@ h1 {
       padding-top: 0; } }
   .splash-stats h3 {
     font-weight: 300;
-    text-shadow: 0px 1px 0 #333; }
+    text-shadow: 0 1px 0 #333; }
   .splash-stats h4 {
     font-weight: 300; }
   .splash-stats .lead-in {
@@ -6705,6 +6705,22 @@ h1 {
       -ms-flex: 2;
           flex: 2;
   text-align: left; }
+
+.sortable__heading {
+  overflow: hidden;
+  padding-right: 1.4em !important;
+  position: relative;
+  cursor: pointer; }
+  .sortable__heading .fa {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    color: #ccc; }
+  .sortable__heading .fa-sort-asc, .sortable__heading .fa-sort-desc {
+    color: #333; }
 
 
 /*# sourceMappingURL=app.css.map */

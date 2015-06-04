@@ -26,7 +26,7 @@
     <li class="active">{!! link_to_route('league_teams_path', 'Teams', [$league->slug]) !!}</li>
   </ul>
 
-  <table class="table table-striped">
+  <table class="table table-striped" data-sortable="3,4,6,7,8">
     <thead>
       <th>Name</th>
       <th>Manager</th>
@@ -35,8 +35,8 @@
       <th>Losses</th>
       <th>Ties</th>
       <th>%</th>
-      <th>Points Scored</th>
-      <th>Points Against</th>
+      <th>For</th>
+      <th>Against</th>
     </thead>
     <tbody>
     @foreach ($teams as $team)
@@ -57,3 +57,8 @@
 </div>
 
 @endsection
+
+@section('scripts')
+  @parent
+  {!! HTML::script('js/table-sortable.js') !!}
+@stop

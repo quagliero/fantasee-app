@@ -25,7 +25,7 @@
     <li>{!! link_to_route('league_teams_path', 'Teams', [$league->slug]) !!}</li>
   </ul>
 
-  <table class="table table-striped">
+  <table class="table table-striped" data-sortable="1,2,4,5,6">
     <thead>
       <th>Name</th>
       <th>Wins</th>
@@ -55,3 +55,8 @@
   <p>{!! link_to_route('leagues_path', 'Back to leagues') !!}</p>
 </div>
 @endsection
+
+@section('scripts')
+  @parent
+  {!! HTML::script('js/table-sortable.js') !!}
+@stop
