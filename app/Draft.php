@@ -45,4 +45,24 @@ class Draft extends Model {
 		return $this->belongsTo('Fantasee\Season');
 	}
 
+	/**
+	 * All drafts in a specific league
+	 *
+	 * @return array
+	 */
+	public function scopeByLeague($query, $league_id)
+	{
+		return $query->where('league_id', $league_id);
+	}
+
+	/**
+	 * All drafts in a specific season
+	 *
+	 * @return array
+	 */
+	public function scopeBySeason($query, $season_id)
+	{
+		return $query->where('season_id', $season_id);
+	}
+
 }
