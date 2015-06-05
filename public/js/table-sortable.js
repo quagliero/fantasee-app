@@ -44,17 +44,15 @@
 
         // Add event listener
         el.addEventListener('click', function(e) {
-          if (this.dataset.dir === 'asc') {
-            this.dataset.dir = 'desc';
-          } else {
-            this.dataset.dir = 'asc';
-          }
+          var dir = (this.dataset.dir === 'asc') ? 'desc' : 'asc';
+          this.dataset.dir = dir;
 
-          Array.prototype.forEach.call(document.querySelectorAll('.sortable > thead > tr > th > [class*="fa-sort"]'), function (el) {
-            el.className = 'fa fa-sort';
+          Array.prototype.forEach.call(that.headings, function (el, i) {
+            if (el.querySelector('[class*="fa-sort"]')) {
+              el.querySelector('[class*="fa-sort"]').className = 'fa fa-sort';
+            }
           });
 
-          var dir = this.dataset.dir;
           this.querySelector('.fa').className = 'fa fa-sort-' + dir;
           that.sortCol(i, dir);
         });
@@ -69,20 +67,11 @@
     toSort.sort(function(a, b) {
       var colA = Number(a.getElementsByTagName('td')[col].textContent);
       var colB = Number(b.getElementsByTagName('td')[col].textContent);
-      if (dir == 'asc') {
-        if (colA > colB) {
-          return 1;
-        }
-        if (colA < colB) {
-          return -1;
-        }
-      } else {
-        if (colA < colB) {
-          return 1;
-        }
-        if (colA > colB) {
-          return -1;
-        }
+      if (colA > colB) {
+        return (dir === 'asc') ? 1 : -1;
+      }
+      if (colA < colB) {
+        return (dir === 'asc') ? -1 : 1;
       }
       // a must be equal to b
       return 0;
