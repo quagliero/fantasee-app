@@ -19,13 +19,6 @@ class CreateDraftsTable extends Migration {
 			$table->foreign('league_id')->references('id')->on('leagues')->onDelete('cascade');
 			$table->integer('season_id')->unsigned();
 			$table->foreign('season_id')->references('id')->on('seasons');
-			$table->integer('round_id')->unsigned();
-			$table->foreign('round_id')->references('id')->on('rounds');
-			$table->integer('pick');
-			$table->integer('team_id')->unsigned();
-			$table->foreign('team_id')->references('id')->on('teams');
-			$table->integer('player_id');
-			$table->timestamps();
 		});
 	}
 
@@ -40,8 +33,6 @@ class CreateDraftsTable extends Migration {
 		{
 			$table->dropForeign('drafts_league_id_foreign');
 			$table->dropForeign('drafts_season_id_foreign');
-			$table->dropForeign('drafts_round_id_foreign');
-			$table->dropForeign('drafts_team_id_foreign');
 			$table->drop();
 		});
 	}
