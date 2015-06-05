@@ -19,6 +19,7 @@ class CreateDraftsTable extends Migration {
 			$table->foreign('league_id')->references('id')->on('leagues')->onDelete('cascade');
 			$table->integer('season_id')->unsigned();
 			$table->foreign('season_id')->references('id')->on('seasons');
+			$table->timestamps();
 		});
 	}
 
