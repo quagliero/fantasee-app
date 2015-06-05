@@ -1,7 +1,5 @@
 <?php namespace Fantasee\Commands;
 
-use Fantasee\League;
-
 class ScrapeLeague extends BaseScraper {
 	use \Illuminate\Foundation\Bus\DispatchesCommands;
 
