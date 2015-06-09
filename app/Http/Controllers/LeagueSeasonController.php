@@ -5,7 +5,6 @@ use Fantasee\Http\Controllers\Controller;
 use Fantasee\League;
 use Fantasee\Season;
 use Fantasee\Team;
-use Fantasee\Match;
 use Illuminate\Http\Request;
 
 class LeagueSeasonController extends Controller {

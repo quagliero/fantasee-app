@@ -16,6 +16,8 @@ class CreatePlayersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
+			$table->string('position');
+			$table->string('site_id')->unique();
 			$table->timestamps();
 		});
 	}

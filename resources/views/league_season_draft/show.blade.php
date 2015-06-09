@@ -22,13 +22,23 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          @foreach ($teams as $index => $team)
-          <th>{{ $team->name }}</th>
-          @endforeach
+          <th>Pick</th>
+          <th>Team</th>
+          <th>Player</th>
+          <th>Position</th>
+          <th>Team</th>
         </tr>
       </thead>
       <tbody>
-
+      @foreach ($picks as $index => $pick)
+        <tr>
+          <td>{{ $index + 1 }}</td>
+          <td>{{ get_team_name_from_id($pick->team_id)}}</td>
+          <td>{{ get_player_name_from_id($pick->player_id) }}</td>
+          <td>{{ get_player_position_from_id($pick->player_id) }}</td>
+          <td></td>
+        </tr>
+      @endforeach
       </tbody>
     </table>
   </div>
