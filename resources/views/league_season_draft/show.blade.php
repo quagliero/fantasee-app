@@ -26,7 +26,7 @@
           <th>Team</th>
           <th>Player</th>
           <th>Position</th>
-          <th>Team</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
