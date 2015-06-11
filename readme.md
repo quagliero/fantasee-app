@@ -8,7 +8,7 @@ The nfl.com fantasy site and apps are getting better, but they lack more in-dept
 - [x] nfl.com
   - [x] single division
   - [ ] multiple divisions
-  - [ ] manually entered final standings
+  - [x] manually entered final standings
 
 #### Features
 - [x] All-time League Manager
