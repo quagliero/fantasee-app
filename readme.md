@@ -22,6 +22,6 @@ The nfl.com fantasy site and apps are getting better, but they lack more in-dept
   - [x] win/loss totals
   - [x] points for/against totals
   - [ ] trades
-  - [ ] draft results
+  - [x] draft results
 - [ ] All-time Draft
 - [ ] All-time Trades
