@@ -6,7 +6,7 @@ use Fantasee\Http\Requests\UpdateLeagueRequest;
 use Fantasee\Http\Controllers\Controller;
 use Fantasee\League;
 use Illuminate\Http\Request;
-use Fantasee\Commands\ScrapeLeague;
+use Fantasee\Jobs\ScrapeLeague;
 
 class LeaguesController extends Controller {
 

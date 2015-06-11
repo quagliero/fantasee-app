@@ -1,17 +1,17 @@
-<?php namespace Fantasee\Commands;
+<?php namespace Fantasee\Jobs;
 
-use Fantasee\Commands\Command;
+use Fantasee\Jobs\Job;
 use Fantasee\League;
 use Goutte\Client;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Contracts\Queue\ShouldBeQueued;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-abstract class BaseScraper extends Command implements SelfHandling, ShouldBeQueued {
+abstract class BaseScraper extends Job implements SelfHandling, ShouldQueue {
 
 	protected $league, $client, $baseUrl;
 
 	/**
-	 * Create a new command instance.
+	 * Create a new Job instance.
 	 *
 	 * @return void
 	 */

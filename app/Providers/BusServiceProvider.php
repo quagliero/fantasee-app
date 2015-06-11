@@ -16,7 +16,7 @@ class BusServiceProvider extends ServiceProvider {
 		$dispatcher->mapUsing(function($command)
 		{
 			return Dispatcher::simpleMapping(
-				$command, 'Fantasee\Commands', 'Fantasee\Handlers\Commands'
+				$command, 'Fantasee\Jobs', 'Fantasee\Listeners\Commands'
 			);
 		});
 	}

@@ -1,9 +1,9 @@
 <?php namespace Fantasee\Http\Controllers\Auth;
 
 use Fantasee\Http\Controllers\Controller;
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Fantasee\User;
+use Validator;
 
 class AuthController extends Controller {
 
@@ -28,21 +28,46 @@ class AuthController extends Controller {
 	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
 	 * @return void
 	 */
-	public function __construct(Guard $auth, Registrar $registrar)
+	public function __construct()
 	{
-		$this->auth = $auth;
-		$this->registrar = $registrar;
-
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
+
+	/**
+	 * Get a validator for an incoming registration request.
+	 *
+	 * @param  array  $data
+	 * @return \Illuminate\Contracts\Validation\Validator
+	 */
+	public function validator(array $data)
+	{
+		return Validator::make($data, [
+			'email' => 'required|email|max:255|unique:users',
+			'password' => 'required|confirmed|min:6',
+		]);
+	}
+
+	/**
+	 * Create a new user instance after a valid registration.
+	 *
+	 * @param  array  $data
+	 * @return User
+	 */
+	public function create(array $data)
+	{
+		return User::create([
+			'email' => $data['email'],
+			'password' => $data['password'],
+		]);
+	}
 
 	/**
 	 * Redirect after log in
 	 */
 	public function redirectPath()
 	{
-		return property_exists($this, 'redirectTo') ? $this->redirectTo : route('user_path', [$this->auth->user()->id]);
+		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
 	}
 
 }

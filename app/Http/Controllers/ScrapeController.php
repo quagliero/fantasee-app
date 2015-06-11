@@ -2,12 +2,12 @@
 
 use Fantasee\Http\Requests;
 use Fantasee\Http\Controllers\Controller;
-use Fantasee\Commands\ScrapeSeasons;
-use Fantasee\Commands\ScrapeManagers;
-use Fantasee\Commands\ScrapeTeams;
-use Fantasee\Commands\ScrapeStandings;
-use Fantasee\Commands\ScrapeSchedule;
-use Fantasee\Commands\ScrapeDraft;
+use Fantasee\Jobs\ScrapeSeasons;
+use Fantasee\Jobs\ScrapeManagers;
+use Fantasee\Jobs\ScrapeTeams;
+use Fantasee\Jobs\ScrapeStandings;
+use Fantasee\Jobs\ScrapeSchedule;
+use Fantasee\Jobs\ScrapeDraft;
 use Fantasee\League;
 use Illuminate\Http\Request;
 use Goutte\Client;
