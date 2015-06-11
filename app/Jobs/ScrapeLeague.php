@@ -1,10 +1,10 @@
-<?php namespace Fantasee\Commands;
+<?php namespace Fantasee\Jobs;
 
 class ScrapeLeague extends BaseScraper {
-	use \Illuminate\Foundation\Bus\DispatchesCommands;
+	use \Illuminate\Foundation\Bus\DispatchesJobs;
 
 	/**
-	 * Create a new command instance.
+	 * Create a new Job instance.
 	 *
 	 * @return void
 	 */
@@ -17,14 +17,14 @@ class ScrapeLeague extends BaseScraper {
 	}
 
 	/**
-	 * Execute the command.
+	 * Execute the Job.
 	 *
 	 * @return void
 	 */
 	public function handle()
 	{
 		// Handle the scrape
-		// dispatch Commands for a whole league scrape
+		// dispatch Jobs for a whole league scrape
 		$this->dispatch(new ScrapeManagers($this->league));
 		$this->dispatch(new ScrapeTeams($this->league));
 		$this->dispatch(new ScrapeStandings($this->league));

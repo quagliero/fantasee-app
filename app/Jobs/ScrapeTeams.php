@@ -1,4 +1,4 @@
-<?php namespace Fantasee\Commands;
+<?php namespace Fantasee\Jobs;
 
 use Fantasee\Team;
 use Fantasee\Manager;
@@ -6,7 +6,7 @@ use Fantasee\Manager;
 class ScrapeTeams extends BaseScraper {
 
 	/**
-	 * Create a new command instance.
+	 * Create a new Job instance.
 	 *
 	 * @return void
 	 */
@@ -16,7 +16,7 @@ class ScrapeTeams extends BaseScraper {
 	}
 
 	/**
-	 * Execute the command.
+	 * Execute the Job.
 	 *
 	 * @return void
 	 */

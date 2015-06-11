@@ -16,9 +16,9 @@ class CreatePicksTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('draft_id')->unsigned();
-			$table->foreign('draft_id')->references('id')->on('drafts');
+			$table->foreign('draft_id')->references('id')->on('drafts')->onDelete('cascade');
 			$table->integer('team_id')->unsigned();
-			$table->foreign('team_id')->references('id')->on('teams');
+			$table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
 			$table->integer('player_id')->unsigned();
 			$table->foreign('player_id')->references('id')->on('players');
 			$table->integer('round');

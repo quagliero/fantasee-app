@@ -1,4 +1,4 @@
-<?php namespace Fantasee\Commands;
+<?php namespace Fantasee\Jobs;
 
 use Fantasee\Team;
 use Fantasee\Manager;
@@ -9,7 +9,7 @@ use Fantasee\LeagueSeasonWeek;
 class ScrapeSchedule extends BaseScraper {
 
 	/**
-	 * Create a new command instance.
+	 * Create a new Job instance.
 	 *
 	 * @return void
 	 */
@@ -19,7 +19,7 @@ class ScrapeSchedule extends BaseScraper {
 	}
 
 	/**
-	 * Execute the command.
+	 * Execute the Job.
 	 *
 	 * @return void
 	 */
@@ -39,7 +39,7 @@ class ScrapeSchedule extends BaseScraper {
 		foreach ($seasons as $season) {
 			$crawler = $this->client->request('GET', $this->baseUrl . '/' . $season->year . '/' . $urlParams);
 
-			$week = Week::where('id', intval($crawler->filter('#scheduleSchedule .content ul.scheduleWeekNav .selected .title span')->text()))->first();
+			$week = Week::where('id', intval($crawler->filter('#scheduleSchedule .content ul.scheduleWeekNav .selected a[href]')->text()))->first();
 
 			$matchups = $crawler->filter('#scheduleSchedule .content .scheduleContent .matchups .matchup');
 			$matchups->each(function ($node) use ($season, $week) {
@@ -80,16 +80,29 @@ class ScrapeSchedule extends BaseScraper {
 	 */
 	private function getTeamScoreFromMatchup($season, $matchup, $team) {
 	  $teamInfo = $matchup->filter('.teamWrap-' . $team);
-		$manager_id = preg_replace('/(\D)*/', '', $teamInfo->filter('[class*="userId-"]')->attr('class'));
 		$score = $teamInfo->filter('.teamTotal')->text();
 
-		// The Dickens hack (changed user accounts after one season)
-		if ($manager_id == 2886224) {
-			$manager_id = 6557238;
-		}
+		// we have a user attached to this team
+		if ($teamInfo->filter('[class*="userId-"]')->count()) {
+			$manager_id = preg_replace('/(\D)*/', '', $teamInfo->filter('[class*="userId-"]')->attr('class'));
 
-		$manager = Manager::byLeague($this->league->id)->where('site_id', $manager_id)->first();
-		$team = Team::byLeague($this->league->id)->bySeason($season->id)->byManager($manager->id)->first();
+			// The Dickens hack (changed user accounts after one season)
+			if ($manager_id == 2886224) {
+				$manager_id = 6557238;
+			}
+
+			$manager = Manager::byLeague($this->league->id)->where('site_id', $manager_id)->first();
+			$team = Team::byLeague($this->league->id)
+				->bySeason($season->id)
+				->byManager($manager->id)
+				->first();
+		} else {
+			// no use attached to the team so try and query from existing matching name or create
+			$team =	Team::byLeague($this->league->id)
+				->bySeason($season->id)
+				->where('name', $teamInfo->filter('.teamName')->text())
+				->firstOrFail();
+		}
 
 	  return (object) array(
 			'id' => $team->id,

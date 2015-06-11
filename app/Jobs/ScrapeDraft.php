@@ -1,4 +1,4 @@
-<?php namespace Fantasee\Commands;
+<?php namespace Fantasee\Jobs;
 
 use Fantasee\Draft;
 use Fantasee\Team;
@@ -8,7 +8,7 @@ use Fantasee\Pick;
 class ScrapeDraft extends BaseScraper {
 
 	/**
-	 * Create a new command instance.
+	 * Create a new Job instance.
 	 *
 	 * @return void
 	 */
@@ -18,7 +18,7 @@ class ScrapeDraft extends BaseScraper {
 	}
 
 	/**
-	 * Execute the command.
+	 * Execute the Job.
 	 *
 	 * @return void
 	 */
@@ -44,7 +44,7 @@ class ScrapeDraft extends BaseScraper {
 						'name' => $pick->filter('.playerName')->text(),
 						'position' => explode(' - ', $pick->filter('.playerName + em')->text())[0]
 					);
-					
+
 		      $team_name = $pick->filter('.teamName')->text();
 					$team = Team::byLeague($this->league->id)->bySeason($season->id)->where('name', $team_name)->first();
 

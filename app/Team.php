@@ -217,6 +217,10 @@ class Team extends Model {
 	{
 		$total = $this->getWins() + $this->getLosses() + $this->getTies();
 
+		if ($total == 0) {
+			return 0;
+		}
+
 		return ($this->getWins() / $total) * 100;
 	}
 }
