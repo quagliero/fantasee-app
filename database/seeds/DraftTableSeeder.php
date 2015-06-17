@@ -38,23 +38,10 @@ class DraftTableSeeder extends Seeder {
             {
 
               $team = $team_id[$j][$l];
-              $pick = ($l + 1);
-              if ($k > 1) {
-                $pick += ($k - 1) * count($team_id[$j]);
-              }
-              $player = $this->generateRandom();
-
-              while (in_array($player, $drafted)) {
-                $player = $this->generateRandom();
-              }
 
               $drafts[] = [
                 'league_id' => $leagues[$i],
                 'season_id' => $seasons[$j],
-                'round_id' => $k,
-                'pick' => $pick,
-                'team_id' => $team,
-                'player_id' => $player,
               ];
             }
           }
