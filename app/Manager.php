@@ -50,10 +50,10 @@ class Manager extends Model {
 	 *
 	 * @var number
 	 */
-	public function getWins()
+	public function getWinsAttribute()
 	{
 		$totalWins = $this->teams->reduce(function ($wins, $team) {
-			return $wins += $team->getWins();
+			return $wins += $team->wins;
 		});
 
 		return $totalWins;
@@ -64,10 +64,10 @@ class Manager extends Model {
 	 *
 	 * @var number
 	 */
-	public function getLosses()
+	public function getLossesAttribute()
 	{
 		$totalLosses = $this->teams->reduce(function ($losses, $team) {
-			return $losses += $team->getLosses();
+			return $losses += $team->losses;
 		});
 
 		return $totalLosses;
@@ -78,10 +78,10 @@ class Manager extends Model {
 	 *
 	 * @var number
 	 */
-	public function getTies()
+	public function getTiesAttribute()
 	{
 		$totalTies = $this->teams->reduce(function ($ties, $team) {
-			return $ties += $team->getTies();
+			return $ties += $team->ties;
 		});
 
 		return $totalTies;
@@ -137,9 +137,9 @@ class Manager extends Model {
 	public function getPerformanceAttribute()
 	{
 		return [
-			'wins'   => $this->getWins(),
-			'losses' => $this->getLosses(),
-			'ties'   => $this->getTies(),
+			'wins'   => $this->wins,
+			'losses' => $this->losses,
+			'ties'   => $this->ties,
 		];
 	}
 
@@ -156,6 +156,6 @@ class Manager extends Model {
 			return 0;
 		}
 
-		return ($this->getWins() / $total) * 100;
+		return ($this->wins / $total) * 100;
 	}
 }

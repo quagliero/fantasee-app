@@ -70,7 +70,7 @@ class LeaguesController extends Controller {
 	public function show(League $league)
 	{
 		$managers = $league->managers()->get()->sort(function ($manager1, $manager2) {
-			return $manager1->getWins() < $manager2->getWins();
+			return $manager1->wins < $manager2->wins;
 		});
 
 		return view('league.show', compact('league', 'managers'));

@@ -40,9 +40,9 @@
     @foreach ($managers as $manager)
       <tr>
         <td>{!! link_to_route('league_manager_path', $manager->name, [$league->slug, $manager->id]) !!}</td>
-        <td>{!! $manager->getWins() !!}</td>
-        <td>{!! $manager->getLosses() !!}</td>
-        <td>{!! $manager->getTies() !!}</td>
+        <td>{!! $manager->wins !!}</td>
+        <td>{!! $manager->losses !!}</td>
+        <td>{!! $manager->ties !!}</td>
         <td>{!! decimal_perc($manager->getWinPercent()) !!}</td>
         <td>{!! $manager->getPointsFor() !!}</td>
         <td>{!! $manager->getPointsAgainst() !!}</td>

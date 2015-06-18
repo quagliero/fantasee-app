@@ -120,7 +120,7 @@ class Team extends Model {
 	 *
 	 * @var array
 	 */
-	public function getWins()
+	public function getWinsAttribute()
 	{
 		$wins = $this->allMatches()->filter(function ($match)
 		{
@@ -141,7 +141,7 @@ class Team extends Model {
 	 *
 	 * @var array
 	 */
-	public function getLosses()
+	public function getLossesAttribute()
 	{
 		$wins = $this->allMatches()->filter(function ($match)
 		{
@@ -162,7 +162,7 @@ class Team extends Model {
 	 *
 	 * @var array
 	 */
-	public function getTies()
+	public function getTiesAttribute()
 	{
 		$wins = $this->allMatches()->filter(function ($match)
 		{
@@ -215,12 +215,26 @@ class Team extends Model {
 	*/
 	public function getWinPercent()
 	{
-		$total = $this->getWins() + $this->getLosses() + $this->getTies();
+		$total = array_sum( $this->performance );
 
 		if ($total == 0) {
 			return 0;
 		}
 
-		return ($this->getWins() / $total) * 100;
+		return ($this->wins / $total) * 100;
+	}
+
+	/**
+	* Get hash of team statistics
+	*
+	* @var number
+	*/
+	public function getPerformanceAttribute()
+	{
+		return [
+			'wins'   => $this->wins,
+			'losses' => $this->losses,
+			'ties'   => $this->ties,
+		];
 	}
 }
