@@ -1,8 +1,12 @@
 <?php namespace Fantasee;
 
+use Fantasee\Traits\HasFantasyPoints;
+use Fantasee\Traits\HasPerformanceRecord;
 use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model {
+	use HasFantasyPoints;
+	use HasPerformanceRecord;
 
 	/**
 	 * The database table used by the model.
@@ -209,21 +213,6 @@ class Team extends Model {
 	}
 
 	/**
-	* Get points attributes
-	*
-	* @var number
-	*/
-	public function getPointsAttribute()
-	{
-		$object = new \StdClass;
-
-		$object->for = $this->getPointsFor();
-		$object->against = $this->getPointsAgainst();
-
-		return $object;
-	}
-
-	/**
 	* Get team win percentage
 	*
 	* @var number
@@ -237,19 +226,5 @@ class Team extends Model {
 		}
 
 		return ($this->wins / $total) * 100;
-	}
-
-	/**
-	* Get hash of team statistics
-	*
-	* @var number
-	*/
-	public function getPerformanceAttribute()
-	{
-		return [
-			'wins'   => $this->wins,
-			'losses' => $this->losses,
-			'ties'   => $this->ties,
-		];
 	}
 }

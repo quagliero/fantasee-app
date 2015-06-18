@@ -1,8 +1,13 @@
 <?php namespace Fantasee;
 
+use Fantasee\Traits\HasFantasyPoints;
+use Fantasee\Traits\HasPerformanceRecord;
 use Illuminate\Database\Eloquent\Model;
 
 class Manager extends Model {
+
+	use HasFantasyPoints;
+	use HasPerformanceRecord;
 
 	/**
 	 * The database table used by the model.
@@ -116,21 +121,6 @@ class Manager extends Model {
 	}
 
 	/**
-	 * Get points attributes
-	 *
-	 * @var number
-	 */
-	public function getPointsAttribute()
-	{
-		$object = new \StdClass;
-
-		$object->for = $this->getPointsFor();
-		$object->against = $this->getPointsAgainst();
-
-		return $object;
-	}
-
-	/**
 	* Get manager championship seasons
 	*
 	* @var number
@@ -142,20 +132,6 @@ class Manager extends Model {
 		})->toArray();
 
 		return implode(array_filter($championships), ', ');
-	}
-
-	/**
-	 * Get hash of team statistics
-	 *
-	 * @var number
-	 */
-	public function getPerformanceAttribute()
-	{
-		return [
-			'wins'   => $this->wins,
-			'losses' => $this->losses,
-			'ties'   => $this->ties,
-		];
 	}
 
 	/**
