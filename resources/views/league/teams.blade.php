@@ -48,8 +48,8 @@
         <td>{!! $team->losses !!}</td>
         <td>{!! $team->ties !!}</td>
         <td>{!! decimal_perc($team->getWinPercent()) !!}</td>
-        <td>{!! $team->getPointsFor() !!}</td>
-        <td>{!! $team->getPointsAgainst() !!}</td>
+        <td>{!! $team->points->for !!}</td>
+        <td>{!! $team->points->against !!}</td>
       </tr>
     @endforeach
     </tbody>

@@ -209,6 +209,21 @@ class Team extends Model {
 	}
 
 	/**
+	* Get points attributes
+	*
+	* @var number
+	*/
+	public function getPointsAttribute()
+	{
+		$object = new \StdClass;
+
+		$object->for = $this->getPointsFor();
+		$object->against = $this->getPointsAgainst();
+
+		return $object;
+	}
+
+	/**
 	* Get team win percentage
 	*
 	* @var number
