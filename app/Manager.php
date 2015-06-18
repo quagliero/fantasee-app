@@ -130,13 +130,27 @@ class Manager extends Model {
 	}
 
 	/**
+	 * Get hash of team statistics
+	 *
+	 * @var number
+	 */
+	public function getPerformanceAttribute()
+	{
+		return [
+			'wins'   => $this->getWins(),
+			'losses' => $this->getLosses(),
+			'ties'   => $this->getTies(),
+		];
+	}
+
+	/**
 	 * Get manager win percentage
 	 *
 	 * @var number
 	 */
 	public function getWinPercent()
 	{
-		$total = $this->getWins() + $this->getLosses() + $this->getTies();
+		$total = array_sum( $this->performance );
 
 		if ($total == 0) {
 			return 0;
