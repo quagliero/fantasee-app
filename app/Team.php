@@ -1,8 +1,12 @@
 <?php namespace Fantasee;
 
+use Fantasee\Traits\HasFantasyPoints;
+use Fantasee\Traits\HasPerformanceRecord;
 use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model {
+	use HasFantasyPoints;
+	use HasPerformanceRecord;
 
 	/**
 	 * The database table used by the model.
@@ -120,7 +124,7 @@ class Team extends Model {
 	 *
 	 * @var array
 	 */
-	public function getWins()
+	public function getWinsAttribute()
 	{
 		$wins = $this->allMatches()->filter(function ($match)
 		{
@@ -141,7 +145,7 @@ class Team extends Model {
 	 *
 	 * @var array
 	 */
-	public function getLosses()
+	public function getLossesAttribute()
 	{
 		$wins = $this->allMatches()->filter(function ($match)
 		{
@@ -162,7 +166,7 @@ class Team extends Model {
 	 *
 	 * @var array
 	 */
-	public function getTies()
+	public function getTiesAttribute()
 	{
 		$wins = $this->allMatches()->filter(function ($match)
 		{
@@ -215,12 +219,12 @@ class Team extends Model {
 	*/
 	public function getWinPercent()
 	{
-		$total = $this->getWins() + $this->getLosses() + $this->getTies();
+		$total = array_sum( $this->performance );
 
 		if ($total == 0) {
 			return 0;
 		}
 
-		return ($this->getWins() / $total) * 100;
+		return ($this->wins / $total) * 100;
 	}
 }

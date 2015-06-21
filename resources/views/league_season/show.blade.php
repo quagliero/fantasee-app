@@ -38,12 +38,12 @@
           <td>{!! $index + 1 !!}</td>
           <td>{!! link_to_route('league_manager_season_path', $team->name, [$league->slug, $team->manager->id, $team->season->year]) !!}</td>
           <td>{!! link_to_route('league_manager_path', $team->manager->name, [$league->slug, $team->manager->id]) !!}</td>
-          <td>{!! $team->getWins() !!}</td>
-          <td>{!! $team->getLosses() !!}</td>
-          <td>{!! $team->getTies() !!}</td>
+          <td>{!! $team->wins !!}</td>
+          <td>{!! $team->losses !!}</td>
+          <td>{!! $team->ties !!}</td>
           <td>{!! decimal_perc($team->getWinPercent()) !!}</td>
-          <td>{!! $team->getPointsFor() !!}</td>
-          <td>{!! $team->getPointsAgainst() !!}</td>
+          <td>{!! $team->points->for !!}</td>
+          <td>{!! $team->points->against !!}</td>
           <td>{!! show_trophy($team) !!}</td>
         </tr>
       @endforeach
