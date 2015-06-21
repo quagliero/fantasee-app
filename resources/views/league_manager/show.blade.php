@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <h1>{{ $manager->name }}</h1>
-  <h2>{!! $manager->getWins() !!} - {!! $manager->getLosses() !!}
+  <h2>{!! $manager->wins !!} - {!! $manager->losses !!}
     <small>({!! decimal_perc($manager->getWinPercent()) !!})</small></h2>
   <h3>Teams</h3>
   <table class="table table-striped">

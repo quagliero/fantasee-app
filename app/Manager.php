@@ -1,8 +1,13 @@
 <?php namespace Fantasee;
 
+use Fantasee\Traits\HasFantasyPoints;
+use Fantasee\Traits\HasPerformanceRecord;
 use Illuminate\Database\Eloquent\Model;
 
 class Manager extends Model {
+
+	use HasFantasyPoints;
+	use HasPerformanceRecord;
 
 	/**
 	 * The database table used by the model.
@@ -50,10 +55,10 @@ class Manager extends Model {
 	 *
 	 * @var number
 	 */
-	public function getWins()
+	public function getWinsAttribute()
 	{
 		$totalWins = $this->teams->reduce(function ($wins, $team) {
-			return $wins += $team->getWins();
+			return $wins += $team->wins;
 		});
 
 		return $totalWins;
@@ -64,10 +69,10 @@ class Manager extends Model {
 	 *
 	 * @var number
 	 */
-	public function getLosses()
+	public function getLossesAttribute()
 	{
 		$totalLosses = $this->teams->reduce(function ($losses, $team) {
-			return $losses += $team->getLosses();
+			return $losses += $team->losses;
 		});
 
 		return $totalLosses;
@@ -78,10 +83,10 @@ class Manager extends Model {
 	 *
 	 * @var number
 	 */
-	public function getTies()
+	public function getTiesAttribute()
 	{
 		$totalTies = $this->teams->reduce(function ($ties, $team) {
-			return $ties += $team->getTies();
+			return $ties += $team->ties;
 		});
 
 		return $totalTies;
@@ -136,12 +141,12 @@ class Manager extends Model {
 	 */
 	public function getWinPercent()
 	{
-		$total = $this->getWins() + $this->getLosses() + $this->getTies();
+		$total = array_sum( $this->performance );
 
 		if ($total == 0) {
 			return 0;
 		}
 
-		return ($this->getWins() / $total) * 100;
+		return ($this->wins / $total) * 100;
 	}
 }
