@@ -46,6 +46,18 @@ class League extends Model {
 	}
 
 	/**
+	* Get the teams and sort them by wins (asc)
+	*
+	* @return array
+	*/
+	public function getTeamsByWins()
+	{
+		return $this->teams->sort(function ($a, $b) {
+			return $a->wins < $b->wins;
+		});
+	}
+
+	/**
 	* All teams attached to this league.
 	*
 	* @return array
@@ -53,6 +65,18 @@ class League extends Model {
 	public function managers()
 	{
 		return $this->hasMany('Fantasee\Manager');
+	}
+
+	/**
+	* Get the managers and sort them by wins (asc)
+	*
+	* @return array
+	*/
+	public function getManagersByWins()
+	{
+		return $this->managers->sort(function ($a, $b) {
+			return $a->wins < $b->wins;
+		});
 	}
 
 	/**

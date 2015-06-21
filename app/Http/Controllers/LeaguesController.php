@@ -75,9 +75,7 @@ class LeaguesController extends Controller {
 	 */
 	public function show(League $league)
 	{
-		$managers = $league->managers()->get()->sort(function ($manager1, $manager2) {
-			return $manager1->wins < $manager2->wins;
-		});
+		$managers = $league->getManagersByWins();
 
 		return view('league.show', compact('league', 'managers'));
 	}
@@ -90,9 +88,7 @@ class LeaguesController extends Controller {
 	 */
 	public function teams(League $league)
 	{
-		$teams = $league->teams()->get()->sort(function ($team1, $team2) {
-			return $team1->wins < $team2->wins;
-		});
+		$teams = $league->getTeamsByWins();
 
 		return view('league.teams', compact('league', 'teams'));
 	}
@@ -105,10 +101,7 @@ class LeaguesController extends Controller {
 	 */
 	public function drafts(League $league)
 	{
-		// $teams = $league->teams()->get()->sort(function ($team1, $team2) {
-		// 	return $team1->getWins() < $team2->getWins();
-		// });
-		$drafts = $league->drafts()->groupBy('season_id')->get();
+		$drafts = $league->drafts;
 
 		return view('league.drafts', compact('league', 'drafts'));
 	}
@@ -146,6 +139,7 @@ class LeaguesController extends Controller {
 	public function destroy(League $league)
 	{
 		$league->delete();
+
 		return redirect()->route('leagues_path');
 	}
 
