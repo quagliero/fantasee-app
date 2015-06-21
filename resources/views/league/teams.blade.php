@@ -13,7 +13,6 @@
       @endif
     </div>
   </div>
-
   <ul class="nav nav-tabs">
   <li class="active">{!! link_to_route('league_path', 'Overall', [$league->slug]) !!}</li>
   @foreach ($league->seasons as $season)
@@ -24,8 +23,9 @@
   <ul class="nav nav-pills">
     <li>{!! link_to_route('league_path', 'Managers', [$league->slug]) !!}</li>
     <li class="active">{!! link_to_route('league_teams_path', 'Teams', [$league->slug]) !!}</li>
+    <li>{!! link_to_route('league_drafts_path', 'Drafts', [$league->slug]) !!}</li>
   </ul>
-
+  <br>
   <table class="table table-striped" data-sortable="3,4,6,7,8">
     <thead>
       <th>Name</th>
