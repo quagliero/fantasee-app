@@ -146,6 +146,7 @@ return [
 		'Fantasee\Providers\ConfigServiceProvider',
 		'Fantasee\Providers\EventServiceProvider',
 		'Fantasee\Providers\RouteServiceProvider',
+		'Fantasee\Providers\DatabaseServiceProvider',
 
 	],
 

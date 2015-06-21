@@ -4,6 +4,7 @@ use Fantasee\Http\Requests;
 use Fantasee\Http\Requests\CreateLeagueRequest;
 use Fantasee\Http\Requests\UpdateLeagueRequest;
 use Fantasee\Http\Controllers\Controller;
+use Fantasee\Repositories\League\LeagueRepository;
 use Fantasee\League;
 use Illuminate\Http\Request;
 use Fantasee\Jobs\ScrapeLeague;
@@ -11,14 +12,19 @@ use Fantasee\Jobs\ScrapeLeague;
 class LeaguesController extends Controller {
 
 	/**
+	 * @var LeagueRepository
+	 */
+	private $repository;
+
+	/**
 	 * Create a new controller instance.
 	 *
 	 * @param	LeagueRepository	$leagues
 	 * @return void
 	 */
-	public function __construct(League $leagues)
+	public function __construct(LeagueRepository $repository)
 	{
-		$this->leagues = $leagues;
+		$this->repository = $repository;
 
 		$this->middleware('auth', ['only' => ['create', 'edit', 'update', 'destroy']]);
 		$this->middleware('admin', ['only' => ['edit', 'update', 'destroy']]);
@@ -31,7 +37,7 @@ class LeaguesController extends Controller {
 	 */
 	public function index()
 	{
-		$leagues = $this->leagues->get();
+		$leagues = $this->repository->getAll();
 
 		return view('league.index', compact('leagues'));
 	}
