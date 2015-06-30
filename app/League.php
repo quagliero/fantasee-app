@@ -126,10 +126,8 @@ class League extends Model {
 	 */
 	public function getChampions()
 	{
-		$champions = $this->managers->reduce(function ($count, $manager) {
-			return $count += $manager->getChampionshipSeasons() ? 1: 0;
+		return $this->managers->reduce(function ($count, $manager) {
+			return $count += $manager->getChampionshipSeasons() ? 1 : 0;
 		});
-
-		return $champions;
 	}
 }

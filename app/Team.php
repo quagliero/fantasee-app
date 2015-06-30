@@ -192,7 +192,7 @@ class Team extends Model {
 			return $score += $weekScore;
 		});
 
-		return $pointsFor;
+		return number_format((float)$pointsFor, 2, '.', '');
 	}
 
 	/**
@@ -202,14 +202,14 @@ class Team extends Model {
 	 */
 	public function getPointsAgainst()
 	{
-		$pointsFor = $this->allMatches()->reduce(function ($score, $match)
+		$pointsAgainst = $this->allMatches()->reduce(function ($score, $match)
 		{
 			$weekScore = ($this->id == $match->team1_id) ? $match->team2_score : $match->team1_score;
 
 			return $score += $weekScore;
 		});
 
-		return $pointsFor;
+		return number_format((float)$pointsAgainst, 2, '.', '');
 	}
 
 	/**

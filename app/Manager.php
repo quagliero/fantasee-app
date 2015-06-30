@@ -57,11 +57,9 @@ class Manager extends Model {
 	 */
 	public function getWinsAttribute()
 	{
-		$totalWins = $this->teams->reduce(function ($wins, $team) {
+		return $this->teams->reduce(function ($wins, $team) {
 			return $wins += $team->wins;
 		});
-
-		return $totalWins;
 	}
 
 	/**
@@ -71,11 +69,9 @@ class Manager extends Model {
 	 */
 	public function getLossesAttribute()
 	{
-		$totalLosses = $this->teams->reduce(function ($losses, $team) {
+		return $this->teams->reduce(function ($losses, $team) {
 			return $losses += $team->losses;
 		});
-
-		return $totalLosses;
 	}
 
 	/**
@@ -85,11 +81,9 @@ class Manager extends Model {
 	 */
 	public function getTiesAttribute()
 	{
-		$totalTies = $this->teams->reduce(function ($ties, $team) {
+		return $this->teams->reduce(function ($ties, $team) {
 			return $ties += $team->ties;
 		});
-
-		return $totalTies;
 	}
 
 	/**
@@ -103,7 +97,7 @@ class Manager extends Model {
 			return $points += $team->getPointsFor();
 		});
 
-		return $totalPointsFor;
+		return number_format((float)$totalPointsFor, 2, '.', '');
 	}
 
 	/**
@@ -117,7 +111,7 @@ class Manager extends Model {
 			return $points += $team->getPointsAgainst();
 		});
 
-		return $totalPointsAgainst;
+		return number_format((float)$totalPointsAgainst, 2, '.', '');
 	}
 
 	/**
