@@ -6,7 +6,8 @@ use Fantasee\League;
 class DbLeagueRepository extends DbRepository implements LeagueRepository {
 
   /**
-   * @var League
+   * Constructor
+   * @param League $model instance of Fantasee\League
    */
   function __construct(League $model)
   {

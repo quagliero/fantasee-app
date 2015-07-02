@@ -5,9 +5,27 @@ use Fantasee\Http\Controllers\Controller;
 use Fantasee\League;
 use Fantasee\Season;
 use Fantasee\Team;
+use Fantasee\Repositories\Team\TeamRepository;
 use Illuminate\Http\Request;
 
 class LeagueSeasonController extends Controller {
+
+	/**
+	 * $repository
+	 * @var Fantasee\Repositories\Team\TeamRepository
+	 */
+	private $repository;
+
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @param	TeamRepository	$repository
+	 * @return void
+	 */
+	public function __construct(TeamRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -47,7 +65,7 @@ class LeagueSeasonController extends Controller {
 	 */
 	public function show(League $league, Season $season)
 	{
-		$teams = Team::byLeague($league->id)->bySeason($season->id)->orderBy('position')->get();
+		$teams = $this->repository->getByLeagueSeason($league->id, $season->id);
 
 		return view('league_season.show', compact('league', 'season', 'teams'));
 	}
