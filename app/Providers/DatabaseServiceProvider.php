@@ -7,6 +7,8 @@ use Fantasee\Repositories\League\LeagueRepository;
 use Fantasee\Repositories\League\DbLeagueRepository;
 use Fantasee\Repositories\Team\TeamRepository;
 use Fantasee\Repositories\Team\DbTeamRepository;
+use Fantasee\Repositories\Match\MatchRepository;
+use Fantasee\Repositories\Match\DbMatchRepository;
 
 class DatabaseServiceProvider extends ServiceProvider
 {
@@ -29,5 +31,6 @@ class DatabaseServiceProvider extends ServiceProvider
     {
         $this->app->bind(LeagueRepository::class, DbLeagueRepository::class);
         $this->app->bind(TeamRepository::class, DbTeamRepository::class);
+        $this->app->bind(MatchRepository::class, DbMatchRepository::class);
     }
 }
