@@ -15,4 +15,11 @@ interface LeagueRepository {
    */
   public function getById($id);
 
+  /**
+   * getBySlug Get single league by unique slug
+   * @param  string $slug
+   * @return Fantasee\League
+   */
+  public function getBySlug($slug);
+
 }

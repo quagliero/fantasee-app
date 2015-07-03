@@ -22,13 +22,27 @@
       <th>Year</th>
       <th>First Pick</th>
       <th>Mr Irrelevant</th>
+      <th>Breakdown</th>
     </thead>
     <tbody>
     @foreach ($drafts as $draft)
       <tr>
         <td>{!! link_to_route('league_season_draft_path', $draft->season->year, [$league->slug, $draft->season->year]) !!}</td>
-        <td></td>
-        <td></td>
+        @if (sizeof($draft->players->all) > 0)
+        <td>{!! get_player_name_from_id($draft->players->first->player_id) !!}</td>
+        <td>{!! get_player_name_from_id($draft->players->last->player_id) !!}</td>
+        @else
+        <td>Unknown</td>
+        <td>Unknown</td>
+        @endif
+        <td>
+          QBs: {!! sizeof($draft->players->positions->qb) !!},
+          RBs: {!! sizeof($draft->players->positions->rb) !!},
+          WRs: {!! sizeof($draft->players->positions->wr) !!},
+          TEs: {!! sizeof($draft->players->positions->te) !!},
+          Ks: {!! sizeof($draft->players->positions->k) !!},
+          DSTs: {!! sizeof($draft->players->positions->dst) !!}
+        </td>
       </tr>
     @endforeach
     </tbody>

@@ -2,8 +2,8 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Fantasee\Repositories\League\LeagueRepository;
 use Fantasee\User;
-use Fantasee\League;
 use Fantasee\Season;
 use Fantasee\Week;
 use Fantasee\Manager;
@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider {
 
 		$router->bind('leagues', function($slug)
 		{
-			return League::where('slug', $slug)->firstOrFail();
+			return app(LeagueRepository::class)->getBySlug($slug);
 		});
 
 		$router->bind('seasons', function($season)
