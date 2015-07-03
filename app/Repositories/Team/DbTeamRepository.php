@@ -34,4 +34,15 @@ class DbTeamRepository extends DbRepository implements TeamRepository {
       ->where('season_id', $seasonId)->orderBy('position')->get();
   }
 
+  /**
+   * getBySeasonManager Geta single team by a season and manager
+   * @param  integer $seasonId
+   * @param  integer $managerId
+   * @return Fantasee\Team;
+   */
+  public function getBySeasonManager($seasonId, $managerId) {
+    return $this->model->where('season_id', $seasonId)
+      ->where('manager_id', $managerId)->first();
+  }
+
 }

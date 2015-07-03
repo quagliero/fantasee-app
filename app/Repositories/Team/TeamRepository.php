@@ -30,4 +30,12 @@ interface TeamRepository {
    */
   public function getByLeagueSeason($leagueId, $seasonId);
 
+  /**
+   * getBySeasonManager Geta team by a season and manager
+   * @param  integer $seasonId
+   * @param  integer $managerId
+   * @return Fantasee\Team;
+   */
+  public function getBySeasonManager($seasonId, $managerId);
+
 }
