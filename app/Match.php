@@ -55,12 +55,22 @@ class Match extends Model {
 		return $this->belongsToMany('Fantasee\Team');
 	}
 
+	/**
+	 * The 'home' team in this match
+	 *
+	 * @return array
+	 */
 	public function team1() {
-		return $this->hasOne('Fantasee\Team');
+		return $this->belongsTo('Fantasee\Team');
 	}
 
+	/**
+	 * The 'away' team in this match
+	 *
+	 * @return array
+	 */
 	public function team2() {
-		return $this->hasOne('Fantasee\Team');
+		return $this->belongsTo('Fantasee\Team');
 	}
 
 
