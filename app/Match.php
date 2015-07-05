@@ -55,6 +55,14 @@ class Match extends Model {
 		return $this->belongsToMany('Fantasee\Team');
 	}
 
+	public function team1() {
+		return $this->hasOne('Fantasee\Team');
+	}
+
+	public function team2() {
+		return $this->hasOne('Fantasee\Team');
+	}
+
 
 	/**
 	 * All matches in a specific league

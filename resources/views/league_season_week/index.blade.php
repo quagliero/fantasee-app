@@ -25,7 +25,7 @@
       <h3 class="media-heading">{{ $weeks->name }}</h3>
     @foreach ($matches as $match)
     <div>
-      {!! get_team_name_from_id($match->team1_id) !!} {{ $match->team1_score }} - {{ $match->team2_score }} {!! get_team_name_from_id($match->team2_id) !!}
+      {{ $match->team1->name }} {{ $match->team1_score }} - {{ $match->team2_score }} {{ $match->team2->name }}
       <br>Winner: {{ get_match_winner($match->id)->name }}
     </div>
     @endforeach

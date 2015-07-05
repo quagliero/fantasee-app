@@ -33,9 +33,9 @@
       @foreach ($picks as $index => $pick)
         <tr>
           <td>{{ $index + 1 }}</td>
-          <td>{{ get_team_name_from_id($pick->team_id)}}</td>
-          <td>{{ get_player_name_from_id($pick->player_id) }}</td>
-          <td>{{ get_player_position_from_id($pick->player_id) }}</td>
+          <td>{{ $pick->team->name }}</td>
+          <td>{{ $pick->player->name }}</td>
+          <td>{{ $pick->player->position }}</td>
           <td></td>
         </tr>
       @endforeach

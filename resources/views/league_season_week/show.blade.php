@@ -27,7 +27,7 @@
       @foreach ($matches as $match)
       <div class="match">
         <span class="match__team">
-        {!! get_team_name_from_id($match->team1_id) !!}
+        {{ $match->team1->name }}
         </span>
         <span class="match__score">
           <span class="score-box">
@@ -37,7 +37,7 @@
           </span>
         </span>
         <span class="match__team">
-          {!! get_team_name_from_id($match->team2_id) !!}
+          {{ $match->team2->name }}
         </span>
       </div>
       @endforeach

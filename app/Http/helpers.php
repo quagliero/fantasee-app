@@ -37,12 +37,6 @@ function delete_form($routeParams, $label = 'Delete')
   return $form;
 }
 
-function get_team_name_from_id($team_id)
-{
-  $team = Team::where('id', $team_id)->first();
-  return $team->name;
-}
-
 function get_match_winner($match_id)
 {
   $match = Match::where('id', $match_id)->first();
@@ -55,18 +49,6 @@ function get_match_winner($match_id)
   } else {
     return Team::where('id', $match->team2_id)->first();
   }
-}
-
-function get_player_name_from_id($player_id)
-{
-  $player = Player::where('id', $player_id)->first();
-  return $player->name;
-}
-
-function get_player_position_from_id($player_id)
-{
-  $player = Player::where('id', $player_id)->first();
-  return $player->position;
 }
 
 function is_league_admin($league_id)
