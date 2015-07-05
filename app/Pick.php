@@ -54,7 +54,7 @@ class Pick extends Model {
 	 */
 	public function player()
 	{
-		return $this->BelongsTo('Fantasee\Player');
+		return $this->belongsTo('Fantasee\Player');
 	}
 
 	/**
