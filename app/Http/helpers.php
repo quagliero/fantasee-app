@@ -7,17 +7,6 @@ use Fantasee\Season;
 use Fantasee\Player;
 
 /* Totals */
-
-function league_count()
-{
-  return League::get()->count();
-}
-
-function manager_count()
-{
-  return Manager::get()->count();
-}
-
 function team_count()
 {
   return Team::get()->count();

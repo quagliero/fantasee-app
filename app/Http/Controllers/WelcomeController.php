@@ -2,6 +2,7 @@
 
 use Fantasee\League;
 use Fantasee\Repositories\League\LeagueRepository;
+use Fantasee\Repositories\Manager\ManagerRepository;
 
 class WelcomeController extends Controller {
 
@@ -21,9 +22,10 @@ class WelcomeController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct(LeagueRepository $leagues)
+	public function __construct(LeagueRepository $leagues, ManagerRepository $managers)
 	{
 		$this->leagues = $leagues;
+		$this->managers = $managers;
 	}
 
 	/**
@@ -34,9 +36,10 @@ class WelcomeController extends Controller {
 	public function index()
 	{
 		$league_count = $this->leagues->count();
+		$manager_count = $this->managers->count();
 		$leagues = $this->leagues->random(3);
 
-		return view('welcome', compact('leagues', 'league_count'));
+		return view('welcome', compact('leagues', 'league_count', 'manager_count'));
 	}
 
 }
