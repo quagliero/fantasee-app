@@ -28,20 +28,20 @@
     @foreach ($drafts as $draft)
       <tr>
         <td>{!! link_to_route('league_season_draft_path', $draft->season->year, [$league->slug, $draft->season->year]) !!}</td>
-        @if (sizeof($draft->players->all) > 0)
-        <td>{{ $draft->players->first->player->name }}</td>
-        <td>{{ $draft->players->last->player->name }}</td>
+        @if (sizeof($draft->picks) > 0)
+        <td>{{ $draft->selections->first->player->name }}</td>
+        <td>{{ $draft->selections->last->player->name }}</td>
         @else
         <td>Unknown</td>
         <td>Unknown</td>
         @endif
         <td>
-          QBs: {!! sizeof($draft->players->positions->qb) !!},
-          RBs: {!! sizeof($draft->players->positions->rb) !!},
-          WRs: {!! sizeof($draft->players->positions->wr) !!},
-          TEs: {!! sizeof($draft->players->positions->te) !!},
-          Ks: {!! sizeof($draft->players->positions->k) !!},
-          DSTs: {!! sizeof($draft->players->positions->dst) !!}
+          QBs: {!! sizeof($draft->selections->positions->qb) !!},
+          RBs: {!! sizeof($draft->selections->positions->rb) !!},
+          WRs: {!! sizeof($draft->selections->positions->wr) !!},
+          TEs: {!! sizeof($draft->selections->positions->te) !!},
+          Ks: {!! sizeof($draft->selections->positions->k) !!},
+          DSTs: {!! sizeof($draft->selections->positions->dst) !!}
         </td>
       </tr>
     @endforeach
