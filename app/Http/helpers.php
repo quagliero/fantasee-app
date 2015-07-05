@@ -37,12 +37,6 @@ function delete_form($routeParams, $label = 'Delete')
   return $form;
 }
 
-function get_team_name_from_id($team_id)
-{
-  $team = Team::where('id', $team_id)->first();
-  return $team->name;
-}
-
 function get_match_winner($match_id)
 {
   $match = Match::where('id', $match_id)->first();
