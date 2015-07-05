@@ -35,4 +35,19 @@ abstract class DbRepository {
   {
     return $this->model->find($id);
   }
+
+  /**
+   * count Returns the number of models in repo
+   * @return integer
+   */
+  public function count() {
+    return $this->model->all()->count();
+  }
+
+  public function random($num = 10) {
+    if ($this->count() < $num) {
+      return $this->getAll();
+    }
+    return $this->model->all()->random($num);
+  }
 }
