@@ -30,8 +30,17 @@ class DbTeamRepository extends DbRepository implements TeamRepository {
    * @return Illuminate\Database\Collection
    */
   public function getByLeagueSeason($leagueId, $seasonId) {
-    return $this->model->where('league_id', $leagueId)
-      ->where('season_id', $seasonId)->orderBy('position')->get();
+    $data = $this->model
+      ->where('league_id', $leagueId)
+      ->where('season_id', $seasonId)
+    ->get();
+
+    return $this->prepareData($data, [
+      'sort' => [
+        'order' => 'asc',
+        'key' => 'position',
+      ],
+    ]);
   }
 
   /**

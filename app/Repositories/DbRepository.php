@@ -23,7 +23,7 @@ abstract class DbRepository {
    */
   public function getAll()
   {
-    return $this->model->all();
+    return $this->prepareData($this->model->all());
   }
 
   /**
@@ -33,6 +33,52 @@ abstract class DbRepository {
    */
   public function getById($id)
   {
-    return $this->model->find($id);
+    return $this->prepareData($this->model->find($id));
   }
+
+  /**
+   * prepareData Prepares found collection for return
+   * @param  Illuminate\Database\Eloquent\Collection $input   Found models
+   * @param  Array $options
+   * @return Illuminate\Database\Eloquent\Collection
+   */
+  protected function prepareData($input, $options = []) {
+    $return = $input;
+
+    if (empty($options)) {
+      return $return;
+    }
+
+    if (array_key_exists('sort', $options)) {
+      $opts = $options['sort'];
+
+      $return = $this->sortData($return, $opts['order'], $opts['key']);
+    }
+
+    return $return;
+  }
+
+  /**
+   * sortData Generic sorting alogrithm
+   * @param  Illuminate\Database\Eloquent\Collection $data
+   * @param  string $order
+   * @param  string $key
+   * @return Illuminate\Database\Eloquent\Collection
+   */
+  protected function sortData($data, $order = 'desc', $key = 'id') {
+    $data = $data->sort(function ($a, $b) use ($key) {
+      if ($a->{$key} == $b->{$key}) {
+        return 0;
+      }
+
+      return $a->{$key} < $b->{$key} ? 1 : -1;
+    });
+
+    if ($order == 'asc') {
+      return $data->reverse();
+    }
+
+    return $data;
+  }
+
 }
