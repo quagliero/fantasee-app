@@ -6,12 +6,6 @@ use Fantasee\Manager;
 use Fantasee\Season;
 use Fantasee\Player;
 
-/* Totals */
-function match_count()
-{
-  return Match::get()->count();
-}
-
 function decimal_perc($num) {
   return ltrim(number_format($num / 100, 3), 0);
 }

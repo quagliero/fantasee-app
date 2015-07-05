@@ -25,7 +25,7 @@ class WelcomeController extends Controller {
 	 * @return void
 	 */
 	public function __construct(
-	  LeagueRepository $leagues,
+		LeagueRepository $leagues,
 		ManagerRepository $managers,
 		TeamRepository $teams,
 		MatchRepository $matches

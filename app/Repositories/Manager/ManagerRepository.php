@@ -3,13 +3,13 @@
 interface ManagerRepository {
 
   /**
-   * getAll Get All Drafts
+   * getAll Get All Managers
    * @return Illuminate\Database\Collection
    */
   public function getAll();
 
   /**
-   * getById Get single draft by primary key
+   * getById Get single manager by primary key
    * @param  integer $id
    * @return Fantasee\Manager
    */
