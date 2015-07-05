@@ -16,13 +16,13 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-4">
-            <h3><span class="big" data-counter="{!! league_count() !!}">0</span><br>Leagues</h3>
+            <h3><span class="big" data-counter="{{ $league_count }}">0</span><br>Leagues</h3>
           </div>
           <div class="col-sm-4">
-            <h3><span class="big" data-counter="{!! manager_count() !!}">0</span><br>Managers</h3>
+            <h3><span class="big" data-counter="{{ $manager_count }}">0</span><br>Managers</h3>
           </div>
           <div class="col-sm-4">
-            <h3><span class="big" data-counter="{!! match_count() !!}" data-counter-start="{!! match_count() - 200 !!}">0</span><br>Games</h3>
+            <h3><span class="big" data-counter="{{ $match_count }}" data-counter-start="{{ $match_count - 200 }}">0</span><br>Games</h3>
           </div>
         </div>
       </div>

@@ -81,4 +81,23 @@ abstract class DbRepository {
     return $data;
   }
 
+  /**
+   * count Returns the number of models in repo
+   * @return integer
+   */
+  public function count() {
+    return $this->model->all()->count();
+  }
+
+  /**
+   * random Return a random number of models from a collection
+   * @param  integer $num
+   * @return Illuminate\Database\Eloquent\Collection
+   */
+  public function random($num = 10) {
+    if ($this->count() < $num) {
+      return $this->getAll();
+    }
+    return $this->model->all()->random($num);
+  }
 }

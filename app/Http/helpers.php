@@ -6,28 +6,6 @@ use Fantasee\Manager;
 use Fantasee\Season;
 use Fantasee\Player;
 
-/* Totals */
-
-function league_count()
-{
-  return League::get()->count();
-}
-
-function manager_count()
-{
-  return Manager::get()->count();
-}
-
-function team_count()
-{
-  return Team::get()->count();
-}
-
-function match_count()
-{
-  return Match::get()->count();
-}
-
 function decimal_perc($num) {
   return ltrim(number_format($num / 100, 3), 0);
 }
