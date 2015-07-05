@@ -51,18 +51,6 @@ function get_match_winner($match_id)
   }
 }
 
-function get_player_name_from_id($player_id)
-{
-  $player = Player::where('id', $player_id)->first();
-  return $player->name;
-}
-
-function get_player_position_from_id($player_id)
-{
-  $player = Player::where('id', $player_id)->first();
-  return $player->position;
-}
-
 function is_league_admin($league_id)
 {
   $league = League::find($league_id);

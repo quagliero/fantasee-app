@@ -29,8 +29,8 @@
       <tr>
         <td>{!! link_to_route('league_season_draft_path', $draft->season->year, [$league->slug, $draft->season->year]) !!}</td>
         @if (sizeof($draft->players->all) > 0)
-        <td>{!! get_player_name_from_id($draft->players->first->player_id) !!}</td>
-        <td>{!! get_player_name_from_id($draft->players->last->player_id) !!}</td>
+        <td>{{ $draft->players->first->player_id->name }}</td>
+        <td>{{ $draft->players->last->player_id->name }}</td>
         @else
         <td>Unknown</td>
         <td>Unknown</td>
