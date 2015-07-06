@@ -25,7 +25,7 @@ class CreateTradesTable extends Migration
           $table->integer('trade_status_id')->unsigned();
           $table->timestamps();
 
-          $table->foreign('league_id')->references('id')->on('leagues');
+          $table->foreign('league_id')->references('id')->on('leagues')->onDelete('cascade');
           $table->foreign('week_id')->references('id')->on('weeks');
           $table->foreign('trade_status_id')->references('id')->on('trade_statuses');
         });
@@ -39,7 +39,7 @@ class CreateTradesTable extends Migration
           $table->string('asset_type');
           $table->timestamps();
 
-          $table->foreign('trade_id')->references('id')->on('trades');
+          $table->foreign('trade_id')->references('id')->on('trades')->onDelete('cascade');
           $table->foreign('gaining_team_id')->references('id')->on('teams');
           $table->foreign('losing_team_id')->references('id')->on('teams');
         });
