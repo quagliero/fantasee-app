@@ -36,7 +36,7 @@ class CreateTradesTable extends Migration
           $table->integer('gaining_team_id')->unsigned();
           $table->integer('losing_team_id')->unsigned();
           $table->integer('asset_id')->unsigned();
-          $table->integer('asset_type')->unsigned();
+          $table->string('asset_type');
           $table->timestamps();
 
           $table->foreign('trade_id')->references('id')->on('trades');
