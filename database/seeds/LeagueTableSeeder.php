@@ -18,6 +18,11 @@ class LeagueTableSeeder extends Seeder {
           'slug' => 'the-others']
         ];
 
+        foreach ($leagues as &$s) {
+          $s['created_at'] = date('Y-m-d H:i:s');
+          $s['updated_at'] = date('Y-m-d H:i:s');
+        }
+
         DB::table('leagues')->insert($leagues);
     }
 

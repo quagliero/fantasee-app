@@ -17,6 +17,11 @@ class SeasonTableSeeder extends Seeder {
           ['year' => 2015],
         ];
 
+        foreach ($seasons as &$s) {
+          $s['created_at'] = date('Y-m-d H:i:s');
+          $s['updated_at'] = date('Y-m-d H:i:s');
+        }
+
         DB::table('seasons')->insert($seasons);
     }
 

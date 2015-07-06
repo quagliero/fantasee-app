@@ -9,10 +9,14 @@ class UserTableSeeder extends Seeder {
         $users = [
           ['name' => 'Tobias',
           'email' => 'tobiaswhd@gmail.com',
-          'password' => bcrypt('fantasee')],
+          'password' => bcrypt('fantasee'),
+          'created_at' => date('Y-m-d H:i:s'),
+          'updated_at' => date('Y-m-d H:i:s')],
           ['name' => 'Other',
           'email' => 'other@gmail.com',
-          'password' => bcrypt('fantasee')]
+          'password' => bcrypt('fantasee'),
+          'created_at' => date('Y-m-d H:i:s'),
+          'updated_at' => date('Y-m-d H:i:s')]
         ];
 
         DB::table('users')->insert($users);

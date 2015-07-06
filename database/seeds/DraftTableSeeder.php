@@ -42,6 +42,8 @@ class DraftTableSeeder extends Seeder {
               $drafts[] = [
                 'league_id' => $leagues[$i],
                 'season_id' => $seasons[$j],
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
               ];
             }
           }
