@@ -6,20 +6,26 @@ $fa-font-path: '../bower_components/font-awesome-sass/assets/fonts/font-awesome/
 /*
  * Vendor
  */
-@import "bootstrap";
-@import "font-awesome";
+@import 'bootstrap';
+@import 'font-awesome';
 $btn-font-weight: 300;
-$font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+$font-family-sans-serif: 'Roboto', Helvetica, Arial, sans-serif;
 html {
   height: 100%;
 }
+
+
 body {
   height: 100%;
   font-weight: 300;
 }
+
+
 h1 {
   font-size: 3rem;
 }
+
+
 .splash-mast {
   padding-top: 20px;
   margin-top: -20px;
@@ -28,6 +34,8 @@ h1 {
   background-size: cover;
   border-bottom: 1px solid #d8d8d8;
 }
+
+
 .splash-mast__body {
   padding: 40px 0 20px;
   background: none;
@@ -36,11 +44,15 @@ h1 {
   @media (max-width: $screen-xs-max) {
     padding: 20px 0 0;
   }
+  
+
   h1 {
     color: #fff;
     font-size: 6rem;
     text-shadow: 0 2px 1px #4e9862;
   }
+  
+
   .btn {
     margin: 20px 0 0;
     font-size: 2.5rem;
@@ -58,6 +70,8 @@ h1 {
     }
   }
 }
+
+
 .splash-stats {
   background: linear-gradient(rgba(#fff, 0) 5%, rgba(#4a4a4a, .5) 95%);
   text-align: center;
@@ -68,54 +82,78 @@ h1 {
   @media (max-width: $screen-xs-max) {
     padding-top: 0;
   }
+  
+
   h3 {
     font-weight: 300;
     text-shadow: 0 1px 0 #333;
   }
+  
+
   h4 {
     font-weight: 300;
   }
+  
+
   .lead-in {
     position: absolute;
     left: 20px;
     top: 0;
   }
+  
+
   .lead-out {
     position: absolute;
     right: 20px;
     bottom: 0;
   }
+  
+
   .big {
     font-weight: 600;
     font-size: 1.8em;
   }
 }
+
+
 .splash-leagues {
   padding: 20px 0;
 }
+
+
 .site-nav {
   background: rgba(255,255,255,.5);
   a {
     color: #fff;
   }
 }
+
+
 .site-footer {
   padding: 40px 0;
   border-top: 1px solid #d8d8d8;
 }
+
+
 .nav-left {
   .nav {
     float: left;
     margin-right: 20px;
   }
+  
+
   .nav-content {
     overflow: hidden;
   }
 }
+
+
 .media-heading {
   text-align: center;
   margin-bottom: 1.4rem;
 }
+
+
 .schedule-nav {
   margin-bottom: 20px;
   .nav {
@@ -128,55 +166,160 @@ h1 {
     }
   }
 }
+
+
 .match {
   display: flex;
   margin-bottom: 10px;
 }
+
+
 .match__team {
   flex: 1;
   &:first-of-type {
     text-align: right;
   }
+  
+
   &:last-of-type {
     text-align: left;
   }
 }
+
+
 .match__score {
   text-align: center;
   flex: 1;
 }
+
+
 .score-box {
   display: flex;
 }
+
+
 .score-box__sep {
   flex: 1;
 }
+
+
 .score-box__left {
   flex: 2;
   text-align: right;
 }
+
+
 .score-box__right {
   flex: 2;
   text-align: left;
 }
+
+
 .sortable {
   &__heading {
     overflow: hidden;
     padding-right: 1.4em !important;
-		position: relative;
-		cursor: pointer;
-
+    position: relative;
+    cursor: pointer;
+    
     .fa {
       position: absolute;
-			right: 0;
-			top: 50%;
-			transform: translateY(-50%);
-			color: #ccc;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ccc;
     }
+    
 
-		.fa-sort-asc,
-		.fa-sort-desc {
-			color: #333;
-		}
+    .fa-sort-asc,
+    .fa-sort-desc {
+      color: #333;
+    }
   }
+}
+
+
+.perc-bar {
+  border-radius: 4px;
+  &:after {
+    display: table;
+    clear: both;
+    content: '';
+  }
+}
+
+
+.perc-bar__item {
+  float: left;
+  background-color: #337ab7;
+  border-bottom: 1px solid rgba(0,0,0,.4);
+  text-align: center;
+  color: #fff;
+  line-height: 1.4;
+  text-transform: uppercase;
+  position: relative;
+  cursor: help;
+  
+  &:after {
+    content: attr(data-value);
+    font-weight: normal;
+    font-size: 0.9em;
+    color: #333;
+    position: absolute;
+    top: 0;
+    margin-top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: top 0.3s ease, opacity 0.3s ease;
+    text-align: center;
+  }
+  
+
+  &:hover {
+    &:after {
+      top: 100%;
+      opacity: 1;
+    }
+  }
+  
+
+  &:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+  
+
+  &:last-child {
+    border-radius: 0 4px 4px 0;
+  }
+}
+
+
+.perc-bar__item--qb {
+  background-color: #5cb85c;
+}
+
+
+.perc-bar__item--rb {
+  background-color: #337ab7;
+}
+
+
+.perc-bar__item--wr {
+  background-color: #f0ad4e;
+}
+
+
+.perc-bar__item--te {
+  background-color: #d9534f;
+}
+
+
+.perc-bar__item--dst {
+  background-color: #b14fd9;
+}
+
+
+.perc-bar__item--k {
+  background-color: #7e7e7e;
 }

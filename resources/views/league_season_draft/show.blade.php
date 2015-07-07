@@ -19,28 +19,38 @@
   </ul>
   <br>
   <div id="dynamic">
+
+    @foreach ($rounds as $round => $picks)
     <table class="table table-striped">
+      <caption>Round {{ $round + 1 }}</caption>
       <thead>
         <tr>
           <th>Pick</th>
           <th>Team</th>
           <th>Player</th>
           <th>Position</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
-      @foreach ($picks as $index => $pick)
+        @foreach ($picks as $p)
         <tr>
-          <td>{{ $index + 1 }}</td>
-          <td>{{ $pick->team->name }}</td>
-          <td>{{ $pick->player->name }}</td>
-          <td>{{ $pick->player->position }}</td>
-          <td></td>
+          <td>{!! $p->pick !!}</td>
+          <td>{!! $p->team->name !!}</td>
+          <td>{!! $p->player->name !!}</td>
+          <td>{!! $p->player->position !!}</td>
         </tr>
-      @endforeach
+        @endforeach
       </tbody>
+      <tfoot>
+        <tr>
+          <th>Breakdown</th>
+          <th colspan="3">
+            @include('partials.percentage_bar', ['breakdown' => $picks->breakdown])
+          </th>
+        </tr>
+      </tfoot>
     </table>
+    @endforeach
   </div>
 </div>
 @stop

@@ -6722,5 +6722,63 @@ h1 {
   .sortable__heading .fa-sort-asc, .sortable__heading .fa-sort-desc {
     color: #333; }
 
+.perc-bar {
+  border-radius: 4px; }
+  .perc-bar:after {
+    display: table;
+    clear: both;
+    content: ''; }
+
+.perc-bar__item {
+  float: left;
+  background-color: #337ab7;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  text-align: center;
+  color: #fff;
+  line-height: 1.4;
+  text-transform: uppercase;
+  position: relative;
+  cursor: info; }
+  .perc-bar__item:after {
+    content: attr(data-value);
+    font-weight: normal;
+    font-size: 0.9em;
+    color: #333;
+    position: absolute;
+    top: 0;
+    margin-top: 5px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+    opacity: 0;
+    transition: top 0.3s ease, opacity 0.3s ease;
+    text-align: center; }
+  .perc-bar__item:hover:after {
+    top: 100%;
+    opacity: 1; }
+  .perc-bar__item:first-child {
+    border-radius: 4px 0 0 4px; }
+  .perc-bar__item:last-child {
+    border-radius: 0 4px 4px 0; }
+
+.perc-bar__item--qb {
+  background-color: #5cb85c; }
+
+.perc-bar__item--rb {
+  background-color: #337ab7; }
+
+.perc-bar__item--wr {
+  background-color: #f0ad4e; }
+
+.perc-bar__item--te {
+  background-color: #d9534f; }
+
+.perc-bar__item--dst {
+  background-color: #b14fd9; }
+
+.perc-bar__item--k {
+  background-color: #7e7e7e; }
+
 
 /*# sourceMappingURL=app.css.map */

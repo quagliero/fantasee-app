@@ -33,9 +33,9 @@ class LeagueSeasonDraftController extends Controller {
 	{
 		$teams = Team::byLeague($league->id)->bySeason($season->id)->orderBy('position')->get();
 		$draft = Draft::byLeague($league->id)->bySeason($season->id)->firstOrFail();
-		$picks = Pick::byDraft($draft->id)->get();
+		$rounds = $draft->getAllPicksByRoundWithBreakdown();
 
-		return view('league_season_draft.show', compact('league', 'season', 'teams', 'picks'));
+		return view('league_season_draft.show', compact('league', 'season', 'teams', 'rounds'));
 	}
 
 }
