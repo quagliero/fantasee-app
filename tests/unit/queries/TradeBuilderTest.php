@@ -2,7 +2,7 @@
 
 use Fantasee\League;
 
-class DbDraftRepositoryTest extends TestCase {
+class TradeBuilderTest extends TestCase {
   public function testShouldBeAbleToTradeAPlayerBetweenTeams() {
     $league = factory(League::class)->create();
     $week = factory(Week::class)->create();
