@@ -1,35 +1,30 @@
-var elixir = require('laravel-elixir');
-var browserSync = require('laravel-elixir-browser-sync');
+// eff elixir
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var browserSync = require('browser-sync').create();
 
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Less
- | file for our application, as well as publishing vendor resources.
- |
- */
-var paths = {
-  'bootstrap': './public/bower_components/bootstrap-sass-official/assets/',
-  'fontAwesome': './public/bower_components/font-awesome-sass/assets/'
-};
+// Proxy Server + watching scss and blade files
+gulp.task('serve', ['sass'], function() {
 
-elixir(function(mix) {
-  mix.sass('app.scss', 'public/css', {
-    includePaths: [
-      paths.bootstrap + 'stylesheets/',
-      paths.fontAwesome + 'stylesheets/'
-    ]
-  });
+    browserSync.init({
+        proxy: "fantasee.app"
+    });
 
-  mix.browserSync([
-    'app/**/*',
-    'public/**/*',
-    'resources/views/**/*'
-  ], {
-    proxy: 'fantasee.app',
-    reloadDelay: 500
-  });
+    gulp.watch("resources/assets/sass/**/*.scss", ['sass']);
+    gulp.watch("resources/views/*/**.blade.php").on('change', browserSync.reload);
 });
+
+// Compile sass into CSS & auto-inject into browsers
+gulp.task('sass', function() {
+    return gulp.src("resources/assets/sass/**/*.scss")
+        .pipe(sass({
+          includePaths: [
+            './public/bower_components/bootstrap-sass-official/assets/stylesheets',
+            './public/bower_components/font-awesome-sass/assets/stylesheets'
+          ]
+        }).on('error', sass.logError))
+        .pipe(gulp.dest("public/css"))
+        .pipe(browserSync.stream());
+});
+
+gulp.task('default', ['serve']);

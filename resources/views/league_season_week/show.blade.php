@@ -13,6 +13,7 @@
   <ul class="nav nav-pills">
     <li>{!! link_to_route('league_season_path', 'Standings', [$league->slug, $season->year]) !!}</li>
     <li class="active">{!! link_to_route('league_season_weeks_path', 'Schedule', [$league->slug, $season->year]) !!}</li>
+    <li>{!! link_to_route('league_season_draft_path', 'Draft', [$league->slug, $season->year]) !!}</li>
   </ul>
   <br>
 

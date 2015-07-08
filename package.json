@@ -2,7 +2,9 @@
   "private": true,
   "devDependencies": {
     "bower": "^1.4.1",
+    "browser-sync": "^2.7.13",
     "gulp": "^3.8.8",
+    "gulp-sass": "^2.0.3",
     "laravel-elixir": "*",
     "laravel-elixir-browser-sync": "^0.1.6"
   }

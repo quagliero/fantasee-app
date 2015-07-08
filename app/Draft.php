@@ -132,6 +132,30 @@ class Draft extends Model {
 	}
 
 	/**
+	 * getAllPicksWithBreakdown returns picks with additional
+	 * data breaking down the stats of the draft
+	 * @param  integer $round
+	 * @return mixed
+	 */
+	public function getAllPicksWithBreakdown()
+	{
+		$picks = $this->getAllPicks();
+		// add in 'breakdown' object
+		$positions = $picks->map(function ($pick) {
+	    return $pick->player->position;
+	  });
+		$length = sizeof($positions);
+		$unique = array_count_values($positions->toArray());
+
+		foreach($unique as $key => $val) {
+	    $perc = number_format($val / $length * 100, 2);
+			$picks->breakdown[strtolower($key)] = str_replace('.00', '', $perc);
+	  }
+
+		return $picks;
+	}
+
+	/**
 	 * getAllPicksByRound returns a Collection containing the picks of a provided round
 	 * number, or if none is provided, returns the entire draft as an array of Collections
 	 * @param  integer $round
@@ -165,8 +189,8 @@ class Draft extends Model {
 			$unique = array_count_values($positions->toArray());
 
 			foreach($unique as $key => $val) {
-		    $perc = rtrim(number_format($val / $length * 100, 2), '.00');
-				$r->breakdown[strtolower($key)] = $perc;
+		    $perc = number_format($val / $length * 100, 2);
+				$r->breakdown[strtolower($key)] = str_replace('.00', '', $perc);
 		  }
 
 		});

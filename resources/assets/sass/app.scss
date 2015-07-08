@@ -241,6 +241,9 @@ h1 {
 
 .perc-bar {
   border-radius: 4px;
+  white-space: nowrap;
+  display: flex;
+  
   &:after {
     display: table;
     clear: both;
@@ -250,9 +253,9 @@ h1 {
 
 
 .perc-bar__item {
-  float: left;
+  display: inline-block;
   background-color: #337ab7;
-  border-bottom: 1px solid rgba(0,0,0,.4);
+  border-bottom: 1px solid rgba(0,0,0,.2);
   text-align: center;
   color: #fff;
   line-height: 1.4;
@@ -292,6 +295,11 @@ h1 {
   &:last-child {
     border-radius: 0 4px 4px 0;
   }
+  
+
+  &:only-child {
+    border-radius: 4px;
+  }
 }
 
 
@@ -315,7 +323,8 @@ h1 {
 }
 
 
-.perc-bar__item--dst {
+.perc-bar__item--dst,
+.perc-bar__item--def {
   background-color: #b14fd9;
 }
 

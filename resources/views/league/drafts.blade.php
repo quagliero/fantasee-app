@@ -36,12 +36,14 @@
         <td>Unknown</td>
         @endif
         <td>
-          QBs: {!! sizeof($draft->selections->positions->qb) !!},
+          <p>QBs: {!! sizeof($draft->selections->positions->qb) !!},
           RBs: {!! sizeof($draft->selections->positions->rb) !!},
           WRs: {!! sizeof($draft->selections->positions->wr) !!},
           TEs: {!! sizeof($draft->selections->positions->te) !!},
           Ks: {!! sizeof($draft->selections->positions->k) !!},
-          DSTs: {!! sizeof($draft->selections->positions->dst) !!}
+          DSTs: {!! sizeof($draft->selections->positions->dst) !!}</p>
+          @include('partials.percentage_bar', ['breakdown' => $draft->getAllPicksWithBreakdown()->breakdown])
+          <br>
         </td>
       </tr>
     @endforeach
