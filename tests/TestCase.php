@@ -23,7 +23,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
   }
 
   public function tearDown() {
-    parent::setUp();
+    parent::tearDown();
     Artisan::call('migrate:rollback');
   }
 }
