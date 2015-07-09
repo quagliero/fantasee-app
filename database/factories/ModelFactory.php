@@ -7,6 +7,7 @@ use Fantasee\Team;
 use Fantasee\Player;
 use Fantasee\Manager;
 use Fantasee\Season;
+use Fantasee\Roster;
 use Fantasee\Trade\TradeStatus;
 use Fantasee\Trade\Trade;
 use Fantasee\Trade\Exchange;
@@ -31,7 +32,7 @@ $factory->define(User::class, function ($faker) {
 $factory->define(Manager::class, function ($faker) {
   return [
     'name' => $faker->name,
-    'site_id' => $faker->randomNumber,
+    'site_id' => $faker->randomNumber(5),
   ];
 });
 $factory->define(TradeStatus::class, function ($faker) {
@@ -56,7 +57,7 @@ $factory->define(League::class, function ($faker) {
     return [
       'name' => $faker->word(6),
       'slug' => $faker->word(3),
-      'league_id' => $faker->randomNumber(),
+      'league_id' => $faker->randomNumber(5),
     ];
 });
 $factory->define(Week::class, function ($faker) {
@@ -67,13 +68,17 @@ $factory->define(Week::class, function ($faker) {
 $factory->define(Team::class, function ($faker) {
     return [
       'name' => $faker->word,
-      'position' => $faker->randomNumber(),
+      'position' => $faker->randomNumber(5),
     ];
 });
 $factory->define(Player::class, function ($faker) {
     return [
       'name' => $faker->word(3),
       'position' => $faker->word(3),
-      'site_id' => $faker->unique()->randomNumber(),
+      'site_id' => $faker->unique()->randomNumber(5),
+    ];
+});
+$factory->define(Roster::class, function ($faker) {
+    return [
     ];
 });

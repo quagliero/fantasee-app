@@ -3,6 +3,7 @@
 use Fantasee\Traits\HasFantasyPoints;
 use Fantasee\Traits\HasPerformanceRecord;
 use Illuminate\Database\Eloquent\Model;
+use Fantasee\Week;
 
 class Team extends Model {
 	use HasFantasyPoints;
@@ -226,5 +227,11 @@ class Team extends Model {
 		}
 
 		return ($this->wins / $total) * 100;
+	}
+
+	public function rosterForWeek($week) {
+		$week = Week::findOrFail($week);
+
+		return Roster::where('team_id', $this->id)->where('week_id', $week->id)->first();
 	}
 }

@@ -39,7 +39,7 @@ class CreateRostersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('rosters_players');
+        Schema::drop('player_roster');
         Schema::drop('rosters');
     }
 }

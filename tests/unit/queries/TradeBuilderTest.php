@@ -7,6 +7,9 @@ use Fantasee\Player;
 use Fantasee\User;
 use Fantasee\Manager;
 use Fantasee\Season;
+use Fantasee\Roster;
+
+use Fantasee\Queries\TradeBuilder;
 
 class TradeBuilderTest extends TestCase {
   public function testShouldBeAbleToTradeAPlayerBetweenTeams() {
@@ -28,8 +31,28 @@ class TradeBuilderTest extends TestCase {
     ]);
     $traded_player = factory(Player::class)->create();
 
-    factory(Player::class, 15)->create();
-    factory(Player::class, 15)->create();
+    factory(Roster::class)->create([
+     'week_id' => $week->id,
+     'team_id' => $team1->id,
+    ]);
+    factory(Roster::class)->create([
+     'week_id' => $week->id,
+     'team_id' => $team2->id,
+    ]);
+
+    $t1r = $team1->rosterForWeek($week->id);
+    $t2r = $team2->rosterForWeek($week->id);
+
+    $t1r->players()->save($traded_player);
+
+    factory(Player::class, 15)->create()->each(function ($p) use ($t1r) {
+      $t1r->players()->save($p);
+    });
+    factory(Player::class, 15)->create()->each(function ($p) use ($t2r) {
+      $t2r->players()->save($p);
+    });
+
+
 
     $trade = TradeBuilder::begin();
 
@@ -41,5 +64,16 @@ class TradeBuilderTest extends TestCase {
     $trade->finalize();
 
     // assertions
+    $players = $team1->rosterForWeek($week->id)->players->filter(function ($p) use ($traded_player) {
+      return $p->id == $traded_player->id;
+    });
+
+    $this->assertEquals(count($players), 0, 'Player has not been removed from team 1');
+
+    $players = $team2->rosterForWeek($week->id)->players->filter(function ($p) use ($traded_player) {
+      return $p->id == $traded_player->id;
+    });
+
+    $this->assertEquals(count($players), 1, 'Player has not been added to team 2');
   }
 }
