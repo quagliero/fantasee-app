@@ -90,6 +90,11 @@ class Team extends Model {
 		return $this->homeMatches->merge($this->awayMatches);
 	}
 
+	public function rosters()
+	{
+		return $this->hasMany('Fantasee\Roster');
+	}
+
 	/**
 	 * Get teams by their leagues
 	 *

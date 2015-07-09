@@ -59,7 +59,7 @@ class TradeBuilderTest extends TestCase {
     $trade->inLeague($league->id)
       ->inWeek($week->id);
 
-    $trade->player($traded_player->id)->to($team1->id);
+    $trade->player($traded_player->id)->to($team2->id);
 
     $trade->finalize();
 
