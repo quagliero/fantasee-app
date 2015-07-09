@@ -1,17 +1,35 @@
 <?php
 
 use Fantasee\League;
+use Fantasee\Week;
+use Fantasee\Team;
+use Fantasee\Player;
+use Fantasee\User;
+use Fantasee\Manager;
+use Fantasee\Season;
 
 class TradeBuilderTest extends TestCase {
   public function testShouldBeAbleToTradeAPlayerBetweenTeams() {
-    $league = factory(League::class)->create();
+    $user = factory(User::class)->create();
+    $league = factory(League::class)->create([ 'user_id' => $user->id ]);
+    $season = factory(Season::class)->create();
     $week = factory(Week::class)->create();
-    $team1 = factory(Team::class)->create([ 'league_id' => $league->id ]);
-    $team2 = factory(Team::class)->create([ 'league_id' => $league->id ]);
-    $traded_player = factory(Player::class)->create([ 'team_id' => $team1->id ]);
+    $mgr1 = factory(Manager::class)->create([ 'league_id' => $league->id ]);
+    $mgr2 = factory(Manager::class)->create([ 'league_id' => $league->id ]);
+    $team1 = factory(Team::class)->create([
+      'league_id' => $league->id,
+      'manager_id' => $mgr1->id,
+      'season_id' => $season->id,
+    ]);
+    $team2 = factory(Team::class)->create([
+      'league_id' => $league->id,
+      'manager_id' => $mgr2->id,
+      'season_id' => $season->id,
+    ]);
+    $traded_player = factory(Player::class)->create();
 
-    factory(Player::class, 15)->create([ 'team_id' => $team1->id ]);
-    factory(Player::class, 15)->create([ 'team_id' => $team2->id ]);
+    factory(Player::class, 15)->create();
+    factory(Player::class, 15)->create();
 
     $trade = TradeBuilder::begin();
 
