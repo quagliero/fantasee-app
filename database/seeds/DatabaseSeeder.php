@@ -46,6 +46,9 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('DraftTableSeeder');
 		$this->command->info('Drafts table seeded!');
+
+		$this->call('TradeSeeder');
+		$this->command->info('Trade table seeded!');
 	}
 
 }

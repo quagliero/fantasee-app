@@ -16,4 +16,14 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 		return $app;
 	}
 
+  public function setUp() {
+    parent::setUp();
+    Artisan::call('migrate');
+    Artisan::call('db:seed');
+  }
+
+  public function tearDown() {
+    parent::tearDown();
+    Artisan::call('migrate:rollback');
+  }
 }

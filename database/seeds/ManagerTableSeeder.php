@@ -79,6 +79,11 @@ class ManagerTableSeeder extends DatabaseSeeder {
           ],
         ];
 
+        foreach ($managers as &$s) {
+          $s['created_at'] = date('Y-m-d H:i:s');
+          $s['updated_at'] = date('Y-m-d H:i:s');
+        }
+
         DB::table('managers')->insert($managers);
     }
 

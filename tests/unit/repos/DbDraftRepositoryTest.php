@@ -15,4 +15,5 @@ class DbDraftRepositoryTest extends TestCase {
       $this->assertEquals($draft->league_id, 1);
     }
   }
+
 }

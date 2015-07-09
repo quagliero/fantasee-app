@@ -72,6 +72,9 @@ class TeamTableSeeder extends DatabaseSeeder {
                 'season_id' => $seasons[$j],
                 'name' => $teams_name[$j][$k],
                 'manager_id' => $teams_man[$j][$k],
+                'position' => $k,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
               ];
             }
           }

@@ -57,7 +57,9 @@ class MatchTableSeeder extends Seeder {
                 'team1_id' => $team1,
                 'team2_id' => $team2,
                 'team1_score' => mt_rand(60, 150),
-                'team2_score' => mt_rand(60, 150)
+                'team2_score' => mt_rand(60, 150),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
               ];
 
               $played[] = $team1;
