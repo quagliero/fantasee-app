@@ -89,8 +89,6 @@ class TradeBuilder {
         $exchange->save();
 
         $trade->exchanges()->save($exchange);
-        $trade->exchanges()->save($exchange);
-        $trade->exchanges()->save($exchange);
       }
     });
   }
