@@ -52,6 +52,10 @@
                 <span class="badge">{{ $league->managers->count() }}</span>
               </li>
               <li class="list-group-item">
+                <i class="fa fa-exchange"></i> <strong>Trades</strong>
+                <span class="badge">{{ $league->trades->count() }}</span>
+              </li>
+              <li class="list-group-item">
                 <i class="fa fa-trophy"></i> <strong>Champions</strong>
                 <span class="badge">{{ $league->getChampions() }}</span>
               </li>

@@ -39,7 +39,7 @@ class ScrapeTrades extends BaseScraper {
 	 * 3: Any players Team 1 had to drop in the process of completing the trade
 	 * 4: Any players Team 2 had to drop in the process of completing the trade
 	 * @param  array $seasons
-	 * @return mixed
+	 * @return void
 	 */
 	public function scrapeTrades($seasons, $pagination = '') {
 		$urlParams = $pagination ?: '?transactionType=trade';
@@ -55,10 +55,21 @@ class ScrapeTrades extends BaseScraper {
 				return false;
 			}
 			$trades->each(function ($node) use ($season) {
-				  $trade_id = preg_match('/transaction-trade-(.*?)-[12]/', $node->attr('class'));
+					$trade_info = [];
+				  $is_trade = preg_match('/transaction-trade-(.*?)-[12]/', $node->attr('class'), $trade_info);
 
-					if ($trade_id) {
+					if ($is_trade) {
+						// skip if it's a vetoed trade
+						if (stristr($node->filter('.transactionType')->text(), 'veto')) {
+							return;
+						}
+
+						$trade_id = $trade_info[1];
+						// Try and find the matching week, otherwise it's the "Offseason"
 						$week = Week::find($node->filter('.transactionWeek')->text());
+						if (is_null($week)) {
+							$week = Week::find(Week::OFF_SEASON_ID);
+						}
 
 						$losing_team = Team::byLeague($this->league->id)
 							->bySeason($season->id)
@@ -70,41 +81,43 @@ class ScrapeTrades extends BaseScraper {
 								->where('name', $node->filter('.transactionTo .teamName')->text())
 								->first();
 
-						// see if this trade has
-						$trade = Trade::firstOrCreate([
-							'external_id' => $trade_id,
-							'trade_status_id' => 4, // 4 is 'accepted'
-							'league_id' => $this->league->id,
-							'week_id' => $week->id
-						]);
-
-						$players = $node->filter('.playerNameAndInfo ul > li');
-						$players->each(function ($player) use ($trade, $gaining_team, $losing_team) {
-							$player_info = (object) array(
-								'external_id' => preg_replace('/(\D)*/', '', $player->filter('[class*="playerNameId-"]')->attr('class')),
-								'name' => $player->filter('.playerName')->text(),
-								'position' => explode(' - ', $player->filter('.playerName + em')->text())[0]
-							);
-
-							// Create or update this NFL player
-							$player = Player::firstOrNew(['site_id' => $player_info->external_id]);
-							if ($player->name !== $player_info->name) {
-								$player->name = $player_info->name;
-							}
-							if ($player->position !== $player_info->position) {
-								$player->position = $player_info->position;
-							}
-							$player->save();
-
-							$exchange = Exchange::create([
-								'trade_id' => $trade->id,
-								'asset_id' => $player->id,
-								'asset_type' => Player::class,
-								'gaining_team_id' => $gaining_team->id,
-								'losing_team_id'  => $losing_team->id,
+						$player_list = $node->filter('.playerNameAndInfo ul > li');
+						// if we have players (legacy views sometimes don't)
+						if ($player_list->count()) {
+							// see if this trade already exists
+							$trade = Trade::firstOrCreate([
+								'external_id' => $trade_id,
+								'trade_status_id' => 4, // 4 is 'accepted'
+								'league_id' => $this->league->id,
+								'week_id' => $week->id
 							]);
-						});
 
+							$player_list->filter('.playerNameAndInfo ul > li')->each(function ($player) use ($trade, $gaining_team, $losing_team) {
+								$player_info = (object) array(
+									'external_id' => preg_replace('/(\D)*/', '', $player->filter('[class*="playerNameId-"]')->attr('class')),
+									'name' => $player->filter('.playerName')->text(),
+									'position' => explode(' - ', $player->filter('.playerName + em')->text())[0]
+								);
+
+								// Create or update this NFL player
+								$player = Player::firstOrNew(['site_id' => $player_info->external_id]);
+								if ($player->name !== $player_info->name) {
+									$player->name = $player_info->name;
+								}
+								if ($player->position !== $player_info->position) {
+									$player->position = $player_info->position;
+								}
+								$player->save();
+
+								$exchange = Exchange::create([
+									'trade_id' => $trade->id,
+									'asset_id' => $player->id,
+									'asset_type' => Player::class,
+									'gaining_team_id' => $gaining_team->id,
+									'losing_team_id'  => $losing_team->id,
+								]);
+							});
+						}
 					}
 			});
 

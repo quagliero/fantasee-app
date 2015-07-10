@@ -3,6 +3,10 @@
 use Illuminate\Database\Eloquent\Model;
 
 class Week extends Model {
+	/**
+	 * WEEK with id of 18 is classed as offseason
+	 */
+	const OFF_SEASON_ID = 18;
 
 	/**
 	 * The database table used by the model.
@@ -24,5 +28,5 @@ class Week extends Model {
 	 * @var array
 	 */
 	protected $hidden = [];
-	
+
 }

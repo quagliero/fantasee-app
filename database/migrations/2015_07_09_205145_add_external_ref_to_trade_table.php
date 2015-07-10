@@ -13,7 +13,7 @@ class AddExternalRefToTradeTable extends Migration
     public function up()
     {
         Schema::table('trades', function (Blueprint $table) {
-            $table->string('external_id');
+            $table->string('external_id')->after('id');
         });
     }
 

@@ -2,7 +2,17 @@
 
 @section('content')
 <div class="container">
-  <h1>{{ $league->name }} {!! link_to_route('league_edit', 'Edit', [$league->slug], ['class' => 'btn btn-info']) !!}</h1>
+  <div class="row">
+    <div class="col-sm-6">
+      <h1>{{ $league->name }}</h1>
+    </div>
+    <div class="col-sm-6 text-right">
+      <br>
+      @if (is_league_admin($league->id))
+    {!! link_to_route('league_edit', 'Edit', [$league->slug], ['class' => 'btn btn-info']) !!}
+      @endif
+    </div>
+  </div>
 
   <ul class="nav nav-tabs">
   <li class="active">{!! link_to_route('league_path', 'Overall', [$league->slug]) !!}</li>
@@ -15,6 +25,7 @@
     <li>{!! link_to_route('league_path', 'Managers', [$league->slug]) !!}</li>
     <li>{!! link_to_route('league_teams_path', 'Teams', [$league->slug]) !!}</li>
     <li class="active">{!! link_to_route('league_drafts_path', 'Drafts', [$league->slug]) !!}</li>
+    <li>{!! link_to_route('league_trades_path', 'Trades', [$league->slug]) !!}</li>
   </ul>
   <br>
   <table class="table table-striped">

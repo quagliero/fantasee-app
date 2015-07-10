@@ -20,7 +20,7 @@ class Trade extends Model
    *
    * @var array
    */
-  protected $fillable = ['league_id', 'week_id', 'trade_status_id'];
+  protected $fillable = ['external_id', 'league_id', 'week_id', 'trade_status_id'];
 
   /**
    * The attributes excluded from the model's JSON form.
