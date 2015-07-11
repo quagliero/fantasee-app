@@ -49,6 +49,33 @@ class TradeBuilderTest extends TestCase {
     $this->assertEquals(count($team2p), 1, 'Player has not been added to team 2');
   }
 
+  public function testShouldBeAbleToTradeMultiplePlayersInASingleTrade() {
+    $roster = $this->rosters[0];
+    $players = factory(Player::class, 5)
+      ->create()
+      ->each(function ($p) use ($roster) {
+        $roster->players()->save($p);
+    });
+
+    $trade = TradeBuilder::begin();
+
+    $trade->inLeague($this->league->id)->inWeek($this->week->id);
+
+    foreach ($players as $player) {
+      $trade->player($player->id)->to($this->teams[1]->id);
+    }
+
+    $trade->finalize();
+
+    $team1pids = $roster->players->lists('id')->toArray();
+    $team2pids = $this->rosters[1]->players->lists('id')->toArray();
+
+    foreach ($players as $player) {
+      $this->assertFalse(in_array($player->id, $team1pids));
+      $this->assertTrue(in_array($player->id, $team2pids));
+    }
+  }
+
   private function createTestableLeague() {
     $this->user = factory(User::class)->create();
     $this->league = factory(League::class)->create([ 'user_id' => $this->user->id ]);
