@@ -28,7 +28,8 @@ class TradeBuilderTest extends TestCase {
     $trade = TradeBuilder::begin();
 
     $trade->inLeague($this->league->id)
-      ->inWeek($this->week->id);
+      ->inWeek($this->week->id)
+      ->inSeason($this->season->id);
 
     $trade->player($traded_player->id)->to($this->teams[1]->id);
 
@@ -59,7 +60,7 @@ class TradeBuilderTest extends TestCase {
 
     $trade = TradeBuilder::begin();
 
-    $trade->inLeague($this->league->id)->inWeek($this->week->id);
+    $trade->inLeague($this->league->id)->inWeek($this->week->id)->inSeason($this->season->id);
 
     foreach ($players as $player) {
       $trade->player($player->id)->to($this->teams[1]->id);
@@ -92,7 +93,7 @@ class TradeBuilderTest extends TestCase {
 
     $trade = TradeBuilder::begin();
 
-    $trade->inLeague($this->league->id)->inWeek($this->week->id);
+    $trade->inLeague($this->league->id)->inWeek($this->week->id)->inSeason($this->season->id);
 
     foreach ($playersA as $p) {
       $trade->player($p->id)->to($this->teams[1]->id);

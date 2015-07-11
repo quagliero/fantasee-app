@@ -7,12 +7,14 @@ use Fantasee\Week;
 use Fantasee\Player;
 use Fantasee\Team;
 use Fantasee\Roster;
+use Fantasee\Season;
 use Fantasee\Trade\Trade;
 use Fantasee\Trade\Exchange;
 
 class TradeBuilder {
 
   protected $week;
+  protected $season;
   protected $league;
   protected $trades = [];
 
@@ -30,6 +32,12 @@ class TradeBuilder {
 
   public function inWeek($week) {
     $this->week = Week::findOrFail($week);
+
+    return $this;
+  }
+
+  public function inSeason($season) {
+    $this->season = Season::findOrFail($season);
 
     return $this;
   }
@@ -68,6 +76,7 @@ class TradeBuilder {
         $gaining_team = Team::findOrFail($t['team']);
 
         $losing_team = Team::where('league_id', $this->league->id)
+          ->where('season_id', $this->season->id)
           ->whereHas('rosters', function ($q) use ($player) {
             $q->where('week_id', $this->week->id)
               ->whereHas('players', function ($sq) use ($player) {
