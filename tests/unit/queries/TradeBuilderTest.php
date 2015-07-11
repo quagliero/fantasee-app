@@ -13,6 +13,8 @@ use Fantasee\Queries\TradeBuilder;
 
 class TradeBuilderTest extends TestCase {
 
+  const NUM_TEST_TEAMS = 3;
+
   public function setUp() {
     parent::setUp();
     $this->createTestableLeague();
@@ -119,13 +121,14 @@ class TradeBuilderTest extends TestCase {
     }
   }
 
+
   private function createTestableLeague() {
     $this->user = factory(User::class)->create();
     $this->league = factory(League::class)->create([ 'user_id' => $this->user->id ]);
     $this->season = factory(Season::class)->create();
     $this->week = factory(Week::class)->create();
-    $this->managers = factory(Manager::class, 2)->create([ 'league_id' => $this->league->id ]);
-    $this->teams = factory(Team::class, 2)->create([
+    $this->managers = factory(Manager::class, self::NUM_TEST_TEAMS)->create([ 'league_id' => $this->league->id ]);
+    $this->teams = factory(Team::class, self::NUM_TEST_TEAMS)->create([
       'league_id' => $this->league->id,
       'season_id' => $this->season->id,
       'manager_id' => 1,
@@ -133,18 +136,18 @@ class TradeBuilderTest extends TestCase {
       $team->manager_id = $i + 1;
       $team->save();
     });
-    $this->rosters = factory(Roster::class, 2)->create([
+    $this->rosters = factory(Roster::class, self::NUM_TEST_TEAMS)->create([
      'week_id' => $this->week->id,
      'team_id' => 1,
     ])->each(function ($roster, $i) {
       $roster->team_id = $i + 1;
       $roster->save();
     });
-    factory(Player::class, 15)->create()->each(function ($p) {
-      $this->rosters[0]->players()->save($p);
-    });
-    factory(Player::class, 15)->create()->each(function ($p) {
-      $this->rosters[1]->players()->save($p);
+
+    $this->teams->each(function ($t, $i) {
+      factory(Player::class, 15)->create()->each(function ($p) use ($i) {
+        $this->rosters[$i]->players()->save($p);
+      });
     });
   }
 }
