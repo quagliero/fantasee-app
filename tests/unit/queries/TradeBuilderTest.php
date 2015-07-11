@@ -160,6 +160,51 @@ class TradeBuilderTest extends TestCase {
 
   }
 
+  /**
+   * @expectedException Exception
+   * @expectedExceptionMessage Error finalizing trade - no league supplied
+   */
+  public function testShouldThrowAnExceptionIfLeagueIsNotSupplied() {
+    $trade = TradeBuilder::begin();
+    $player = factory(Player::class)->create();
+
+    $trade->inSeason($this->season->id)->inWeek($this->week->id);
+
+    $trade->player($player->id)->to($this->teams[1]->id);
+
+    $trade->finalize();
+  }
+
+  /**
+   * @expectedException Exception
+   * @expectedExceptionMessage Error finalizing trade - no season supplied
+   */
+  public function testShouldThrowAnExceptionIfSeasonIsNotSupplied() {
+    $trade = TradeBuilder::begin();
+    $player = factory(Player::class)->create();
+
+    $trade->inLeague($this->league->id)->inWeek($this->week->id);
+
+    $trade->player($player->id)->to($this->teams[1]->id);
+
+    $trade->finalize();
+  }
+
+  /**
+   * @expectedException Exception
+   * @expectedExceptionMessage Error finalizing trade - no week supplied
+   */
+  public function testShouldThrowAnExceptionIfWeekIsNotSupplied() {
+    $trade = TradeBuilder::begin();
+    $player = factory(Player::class)->create();
+
+    $trade->inSeason($this->season->id)->inLeague($this->league->id);
+
+    $trade->player($player->id)->to($this->teams[1]->id);
+
+    $trade->finalize();
+  }
+
   private function createTestableLeague() {
     $this->user = factory(User::class)->create();
     $this->league = factory(League::class)->create([ 'user_id' => $this->user->id ]);

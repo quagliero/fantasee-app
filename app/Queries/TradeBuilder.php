@@ -2,6 +2,8 @@
 
 namespace Fantasee\Queries;
 
+use Exception;
+
 use Fantasee\League;
 use Fantasee\Week;
 use Fantasee\Player;
@@ -61,6 +63,9 @@ class TradeBuilder {
   }
 
   public function finalize() {
+
+    $this->isViableForTrade();
+
     \DB::transaction(function () {
       $trade = new Trade;
 
@@ -100,5 +105,20 @@ class TradeBuilder {
         $trade->exchanges()->save($exchange);
       }
     });
+  }
+
+  private function isViableForTrade() {
+    if (!isset($this->week)) {
+      throw new Exception('Error finalizing trade - no week supplied');
+    }
+
+    if (!isset($this->season)) {
+      throw new Exception('Error finalizing trade - no season supplied');
+    }
+
+    if (!isset($this->league)) {
+      throw new Exception('Error finalizing trade - no league supplied');
+    }
+
   }
 }
