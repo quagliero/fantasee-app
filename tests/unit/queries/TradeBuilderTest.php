@@ -12,68 +12,69 @@ use Fantasee\Roster;
 use Fantasee\Queries\TradeBuilder;
 
 class TradeBuilderTest extends TestCase {
+
+  public function setUp() {
+    parent::setUp();
+    $this->createTestableLeague();
+  }
+
   public function testShouldBeAbleToTradeAPlayerBetweenTeams() {
-    $user = factory(User::class)->create();
-    $league = factory(League::class)->create([ 'user_id' => $user->id ]);
-    $season = factory(Season::class)->create();
-    $week = factory(Week::class)->create();
-    $mgr1 = factory(Manager::class)->create([ 'league_id' => $league->id ]);
-    $mgr2 = factory(Manager::class)->create([ 'league_id' => $league->id ]);
-    $team1 = factory(Team::class)->create([
-      'league_id' => $league->id,
-      'manager_id' => $mgr1->id,
-      'season_id' => $season->id,
-    ]);
-    $team2 = factory(Team::class)->create([
-      'league_id' => $league->id,
-      'manager_id' => $mgr2->id,
-      'season_id' => $season->id,
-    ]);
+    /* Preparation */
     $traded_player = factory(Player::class)->create();
-
-    factory(Roster::class)->create([
-     'week_id' => $week->id,
-     'team_id' => $team1->id,
-    ]);
-    factory(Roster::class)->create([
-     'week_id' => $week->id,
-     'team_id' => $team2->id,
-    ]);
-
-    $t1r = $team1->rosterForWeek($week->id);
-    $t2r = $team2->rosterForWeek($week->id);
-
+    $t1r = $this->teams[0]->rosterForWeek($this->week->id);
     $t1r->players()->save($traded_player);
 
-    factory(Player::class, 15)->create()->each(function ($p) use ($t1r) {
-      $t1r->players()->save($p);
-    });
-    factory(Player::class, 15)->create()->each(function ($p) use ($t2r) {
-      $t2r->players()->save($p);
-    });
-
-
-
+    /* Perform trade */
     $trade = TradeBuilder::begin();
 
-    $trade->inLeague($league->id)
-      ->inWeek($week->id);
+    $trade->inLeague($this->league->id)
+      ->inWeek($this->week->id);
 
-    $trade->player($traded_player->id)->to($team2->id);
+    $trade->player($traded_player->id)->to($this->teams[1]->id);
 
     $trade->finalize();
 
-    // assertions
-    $players = $team1->rosterForWeek($week->id)->players->filter(function ($p) use ($traded_player) {
+    /* gather the results */
+    $team1p = $this->teams[0]->rosterForWeek($this->week->id)->players->filter(function ($p) use ($traded_player) {
       return $p->id == $traded_player->id;
     });
 
-    $this->assertEquals(count($players), 0, 'Player has not been removed from team 1');
-
-    $players = $team2->rosterForWeek($week->id)->players->filter(function ($p) use ($traded_player) {
+    $team2p = $this->teams[1]->rosterForWeek($this->week->id)->players->filter(function ($p) use ($traded_player) {
       return $p->id == $traded_player->id;
     });
 
-    $this->assertEquals(count($players), 1, 'Player has not been added to team 2');
+    /* assertions */
+    $this->assertEquals(count($team1p), 0, 'Player has not been removed from team 1');
+
+    $this->assertEquals(count($team2p), 1, 'Player has not been added to team 2');
+  }
+
+  private function createTestableLeague() {
+    $this->user = factory(User::class)->create();
+    $this->league = factory(League::class)->create([ 'user_id' => $this->user->id ]);
+    $this->season = factory(Season::class)->create();
+    $this->week = factory(Week::class)->create();
+    $this->managers = factory(Manager::class, 2)->create([ 'league_id' => $this->league->id ]);
+    $this->teams = factory(Team::class, 2)->create([
+      'league_id' => $this->league->id,
+      'season_id' => $this->season->id,
+      'manager_id' => 1,
+    ])->each(function ($team, $i) {
+      $team->manager_id = $i + 1;
+      $team->save();
+    });
+    $this->rosters = factory(Roster::class, 2)->create([
+     'week_id' => $this->week->id,
+     'team_id' => 1,
+    ])->each(function ($roster, $i) {
+      $roster->team_id = $i + 1;
+      $roster->save();
+    });
+    factory(Player::class, 15)->create()->each(function ($p) {
+      $this->rosters[0]->players()->save($p);
+    });
+    factory(Player::class, 15)->create()->each(function ($p) {
+      $this->rosters[1]->players()->save($p);
+    });
   }
 }
