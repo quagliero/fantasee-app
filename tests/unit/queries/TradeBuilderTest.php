@@ -76,6 +76,48 @@ class TradeBuilderTest extends TestCase {
     }
   }
 
+  public function testShouldBeAbleToTradeMultiplePlayersBetweenTwoTeamsInASingleTrade() {
+    $rosterA = $this->rosters[0];
+    $rosterB = $this->rosters[1];
+
+    $playersA = factory(Player::class, 3)->create()
+      ->each(function ($p, $i) use ($rosterA) {
+        $rosterA->players()->save($p);
+    });
+
+    $playersB = factory(Player::class, 3)->create()
+      ->each(function ($p, $i) use ($rosterB) {
+        $rosterB->players()->save($p);
+    });
+
+    $trade = TradeBuilder::begin();
+
+    $trade->inLeague($this->league->id)->inWeek($this->week->id);
+
+    foreach ($playersA as $p) {
+      $trade->player($p->id)->to($this->teams[1]->id);
+    }
+
+    foreach ($playersB as $p) {
+      $trade->player($p->id)->to($this->teams[0]->id);
+    }
+
+    $trade->finalize();
+
+    $team1pids = $rosterA->players->lists('id')->toArray();
+    $team2pids = $rosterB->players->lists('id')->toArray();
+
+    foreach ($playersA as $p) {
+      $this->assertFalse(in_array($p->id, $team1pids));
+      $this->assertTrue(in_array($p->id, $team2pids));
+    }
+
+    foreach ($playersB as $p) {
+      $this->assertTrue(in_array($p->id, $team1pids));
+      $this->assertFalse(in_array($p->id, $team2pids));
+    }
+  }
+
   private function createTestableLeague() {
     $this->user = factory(User::class)->create();
     $this->league = factory(League::class)->create([ 'user_id' => $this->user->id ]);
