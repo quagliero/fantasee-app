@@ -5,6 +5,7 @@ use Fantasee\Http\Requests\CreateLeagueRequest;
 use Fantasee\Http\Requests\UpdateLeagueRequest;
 use Fantasee\Http\Controllers\Controller;
 use Fantasee\Repositories\League\LeagueRepository;
+use Fantasee\Repositories\Trade\TradeRepository;
 use Fantasee\League;
 use Illuminate\Http\Request;
 use Fantasee\Jobs\ScrapeLeague;
@@ -111,11 +112,12 @@ class LeaguesController extends Controller {
 	 * @param  Fantasee\League $league
 	 * @return Response
 	 */
-	public function trades(League $league)
+	public function trades(League $league, TradeRepository $trades_repo)
 	{
 		$seasons = $league->seasons;
+		$trades = $trades_repo->getByLeague( $league->id );
 
-		return view('league.trades', compact('league', 'seasons'));
+		return view('league.trades', compact('league', 'seasons', 'trades'));
 	}
 
 	/**
