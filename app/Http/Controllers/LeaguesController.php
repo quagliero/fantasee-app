@@ -107,6 +107,18 @@ class LeaguesController extends Controller {
 	}
 
 	/**
+	 * Display all trades for a league
+	 * @param  Fantasee\League $league
+	 * @return Response
+	 */
+	public function trades(League $league)
+	{
+		$seasons = $league->seasons;
+
+		return view('league.trades', compact('league', 'seasons'));
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param	League $league

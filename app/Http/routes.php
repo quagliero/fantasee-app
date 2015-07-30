@@ -47,6 +47,11 @@ Route::get('leagues/{leagues}/seasons/{seasons}/draft', [
 	'as' => 'league_season_draft_path'
 ]);
 
+Route::get('leagues/{leagues}/seasons/{seasons}/trades', [
+	'uses' => 'LeagueSeasonTradeController@show',
+	'as' => 'league_trades_detail_path'
+]);
+
 /* League scraper */
 Route::post('leagues/{leagues}/scrape', [
 	'uses' => 'ScrapeController@store',
