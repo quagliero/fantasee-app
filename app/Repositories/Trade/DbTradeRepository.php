@@ -32,7 +32,9 @@ class DbTradeRepository extends DbRepository implements TradeRepository {
   public function getByLeagueSeason($leagueId, $seasonId) {
     $data = $this->model
       ->where('league_id', $leagueId)
-      ->where('season_id', $seasonId)
+      ->whereHas('exchanges.gainingTeam.season', function ($q) use($seasonId) {
+        $q->where('id', $seasonId);
+      })
     ->get();
 
     return $this->prepareData($data, [
