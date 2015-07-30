@@ -20,12 +20,7 @@
   @endforeach
   </ul>
   <br>
-  <ul class="nav nav-pills">
-    <li class="active">{!! link_to_route('league_path', 'Managers', [$league->slug]) !!}</li>
-    <li>{!! link_to_route('league_teams_path', 'Teams', [$league->slug]) !!}</li>
-    <li>{!! link_to_route('league_drafts_path', 'Drafts', [$league->slug]) !!}</li>
-    <li>{!! link_to_route('league_trades_path', 'Trades', [$league->slug]) !!}</li>
-  </ul>
+  @include('partials.league_section_header', [ 'active' => 'managers' ])
   <br>
   <table class="table table-striped" data-sortable="1,2,4,5,6">
     <thead>
