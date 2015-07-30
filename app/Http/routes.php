@@ -37,6 +37,11 @@ Route::get('leagues/{leagues}/drafts', [
 	'as' => 'league_drafts_path'
 ]);
 
+Route::get('leagues/{leagues}/trades', [
+	'uses' => 'LeaguesController@trades',
+	'as' => 'league_trades_path'
+]);
+
 Route::get('leagues/{leagues}/seasons/{seasons}/draft', [
 	'uses' => 'LeagueSeasonDraftController@show',
 	'as' => 'league_season_draft_path'
