@@ -16,7 +16,7 @@
   <ul class="nav nav-tabs">
   <li class="active">{!! link_to_route('league_path', 'Overall', [$league->slug]) !!}</li>
   @foreach ($league->seasons->sortByDesc('id') as $s)
-    <li>{!! link_to_route('league_season_path', $season->year, [$league->slug, $season->year]) !!}</li>
+    <li>{!! link_to_route('league_season_path', $s->year, [$league->slug, $s->year]) !!}</li>
   @endforeach
   </ul>
   <br>
