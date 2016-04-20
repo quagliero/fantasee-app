@@ -43,5 +43,5 @@
 
 @section('scripts')
   @parent
-  {!! HTML::script('js/add-league.js') !!}
+  {!! Html::script('js/add-league.js') !!}
 @stop

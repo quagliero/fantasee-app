@@ -1,14 +1,10 @@
-<?php namespace Fantasee;
+<?php
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+namespace Fantasee;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-	use Authenticatable, CanResetPassword;
+class User extends Authenticatable {
 
 	/**
 	 * The database table used by the model.
