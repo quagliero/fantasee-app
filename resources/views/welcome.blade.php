@@ -74,5 +74,5 @@
 
 @section('scripts')
   @parent
-  {!! HTML::script('js/counter.js') !!}
+  {!! Html::script('js/counter.js') !!}
 @stop

@@ -2,9 +2,8 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Routing\Middleware;
 
-class SuperAdminMiddleware implements Middleware {
+class SuperAdminMiddleware {
 
 	/**
 	* The Guard implementation.

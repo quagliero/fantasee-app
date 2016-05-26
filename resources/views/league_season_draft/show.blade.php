@@ -7,7 +7,7 @@
   <h1>{{ $league->name }} &mdash; {{ $season->year }}</h1>
   <ul class="nav nav-tabs">
     <li>{!! link_to_route('league_path', 'Overall', [$league->slug]) !!}</li>
-    @foreach ($league->seasons as $s)
+    @foreach ($league->seasons->sortByDesc('id') as $s)
     <li class="{{ $s->year == $season->year ? 'active' : '' }}">{!! link_to_route('league_season_path', $s->year, [$league->slug, $s->year]) !!}</li>
     @endforeach
   </ul>
@@ -57,5 +57,5 @@
 
 @section('scripts')
   @parent
-  {!! HTML::script('js/table-sortable.js') !!}
+  {!! Html::script('js/table-sortable.js') !!}
 @stop
