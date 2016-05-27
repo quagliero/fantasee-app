@@ -13,7 +13,7 @@ class CreatePlayoffsTable extends Migration
         Schema::create('playoffs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('match_id')->unsigned()->unique();
-            $table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');
+            $table->foreign('match_id')->references('id')->on('matches');
             $table->enum('type', array('championship', 'consolation'));
             $table->enum('stage', array('other', 'quarter', 'semi', 'final'));
             $table->timestamps();

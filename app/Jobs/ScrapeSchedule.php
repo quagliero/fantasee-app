@@ -91,6 +91,11 @@ class ScrapeSchedule extends BaseScraper
                 $manager_id = 6557238;
             }
 
+            // The Sol bitch quit hack (replace IDs where required)
+            // select * from matches where league_id = 1 and season_id = 8 and team1_id = 44 or team2_id = 44;
+            // update matches set team1_id = 77 where team1_id = 44 and week_id < 8 and season_id = 8 and league_id = 1;
+            // update matches set team2_id = 77 where team2_id = 44 and week_id < 8 and season_id = 8 and league_id = 1;
+
             $manager = Manager::byLeague($this->league->id)->where('site_id', $manager_id)->first();
             $team = Team::byLeague($this->league->id)
                 ->bySeason($season->id)

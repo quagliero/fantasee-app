@@ -12,7 +12,7 @@ class AddPlayoffToMatchTable extends Migration
     {
         Schema::table('matches', function (Blueprint $table) {
             $table->integer('playoff_id')->unsigned()->nullable()->after('week_id');
-            $table->foreign('playoff_id')->references('id')->on('playoffs');
+            $table->foreign('playoff_id')->references('id')->on('playoffs')->onDelete('cascade');
         });
     }
 
