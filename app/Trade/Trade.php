@@ -5,6 +5,7 @@ namespace Fantasee\Trade;
 use Fantasee\Week;
 use Fantasee\League;
 use Fantasee\Season;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class Trade extends Model
@@ -29,6 +30,17 @@ class Trade extends Model
    * @var array
    */
   protected $hidden = [];
+
+  public function getSummaryAttribute() {
+    $c = [];
+
+    foreach ($this->exchanges as $e) {
+      $c[$e->gainingTeam->id]['gains'][] = $e->asset->id;
+      $c[$e->losingTeam->id]['gives'][] = $e->asset->id;
+    }
+
+    return $c;
+  }
 
     public function exchanges()
     {
