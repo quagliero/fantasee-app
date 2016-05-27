@@ -110,6 +110,16 @@ class League extends Model {
 	}
 
 	/**
+	 * All trades attached to this league.
+	 *
+	 * @return array
+	 */
+	public function trades()
+	{
+		return $this->hasMany('Fantasee\Trade\Trade');
+	}
+
+	/**
 	* Get the weeks attached to a specific season of this league.
 	*
 	* @return array

@@ -13,6 +13,8 @@ use Fantasee\Repositories\Manager\ManagerRepository;
 use Fantasee\Repositories\Manager\DbManagerRepository;
 use Fantasee\Repositories\Draft\DraftRepository;
 use Fantasee\Repositories\Draft\DbDraftRepository;
+use Fantasee\Repositories\Trade\TradeRepository;
+use Fantasee\Repositories\Trade\DbTradeRepository;
 
 class DatabaseServiceProvider extends ServiceProvider
 {
@@ -38,5 +40,6 @@ class DatabaseServiceProvider extends ServiceProvider
         $this->app->bind(MatchRepository::class, DbMatchRepository::class);
         $this->app->bind(ManagerRepository::class, DbManagerRepository::class);
         $this->app->bind(DraftRepository::class, DbDraftRepository::class);
+        $this->app->bind(TradeRepository::class, DbTradeRepository::class);
     }
 }

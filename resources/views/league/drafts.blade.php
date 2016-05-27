@@ -2,20 +2,10 @@
 
 @section('content')
 <div class="container">
-  <h1>{{ $league->name }} {!! link_to_route('league_edit', 'Edit', [$league->slug], ['class' => 'btn btn-info']) !!}</h1>
-
-  <ul class="nav nav-tabs">
-  <li class="active">{!! link_to_route('league_path', 'Overall', [$league->slug]) !!}</li>
-  @foreach ($league->seasons->sortByDesc('id') as $s)
-    <li>{!! link_to_route('league_season_path', $season->year, [$league->slug, $season->year]) !!}</li>
-  @endforeach
-  </ul>
+  <h1>{{ $league->name }}</h1>
+  @include ('partials.league_years_header')
   <br>
-  <ul class="nav nav-pills">
-    <li>{!! link_to_route('league_path', 'Managers', [$league->slug]) !!}</li>
-    <li>{!! link_to_route('league_teams_path', 'Teams', [$league->slug]) !!}</li>
-    <li class="active">{!! link_to_route('league_drafts_path', 'Drafts', [$league->slug]) !!}</li>
-  </ul>
+  @include ('partials.league_section_header', [ 'active' => 'drafts' ])
   <br>
   <table class="table table-striped">
     <thead>
