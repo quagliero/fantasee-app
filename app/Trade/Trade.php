@@ -5,7 +5,6 @@ namespace Fantasee\Trade;
 use Fantasee\Week;
 use Fantasee\League;
 use Fantasee\Season;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class Trade extends Model
