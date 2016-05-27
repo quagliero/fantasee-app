@@ -107,6 +107,19 @@ class LeaguesController extends Controller {
 	}
 
 	/**
+	 * Display all the trades of the league
+	 *
+	 * @param	League $league
+	 * @return Response
+	 */
+	public function trades(League $league)
+	{
+		$trades = $league->trades;
+
+		return view('league.trades', compact('league', 'trades'));
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param	League $league

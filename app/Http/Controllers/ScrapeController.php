@@ -8,6 +8,7 @@ use Fantasee\Jobs\ScrapeTeams;
 use Fantasee\Jobs\ScrapeStandings;
 use Fantasee\Jobs\ScrapeSchedule;
 use Fantasee\Jobs\ScrapeDraft;
+use Fantasee\Jobs\ScrapeTrades;
 use Fantasee\League;
 use Illuminate\Http\Request;
 use Goutte\Client;
@@ -28,7 +29,8 @@ class ScrapeController extends Controller {
 			'teams' => ScrapeTeams::class,
 			'standings' => ScrapeStandings::class,
 			'schedule' => ScrapeSchedule::class,
-			'drafts' => ScrapeDraft::class
+			'drafts' => ScrapeDraft::class,
+			'trades' => ScrapeTrades::class,
 		];
 
 		// grab the posted keys and compare with available options

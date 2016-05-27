@@ -24,6 +24,7 @@
     <li class="active">{!! link_to_route('league_path', 'Managers', [$league->slug]) !!}</li>
     <li>{!! link_to_route('league_teams_path', 'Teams', [$league->slug]) !!}</li>
     <li>{!! link_to_route('league_drafts_path', 'Drafts', [$league->slug]) !!}</li>
+    <li>{!! link_to_route('league_trades_path', 'Trades', [$league->slug]) !!}</li>
   </ul>
   <br>
   <table class="table table-striped" data-sortable="1,2,4,5,6">

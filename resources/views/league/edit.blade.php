@@ -74,14 +74,12 @@
         Drafts
         </label>
       </div>
-      <!--
       <div class="checkbox">
         <label>
         {!! Form::checkbox('trades', 'true') !!}
         Trades
         </label>
       </div>
-    -->
       {!! Form::submit('Scrape it', ['class' => 'btn btn-primary']) !!}
       {!! Form::close() !!}
       </section>
