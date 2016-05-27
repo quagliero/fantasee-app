@@ -75,7 +75,7 @@ class LeaguesController extends Controller
      */
     public function show(League $league)
     {
-        $managers = $league->getManagersByWins();
+        $managers = $league->getManagersByWins('reg');
 
         return view('league.show', compact('league', 'managers'));
     }
