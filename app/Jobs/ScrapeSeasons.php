@@ -21,7 +21,6 @@ class ScrapeSeasons extends BaseScraper {
 	 */
 	public function handle()
 	{
-		if (count($this->league->seasons()->get()) == 0) {
 			$crawler = $this->client->request('GET', $this->baseUrl);
 			$seasons = $crawler->filter('#historySeasonNav .st-menu a[href]')->each(function ($node) {
 				return Season::where('year', intval($node->text()))->first();
@@ -33,6 +32,4 @@ class ScrapeSeasons extends BaseScraper {
 
 			$this->league->seasons()->sync($seasonIds);
 		}
-	}
-
 }

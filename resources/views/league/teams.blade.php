@@ -13,12 +13,7 @@
       @endif
     </div>
   </div>
-  <ul class="nav nav-tabs">
-  <li class="active">{!! link_to_route('league_path', 'Overall', [$league->slug]) !!}</li>
-  @foreach ($league->seasons as $season)
-    <li>{!! link_to_route('league_season_path', $season->year, [$league->slug, $season->year]) !!}</li>
-  @endforeach
-  </ul>
+  @include ('partials.league_years_header')
   <br>
   @include ('partials.league_section_header', [ 'active' => 'teams' ])
   <br>
@@ -56,5 +51,5 @@
 
 @section('scripts')
   @parent
-  {!! HTML::script('js/table-sortable.js') !!}
+  {!! Html::script('js/table-sortable.js') !!}
 @stop

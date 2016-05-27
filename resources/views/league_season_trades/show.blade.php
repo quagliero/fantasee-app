@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <h1>{{ $league->name }}</h1>
+      <h1>{{ $league->name }} - {{ $season->year }}</h1>
     </div>
     <div class="col-sm-6 text-right">
       <br>
@@ -13,19 +13,13 @@
       @endif
     </div>
   </div>
-  <ul class="nav nav-tabs">
-    <li class="active">{!! link_to_route('league_path', 'Overall', [$league->slug]) !!}</li>
-    @foreach ($seasons as $season)
-      <li>{!! link_to_route('league_trades_detail_path', $season->year, [$league->slug, $season->year]) !!}</li>
-    @endforeach
-  </ul>
+  @include ('partials.league_years_header')
   <br>
   @include ('partials.league_section_header', [ 'active' => 'trades' ])
   <br>
-  @foreach ($trades as $trade)
+  @foreach ($trades->sortByDesc('week_id') as $trade)
   <table class="table table-striped">
     <thead>
-      <th>Season</th>
       <th>Week</th>
       <th>Gaining Team</th>
       <th>Player</th>
@@ -34,7 +28,6 @@
     <tbody>
       @foreach ($trade->exchanges as $swap)
         <tr>
-          <td>{{ $swap->gainingTeam->season->year }}</td>
           <td>{{ $trade->week->name }}</td>
           <td>{{ $swap->gainingTeam->name }}</td>
           <td>{{ $swap->asset->name }}</td>
@@ -50,5 +43,5 @@
 
 @section('scripts')
   @parent
-  {!! HTML::script('js/table-sortable.js') !!}
+  {!! Html::script('js/table-sortable.js') !!}
 @stop
