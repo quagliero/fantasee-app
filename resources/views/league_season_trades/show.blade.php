@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <h1>{{ $league->name }}</h1>
+      <h1>{{ $league->name }} - {{ $season->year }}</h1>
     </div>
     <div class="col-sm-6 text-right">
       <br>
@@ -20,7 +20,6 @@
   @foreach ($trades as $trade)
   <table class="table table-striped">
     <thead>
-      <th>Season</th>
       <th>Week</th>
       <th>Gaining Team</th>
       <th>Player</th>
@@ -29,7 +28,6 @@
     <tbody>
       @foreach ($trade->exchanges as $swap)
         <tr>
-          <td>{{ $swap->gainingTeam->season->year }}</td>
           <td>{{ $trade->week->name }}</td>
           <td>{{ $swap->gainingTeam->name }}</td>
           <td>{{ $swap->asset->name }}</td>
@@ -46,5 +44,4 @@
 @section('scripts')
   @parent
   {!! Html::script('js/table-sortable.js') !!}
->>>>>>> trade_views
 @stop

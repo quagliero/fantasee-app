@@ -43,7 +43,7 @@ class ScrapeTrades extends BaseScraper
     {
         $urlParams = $pagination ?: '?transactionType=trade';
 
-        foreach ($this->league->seasons as $season) {
+        foreach ($seasons as $season) {
             $crawler = $this->client->request('GET', $this->baseUrl.'/'.$season->year.'/transactions'.$urlParams);
 
             $trades = $crawler->filter('#primaryContent #leagueTransactions .tableType-transaction tbody > [class*="transaction-trade-"]');
@@ -53,8 +53,9 @@ class ScrapeTrades extends BaseScraper
             if ($trades->count() == 0) {
                 return false;
             }
+
             $trades->each(function ($node) use ($season) {
-                    $trade_info = [];
+                  $trade_info = [];
                   $is_trade = preg_match('/transaction-trade-(.*?)-[12]/', $node->attr('class'), $trade_info);
 
                     if ($is_trade) {
@@ -64,6 +65,7 @@ class ScrapeTrades extends BaseScraper
                         }
 
                         $trade_id = $trade_info[1];
+
                         // Try and find the matching week, otherwise it's the "Offseason"
                         $week = Week::find($node->filter('.transactionWeek')->text());
                         if (is_null($week)) {
@@ -88,10 +90,11 @@ class ScrapeTrades extends BaseScraper
                                 'external_id' => $trade_id,
                                 'trade_status_id' => 4, // 4 is 'accepted'
                                 'league_id' => $this->league->id,
+                                'season_id' => $season->id,
                                 'week_id' => $week->id,
                             ]);
 
-                            $player_list->filter('.playerNameAndInfo ul > li')->each(function ($player) use ($trade, $gaining_team, $losing_team) {
+                            $player_list->each(function ($player) use ($trade, $gaining_team, $losing_team) {
                                 $player_info = (object) array(
                                     'external_id' => preg_replace('/(\D)*/', '', $player->filter('[class*="playerNameId-"]')->attr('class')),
                                     'name' => $player->filter('.playerName')->text(),
@@ -108,13 +111,14 @@ class ScrapeTrades extends BaseScraper
                                 }
                                 $player->save();
 
-                                $exchange = Exchange::create([
+                                $exchange = Exchange::firstOrCreate([
                                     'trade_id' => $trade->id,
                                     'asset_id' => $player->id,
                                     'asset_type' => Player::class,
                                     'gaining_team_id' => $gaining_team->id,
                                     'losing_team_id' => $losing_team->id,
                                 ]);
+
                             });
                         }
                     }

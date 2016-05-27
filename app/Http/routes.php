@@ -39,14 +39,9 @@ Route::group(['middleware' => 'web'], function () {
         'as' => 'league_trades_path',
     ]);
 
-    Route::get('leagues/{leagues}/seasons/{seasons}/draft', [
-        'uses' => 'LeagueSeasonDraftController@show',
-        'as' => 'league_season_draft_path',
-    ]);
-
     Route::get('leagues/{leagues}/seasons/{seasons}/trades', [
-        'uses' => 'LeagueSeasonDraftController@show',
-        'as' => 'league_season_trades_path',
+        'uses' => 'LeagueSeasonTradeController@show',
+        'as' => 'league_season_trade_path',
     ]);
 
     Route::get('leagues/{leagues}/drafts', [

@@ -13,19 +13,9 @@
       @endif
     </div>
   </div>
-  <ul class="nav nav-tabs">
-  <li class="active">{!! link_to_route('league_path', 'Overall', [$league->slug]) !!}</li>
-  @foreach ($league->seasons->sortByDesc('id') as $s)
-    <li>{!! link_to_route('league_season_path', $season->year, [$league->slug, $season->year]) !!}</li>
-  @endforeach
-  </ul>
+  @include ('partials.league_years_header')
   <br>
-  <ul class="nav nav-pills">
-    <li>{!! link_to_route('league_path', 'Managers', [$league->slug]) !!}</li>
-    <li class="active">{!! link_to_route('league_teams_path', 'Teams', [$league->slug]) !!}</li>
-    <li>{!! link_to_route('league_drafts_path', 'Drafts', [$league->slug]) !!}</li>
-    <li>{!! link_to_route('league_trades_path', 'Trades', [$league->slug]) !!}</li>
-  </ul>
+  @include ('partials.league_section_header', [ 'active' => 'teams' ])
   <br>
   <table class="table table-striped" data-sortable="3,4,6,7,8">
     <thead>
