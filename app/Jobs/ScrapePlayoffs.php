@@ -22,17 +22,18 @@ class ScrapePlayoffs extends BaseScraper
      */
     public function handle()
     {
-        $this->scrapePlayoffs($this->league->seasons);
+        $this->scrapePlayoffs($this->league->seasons, 'championship');
+        $this->scrapePlayoffs($this->league->seasons, 'consolation');
     }
 
     /**
      * scrapePlayoffs
      * $seasons Array - array of Season models.
      */
-    private function scrapePlayoffs($seasons)
+    private function scrapePlayoffs($seasons, $bracket)
     {
         foreach ($seasons as $season) {
-            $crawler = $this->client->request('GET', $this->baseUrl.'/'.$season->year.'/playoffs?bracketType=championship&standingsTab=playoffs');
+            $crawler = $this->client->request('GET', $this->baseUrl.'/'.$season->year.'/playoffs?bracketType='.$bracket.'&standingsTab=playoffs');
             $bracket = $this->mapBracket($crawler->filter('.playoffNav .selected a span')->text());
             $weeks = $crawler->filter('#leaguePlayoffsPlayoffs .content .weekLabels ul li h4');
 
@@ -55,15 +56,18 @@ class ScrapePlayoffs extends BaseScraper
                   ->where('name', $node->filter('.teamsWrap .teamWrap-1 .teamName')->text())
                   ->firstOrFail();
 
-                $match = Match::byTeam($team1->id)->bySeason($season->id)->byWeek($week->id)->firstOrFail();
                 $stage = $this->mapStage($node->filter('h5')->text());
+                $match = Match::byTeam($team1->id)->bySeason($season->id)->byWeek($week->id)->firstOrFail();
 
-                $playoff = Playoff::updateOrCreate([
+                $playoff = Playoff::firstOrCreate([
                   'match_id' => $match->id,
                   'type' => $bracket,
                   'stage' => $stage,
                 ]);
 
+                // can't get the relationship save() to work
+                $match->playoff_id = $playoff->id;
+                $match->save();
               });
             });
         }
