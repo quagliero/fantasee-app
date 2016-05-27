@@ -49,6 +49,9 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('TradeSeeder');
 		$this->command->info('Trade table seeded!');
+
+		$this->call('AddOffseasonToWeeksTableSeeder');
+		$this->command->info('Offseason added to Week table!');
 	}
 
 }

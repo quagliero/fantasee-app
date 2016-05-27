@@ -30,6 +30,7 @@ class ScrapeLeague extends BaseScraper {
 		$this->dispatch(new ScrapeStandings($this->league));
 		$this->dispatch(new ScrapeSchedule($this->league));
 		$this->dispatch(new ScrapeDraft($this->league));
+		$this->dispatch(new ScrapeTrades($this->league));
 
 		// event(new LeagueWasScraped($this->league));
 	}
