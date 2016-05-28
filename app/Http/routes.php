@@ -28,6 +28,11 @@ Route::group(['middleware' => 'web'], function () {
         'password' => 'Auth\PasswordController',
     ]);
 
+    Route::get('trades/{id}/summary', [
+      'uses' => 'TradesController@summary',
+      'as' => 'trade_summary_path'
+    ]);
+
     /* Non-resource /leagues/{$league} routes */
     Route::get('leagues/{leagues}/teams', [
         'uses' => 'LeaguesController@teams',
