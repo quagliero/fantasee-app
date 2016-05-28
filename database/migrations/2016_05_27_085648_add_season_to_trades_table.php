@@ -11,7 +11,7 @@ class AddSeasonToTradesTable extends Migration
     public function up()
     {
         Schema::table('trades', function (Blueprint $table) {
-          $table->integer('season_id')->unsigned();
+          $table->integer('season_id')->unsigned()->nullable();
           $table->foreign('season_id')->references('id')->on('seasons');
         });
     }
