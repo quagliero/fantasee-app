@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d9ce9f3bac9e9be11539bcada3058387",
-    "content-hash": "b5c6c0f447064d8084fbeece533509bf",
+    "hash": "6cbc1f557fcea6ad6088225dc69d44e2",
+    "content-hash": "9afaf934202f60c4a63c59c581749566",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2888,6 +2888,52 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "diablomedia/phpunit-pretty-printer",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/diablomedia/phpunit-pretty-printer.git",
+                "reference": "5ad8f7019845fce9341eff0fcdaf2934ce890cfd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/diablomedia/phpunit-pretty-printer/zipball/5ad8f7019845fce9341eff0fcdaf2934ce890cfd",
+                "reference": "5ad8f7019845fce9341eff0fcdaf2934ce890cfd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "phpunit/phpunit": ">=4.7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DiabloMedia\\PHPUnit\\Printer\\": "src/DiabloMedia/PHPUnit/Printer"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ari Pringle",
+                    "email": "ari@diablomedia.com",
+                    "homepage": "https://diablomedia.com"
+                }
+            ],
+            "description": "A PHPUnit result printer that shows per-file test progress and execution times",
+            "homepage": "https://github.com/diablomedia/phpunit-pretty-printer",
+            "keywords": [
+                "phpunit",
+                "printer",
+                "result",
+                "test",
+                "unit"
+            ],
+            "time": "2016-02-16 21:45:23"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
