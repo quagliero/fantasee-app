@@ -1,4 +1,4 @@
-## :football: [Fantasee](http://fantasee.co)
+## :football: [Fantasee](http://fantasee.co) ![build status](https://travis-ci.org/quagliero/fantasee-app.svg?branch=master)
 
 #### See more from your fantasy league.
 
