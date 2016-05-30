@@ -4,7 +4,26 @@ use Illuminate\Database\Seeder;
 
 class TeamTableSeeder extends DatabaseSeeder {
 
-    public function run()
+    public function run() {
+      $this->runChumboSeeder();
+
+
+      $this->getNonChumboLeagues()->each(function ($league) {
+        $league->seasons->each(function ($season) use ($league) {
+          $league->managers->each(function ($manager) use ($league, $season) {
+            factory(\Fantasee\Team::class)
+              ->create([
+                'manager_id' => $manager->id,
+                'league_id' => $league->id,
+                'season_id' => $season->id
+              ]);
+          });
+        });
+
+      });
+      }
+
+    public function runChumboSeeder()
     {
         $teams = [];
         $leagues = [1];

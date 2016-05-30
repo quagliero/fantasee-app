@@ -56,17 +56,17 @@ $factory->define(Exchange::class, function ($faker) {
 });
 $factory->define(Trade::class, function ($faker) {
     return [
-        'league_id' => factory(League::class)->create()->id,
-        'week_id' => factory(Week::class)->create()->id,
-        'trade_status_id' => factory(TradeStatus::class)->create()->id,
-        'season_id' => factory(Season::class)->create()->id
+        'league_id' => 1,
+        'week_id' => 1,
+        'trade_status_id' => 1,
+        'season_id' => 1
     ];
 });
 $factory->define(League::class, function ($faker) {
     return [
-      'user_id' => factory(User::class)->create()->id,
-      'name' => $faker->word(6),
-      'slug' => $faker->word(3),
+      'user_id' => 1,
+      'name' => $faker->company(),
+      'slug' => rand(10000, 1000000),
       'league_id' => $faker->randomNumber(5),
     ];
 });
@@ -80,7 +80,7 @@ $factory->define(Team::class, function ($faker) {
       'name' => $faker->word,
       'position' => $faker->randomNumber(5),
       'league_id' => 1,
-      'manager_id' => factory(Manager::class)->create()->id,
+      'manager_id' => 1,
       'season_id' => 1
     ];
 });

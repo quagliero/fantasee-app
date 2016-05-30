@@ -1,10 +1,25 @@
 <?php
 
+use Fantasee\League;
 use Illuminate\Database\Seeder;
 
 class ManagerTableSeeder extends DatabaseSeeder {
 
-    public function run()
+    public function run() {
+      $this->runChumboSeed();
+      $leagues = League::where('id', '!=', 1)->get();
+
+      $leagues->each(function ($l) {
+        $numberManagers = rand(4, 10);
+        factory(\Fantasee\Manager::class, $numberManagers)
+          ->create()
+          ->each(function ($m) use ($l) {
+            $m->league_id = $l->id;
+            $m->save();
+          });
+      });
+    }
+    public function runChumboSeed()
     {
         $managers = [
           [

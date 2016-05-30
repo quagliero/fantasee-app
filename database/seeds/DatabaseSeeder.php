@@ -54,4 +54,8 @@ class DatabaseSeeder extends Seeder {
 		$this->command->info('Offseason added to Week table!');
 	}
 
+	public function getNonChumboLeagues() {
+		return \Fantasee\League::where('league_id', '!=', 874089)->get();
+	}
+
 }
