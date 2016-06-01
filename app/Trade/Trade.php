@@ -34,8 +34,8 @@ class Trade extends Model
     $c = [];
 
     foreach ($this->exchanges as $e) {
-      $c[$e->gainingTeam->id]['gains'][] = $e->asset->id;
-      $c[$e->losingTeam->id]['gives'][] = $e->asset->id;
+      $c[$e->gainingTeam->id]['gains'][$e->asset_type][] = $e->asset->id;
+      $c[$e->losingTeam->id]['gives'][$e->asset_type][] = $e->asset->id;
     }
 
     return $c;
