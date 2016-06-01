@@ -48,6 +48,7 @@ $factory->define(Season::class, function ($faker) {
 });
 $factory->define(Exchange::class, function ($faker) {
   return [
+    'trade_id' => 1,
     'gaining_team_id' => 1,
     'losing_team_id' => 2,
     'asset_id' => 1,
@@ -65,8 +66,8 @@ $factory->define(Trade::class, function ($faker) {
 $factory->define(League::class, function ($faker) {
     return [
       'user_id' => factory(User::class)->create()->id,
-      'name' => $faker->word(6),
-      'slug' => $faker->word(3),
+      'name' => $faker->word(12),
+      'slug' => rand(1, 100000000),
       'league_id' => $faker->randomNumber(5),
     ];
 });
