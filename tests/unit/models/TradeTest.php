@@ -29,8 +29,8 @@ class TradeTest extends TestCase {
     $this->assertNotNull($output);
 
     foreach ($trade->exchanges as $exchange) {
-      $this->assertContains($exchange->asset->id, $output[$exchange->gainingTeam->id]['gains']);
-      $this->assertContains($exchange->asset->id, $output[$exchange->losingTeam->id]['gives']);
+      $this->assertContains($exchange->asset->id, $output[$exchange->gainingTeam->id]['gains'][$exchange->asset_type]);
+      $this->assertContains($exchange->asset->id, $output[$exchange->losingTeam->id]['gives'][$exchange->asset_type]);
     }
   }
 }
