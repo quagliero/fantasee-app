@@ -11,7 +11,14 @@
 |
 */
 
+Route::group(['middleware' => 'dev'], function () {
+    Route::get('react-test', [
+      'uses' => 'Developer\ReactController@index'
+    ]);
+});
+
 Route::group(['middleware' => 'web'], function () {
+
 
     Route::get('/', [
         'uses' => 'WelcomeController@index',
