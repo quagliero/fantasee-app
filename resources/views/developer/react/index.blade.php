@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-  <h1>Hi React!</h1>
-</body>
-</html>
+@extends('app')
+
+@section('content')
+<div class="container">
+  <div id="content"></div>
+</div>
+@stop
+
+
+@section('scripts')
+  @parent
+  {!! Html::script('js/app.js') !!}
+@stop

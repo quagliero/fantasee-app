@@ -1,30 +1,18 @@
-// eff elixir
 var gulp = require('gulp');
-var sass = require('gulp-sass');
-var browserSync = require('browser-sync').create();
+var pkg = require('./package.json');
+var environments = require('gulp-environments');
+var del = require('del');
+var path = require('path');
+var requireDir = require('require-dir');
 
-// Proxy Server + watching scss and blade files
-gulp.task('serve', ['sass'], function() {
+// Loading gulp tasks in to the registry
+requireDir('./gulp/', { recurse: true });
 
-    browserSync.init({
-        proxy: "fantasee.app"
-    });
+// Basic task and alias
+gulp.task('default', gulp.parallel('scripts', 'styles', 'images'));
 
-    gulp.watch("resources/assets/sass/**/*.scss", ['sass']);
-    gulp.watch("resources/views/*/**.blade.php").on('change', browserSync.reload);
-});
+// Clean task
+// @TODO do we need a clean task?
 
-// Compile sass into CSS & auto-inject into browsers
-gulp.task('sass', function() {
-    return gulp.src("resources/assets/sass/**/*.scss")
-        .pipe(sass({
-          includePaths: [
-            './public/bower_components/bootstrap-sass-official/assets/stylesheets',
-            './public/bower_components/font-awesome-sass/assets/stylesheets'
-          ]
-        }).on('error', sass.logError))
-        .pipe(gulp.dest("public/css"))
-        .pipe(browserSync.stream());
-});
-
-gulp.task('default', ['serve']);
+// Deploy
+// @TODO magic?
