@@ -46,5 +46,4 @@
 @section('scripts')
   @parent
   {!! Html::script('js/table-sortable.js') !!}
->>>>>>> trade_views
 @stop
